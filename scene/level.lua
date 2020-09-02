@@ -65,7 +65,7 @@ function scene:show( event )
     end
 img()
 
-local levels = {"scene.game", "scene.game" ,"scene.game","scene.kolodki"}
+local levels = {"scene", "scene" ,"scene","scene"}
 
 local level = {"text_3", "text_3", "medal_4", "kolodki_4"}
 
@@ -79,7 +79,7 @@ function touchIt(e)
         _G.marafon = true
       end
       _G.variant = level[e.target.tag]
-      composer.gotoScene("scene.game", {delay = 400, time = 1000, effect="slideDown", onComplete = composer.removeScene("scene.level")})
+      composer.gotoScene("scene", {delay = 400, time = 1000, effect="slideDown", onComplete = composer.removeScene("scene.level")})
   end
   end
 end

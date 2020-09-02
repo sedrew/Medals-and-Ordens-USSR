@@ -15,13 +15,11 @@ function scene:create(event)
 	local right      = left + fullw
 	local top        = centerY - fullh/2
 	local bottom     = top + fullh
-	--tumb = false
+
 
 	display.newRect(sceneGroup, centerX , centerY, fullw, fullh):setFillColor(37/255, 39/255, 46/255, 0.7)
   local plant = display.newRoundedRect(sceneGroup, display.contentCenterX, 600, 560, 920, 15)
 				plant:setFillColor(244/255,229/255,209/255)
-
- --local ol = plant[1]
 
 	local textTab = {"Время вышло\n", "Звезды закончились\n", "Очки", "Ловкость ", "Правельных ответов"}
 
@@ -37,7 +35,6 @@ function scene:create(event)
 	text:setTextColor(255/255,129/255,129/255)
 
 transition.cancel("transTag")
---composer.getVariable("level")
 
 local lov = 0
 	for i = 1, #lovkost do
@@ -79,7 +76,7 @@ local ar2 = math.random(2, math.random(2, #facts[ar1]))
 
 	local text4 = display.newText({
 		parent = sceneGroup,
-		text =  'А вы знали что?' ,
+		text =  'А вы знали что:' ,
 		width = 490,
 		align = "center",
 		x = display.contentCenterX, y = plant.y-220,
@@ -87,32 +84,21 @@ local ar2 = math.random(2, math.random(2, #facts[ar1]))
 		fontSize = 45,
 	})
 	text4:setTextColor(118/255,113/255,112/255)
-
+---------------
   local setting = loadsave.loadTable( "settings.json" )
+	goh()
 
 	function closer(tip)
-		--	saveSettings(settings, "settings.json")
-			local lovk2 =  math.ceil(lov/#lovkost)
-			local lovk = setting.lovk + lovk2
-
-		local setting = {
-			PlayGame = PlayGame,
-			score = score,
-			minus = minus,
-			lovk = lovk,
-		}
-		--setting.score = score setting.minus  = minus
-		loadsave.saveTable( setting, "settings.json" )
-		lovkost = {}
 			if (tip == 'restart') then
 					composer.removeHidden( false )
 					composer.hideOverlay("fade", 400)
-					composer.gotoScene( "scene.cutscene", {time = 800, effect="crossFade"} )
-					composer.removeScene(composer.getVariable( "name" ))
+					composer.removeScene("scene")-- composer.getVariable( "name" )
+					composer.gotoScene( "scene", {time = 800, effect="crossFade"} )
 			elseif (tip == 'close') then
 				composer.hideOverlay("fade", 400) -- закрываем сцену
-				composer.gotoScene("scene.menu", {time = 800, effect="crossFade"})
-				composer.removeScene(composer.getVariable( "name" ))
+				--composer.gotoScene("scene.menu", {time = 800, effect="crossFade"})
+				composer.removeScene("scene")
+			--	composer.removeScene(composer.getVariable( "name" ))
 		end
 	end
 
