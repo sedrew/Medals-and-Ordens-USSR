@@ -1,0 +1,360 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>Sergey Maligyn</Author>
+  <LastAuthor>RePack by Diakov</LastAuthor>
+  <Created>2019-02-05T11:49:46Z</Created>
+  <Version>16.00</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>11490</WindowHeight>
+  <WindowWidth>19200</WindowWidth>
+  <WindowTopX>0</WindowTopX>
+  <WindowTopY>0</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Calibri" ss:Size="11" ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s15">
+   <Alignment ss:Vertical="Bottom"/>
+   <Font ss:FontName="Calibri" ss:Size="11" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s16">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Font ss:FontName="Calibri" ss:Size="11" ss:Color="#000000" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s17">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Font ss:FontName="Calibri" ss:Size="14" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s18">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Font ss:FontName="Calibri" ss:Size="18" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s19">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Font ss:FontName="Calibri" ss:Size="18"/>
+  </Style>
+  <Style ss:ID="s20">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Font ss:FontName="Calibri" ss:Size="18" ss:Color="#000000"/>
+   <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s21">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center"
+    ss:ReadingOrder="LeftToRight"/>
+   <Font ss:FontName="Calibri" ss:Size="12" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s22">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Font ss:FontName="Calibri" ss:Size="11"/>
+  </Style>
+  <Style ss:ID="s23">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Font ss:FontName="Calibri" ss:Size="11" ss:Color="#0000FF"
+    ss:Underline="Single"/>
+  </Style>
+  <Style ss:ID="s24">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+   <Font ss:FontName="Calibri" ss:Size="11" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s25">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+   <Font ss:FontName="Calibri" ss:Size="11" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s26">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Font ss:FontName="Calibri" ss:Size="11" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s27">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Font ss:FontName="Arial" ss:Size="11" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s28">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Font ss:FontName="Arial" ss:Size="11" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s30">
+   <Alignment ss:Vertical="Bottom"/>
+   <Font ss:FontName="Calibri" ss:Size="11" ss:Color="#0000FF"
+    ss:Underline="Single"/>
+  </Style>
+  <Style ss:ID="s31">
+   <Font ss:FontName="Calibri" ss:Size="11"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Лист1">
+  <Table ss:ExpandedColumnCount="26" ss:ExpandedRowCount="1000" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s15" ss:DefaultColumnWidth="75.75"
+   ss:DefaultRowHeight="15">
+   <Column ss:StyleID="s15" ss:AutoFitWidth="0" ss:Width="446.25"/>
+   <Column ss:StyleID="s15" ss:AutoFitWidth="0" ss:Width="171"/>
+   <Column ss:StyleID="s15" ss:AutoFitWidth="0" ss:Width="207"/>
+   <Column ss:StyleID="s15" ss:AutoFitWidth="0" ss:Width="149.25"/>
+   <Column ss:StyleID="s15" ss:AutoFitWidth="0" ss:Width="177.75"/>
+   <Column ss:StyleID="s15" ss:AutoFitWidth="0" ss:Width="134.25"/>
+   <Column ss:StyleID="s15" ss:AutoFitWidth="0" ss:Width="147"/>
+   <Column ss:StyleID="s15" ss:AutoFitWidth="0" ss:Width="118.5"/>
+   <Column ss:StyleID="s15" ss:AutoFitWidth="0" ss:Width="45.75" ss:Span="17"/>
+   <Row ss:Height="116.25">
+    <Cell ss:StyleID="s16"><ss:Data ss:Type="String"
+      xmlns="http://www.w3.org/TR/REC-html40"><B><Font html:Color="#000000">Нужны факты либо ттх, или их описание(тоесть за какие заслуги, кто награждался). Количество символов 100-120 (больше можно, но не желательно). Возможно какие отрывки из дневников солдатов или их детей(воспоминание). Так же как к тем или иным медалям относились, то-есть возможно какие либо были суеверия. </Font></B><Font
+       html:Color="#FF0000">Каждое описание или факт отдельно в столбце, мне так проще экспортировать в игру. </Font><Font
+       html:Color="#4A86E8">Добавлены столбцы URL ссылки на их подробное описание, таке же столбцы на ссылку другого языка. </Font><Font
+       html:Color="#FF0000">Дополнять столбцы на другие языки то же нужно</Font></ss:Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Описание (именно в этом столбце)</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="String">Факты, ттх, другое.</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="String">Факты, ттх, другое.</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="String">Факты, ттх, другое.</Data></Cell>
+    <Cell ss:StyleID="s19"><Data ss:Type="String">URL ссылка на медаль или орден (wiki)</Data></Cell>
+    <Cell ss:StyleID="s20"><Data ss:Type="String">URL ссылка на медаль или орден (другой сайт)</Data></Cell>
+    <Cell ss:StyleID="s20"><Data ss:Type="String">URL ссылка на медаль или орден (wiki) другой язык us</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За победу над Германией в Великой Отечественной войне 1941-1945 гг.»</Data></Cell>
+    <Cell ss:Index="6" ss:StyleID="s22"><Data ss:Type="String">https://ru.wikipedia.org/wiki/Медаль_«За_победу_над_Германией_в_Великой_Отечественной_войне_1941—1945_гг.»</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Золотая медаль «Серп и Молот»</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден «Победа»</Data></Cell>
+    <Cell ss:Index="3" ss:StyleID="s22"><Data ss:Type="String">До 9 мая 1945 года состоялось 9 из 20 награждений этим орденом. Маршалы Жуков и Василевский были награждены орденом &quot;Победа&quot; дважды.</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">5 кавалеров ордена из 16 являются гражданами иностранных государств - США, Великобритании, Югославии, Польши и Румынии</Data></Cell>
+    <Cell ss:Index="6" ss:StyleID="s23" ss:HRef="https://ru.wikipedia.org/wiki/%D0%9E%D1%80%D0%B4%D0%B5%D0%BD_%C2%AB%D0%9F%D0%BE%D0%B1%D0%B5%D0%B4%D0%B0%C2%BB"><Data
+      ss:Type="String">https://ru.wikipedia.org/wiki/%D0%9E%D1%80%D0%B4%D0%B5%D0%BD_%C2%AB%D0%9F%D0%BE%D0%B1%D0%B5%D0%B4%D0%B0%C2%BB</Data></Cell>
+    <Cell ss:Index="8" ss:StyleID="s23" ss:HRef="https://en.wikipedia.org/wiki/Order_of_Victory"><Data
+      ss:Type="String">https://en.wikipedia.org/wiki/Order_of_Victory</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден Ленина</Data></Cell>
+    <Cell ss:Index="6" ss:StyleID="s22"><Data ss:Type="String">https://ru.wikipedia.org/wiki/Орден_Ленина</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «Золотая Звезда»</Data></Cell>
+    <Cell ss:Index="3" ss:StyleID="s22"><Data ss:Type="String">Самым пожилым героем СССР в годы войны стал Матвей Кузьмин, повторивший подвиг Ивана Сусанина</Data></Cell>
+    <Cell ss:Index="6" ss:StyleID="s22"><Data ss:Type="String">https://ru.wikipedia.org/wiki/Медаль_«Золотая_Звезда»_(СССР)</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «Партизану Отечественной войны» I степени</Data></Cell>
+    <Cell ss:Index="6" ss:StyleID="s22"><Data ss:Type="String">https://ru.wikipedia.org/wiki/Медаль_«Партизану_Отечественной_войны»</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль Ушакова</Data></Cell>
+    <Cell ss:Index="6" ss:StyleID="s22"><Data ss:Type="String">https://ru.wikipedia.org/wiki/Медаль_Ушакова_(СССР)</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден Суворова III степени</Data></Cell>
+    <Cell ss:Index="6" ss:StyleID="s22"><Data ss:Type="String">https://ru.wikipedia.org/wiki/Орден_Суворова</Data></Cell>
+   </Row>
+   <Row ss:Height="150">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль Нахимова</Data></Cell>
+    <Cell ss:StyleID="s24"><Data ss:Type="String">Медаль Нахимова — это флотский аналог медали «За боевые заслуги». Медаль Нахимова в первую очередь предназначалась для награждения рядового состава Флота, хотя были случаи награждения ею офицеров, что считалось высшим признанием личной отваги командира.</Data></Cell>
+    <Cell ss:Index="6" ss:StyleID="s22"><Data ss:Type="String">https://ru.wikipedia.org/wiki/Медаль_Нахимова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден Богдана Хмельницкого I степени</Data></Cell>
+    <Cell ss:Index="6" ss:StyleID="s22"><Data ss:Type="String">https://ru.wikipedia.org/wiki/Орден_Богдана_Хмельницкого_(СССР)</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За отвагу» 1938 года</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден Кутузова I степени </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «Партизану Отечественной войны» II степени </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За взятие Берлина»</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден Кутузова II степени </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден Отечественной войны I степени</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За трудовую доблесть» 1938 года</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден Славы I степени </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден Кутузова III степени </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За взятие Будапешта»</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден Славы II степени</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15.75">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден Нахимова I степени </Data></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Награждали Орденом Нахимова офицеров Военно-Морского Флота СССР за разработку, проведение и обеспечение успешного проведения боевых морских операций, результатом которых было отражение наступательных действий противника и нанесение ему значительного урона при сохранении своих основных сил.</Data></Cell>
+    <Cell ss:StyleID="s26"><Data ss:Type="String">Иготовлен из серебра 925° с использованием красной эмали. Размеры: 56 мм между противолежащими концами рубиновой звезды, 29 мм от центра аверса до конца любого якоря. Вес ордена: 43,6 г.</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден Красного Знамени </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">«Медаль материнства» I степени</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За оборону Кавказа»</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден Красной звезды </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден Суворова I степени</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За отвагу» 1943 года</Data></Cell>
+    <Cell ss:Index="3" ss:StyleID="s22"><Data ss:Type="String">Рекордное награждение медалью одного человека - 6. Семён Грецов за годы войны вынес с поля боя только с оружием 130 человек</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За оборону Одессы»</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден «Материнская слава» II степени</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден Суворова II степени</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="99">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За оборону Ленинграда»</Data></Cell>
+    <Cell ss:StyleID="s27"><Data ss:Type="String">Вручалась людям, участвовавшим в защите этого города, как военным, так и штатским. Дизайн разработал художник Н. Москалев. Материалом, из которого чеканился знак, была латунь.</Data></Cell>
+    <Cell ss:StyleID="s28"><Data ss:Type="String">В общей сложности, до 1985 г., она была вручена 1,47 млн. человек.</Data></Cell>
+    <Cell ss:StyleID="s28"><Data ss:Type="String">Её получили 15 000 детей, переживших блокаду.</Data></Cell>
+    <Cell ss:StyleID="s28"><Data ss:Type="String">Первым кавалером стал А.А. Жданов.</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден Ушакова I степени</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За оборону Севастополя»</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Юбилейная медаль «ХХ лет Рабоче-Крестьянской Красной Армии» 1943 года</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">«Медаль материнства» II степени</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден Ушакова II степени</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За боевые заслуги» </Data></Cell>
+    <Cell ss:Index="3" ss:StyleID="s22"><Data ss:Type="String">Самым юным кавалером медали стал шестилетний &quot;сын полка&quot; Сережа Алёшков, получивший награду 26 апреля 1943 года</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден Отечественной войны II степени</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден Александра Невского </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За победу над Японией»</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За освобождение Праги»</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден Славы III степени</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За освобождение Варшавы»</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден Нахимова II степени</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За освобождение Белграда»</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За взятие Вены»</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден «Материнская слава» III степени</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За взятие Кенигсберга» </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За доблестный труд в Великой Отечественной войне 1941-1945 гг.»</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден «Материнская слава» I степени</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За обороне Советского Заполярья» </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За оборону Москвы»</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден Богдана Хмельницкого II степени</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За оборону Сталинграда»</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За трудовое отличие» </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За трудовую доблесть» 1943 года</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Орден Богдана Хмельницкого III степени</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Юбилейная медаль «ХХ лет Рабоче-Крестьянской Красной Армии» </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="49.5">
+    <Cell ss:StyleID="s21"><Data ss:Type="String">Медаль «За освобождение Кореи» </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15.75"/>
+   <Row ss:AutoFitHeight="0" ss:Height="15.75">
+    <Cell ss:StyleID="s30" ss:HRef="http://onagradah.ru/medali-sssr/"><Data
+      ss:Type="String">http://onagradah.ru/medali-sssr/#</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15.75">
+    <Cell ss:StyleID="s31"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15.75" ss:Span="935"/>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0"/>
+    <Footer x:Margin="0"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <Unsynced/>
+   <Print>
+    <ValidPrinterInfo/>
+    <HorizontalResolution>600</HorizontalResolution>
+    <VerticalResolution>600</VerticalResolution>
+   </Print>
+   <Selected/>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>
