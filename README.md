@@ -6,3 +6,5 @@
 </p>
 
 A simple game made with Solar2D(Corona SDK)
+
+### Refactoring code
