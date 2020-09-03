@@ -64,6 +64,7 @@ function B:createRects(t)--rectGroup,collor, x, y, w, h, countX, centerY
   self.indentX, self.indentY = self.w + (t.indentX or 20), self.h + (t.indentY or 20)
   self.box = {}
   self.numbersList = t.numbersList or {}
+  self.mainScene = display.newGroup()
   
   local k = 1
   for i = 1, self.countX do
@@ -79,23 +80,26 @@ function B:createRects(t)--rectGroup,collor, x, y, w, h, countX, centerY
     self.x = self.x + self.indentX
   end
   self.rectGroup.x,self.rectGroup.y = self.globalX, self.globalY
-  print(self.centerY)
+  self.mainScene:insert(self.rectGroup)
   
-  self.group2 = display.newGroup()
   self.med = {}
+  --self.imagesGroup = display.newGroup() 
   function self:image(t)
+    self.imagesGroup = display.newGroup()
 		print(t[1])
     for i = 1, #t do
-        self.med[i] = display.newImage(self.group2, "img/medali_ten/" .. t[i] .. ".png", self.box[i].x, self.box[i].y)
+        self.med[i] = display.newImage(self.imagesGroup, "img/medali_ten/" .. t[i] .. ".png", self.box[i].x, self.box[i].y)
         self.med[i]:scale(0.9*(320/self.med[i].height), 0.9*(320/self.med[i].height)) --КОСТЫЛь!!!
         self.med[i].tag = i
     end
-	self.group2.x, self.group2.y = self.rectGroup.x,self.rectGroup.y
+	self.imagesGroup.x, self.imagesGroup.y = self.rectGroup.x, self.rectGroup.y
+    self.mainScene:insert(self.imagesGroup)
+	return self.imagesGroup
   end
-  
+
   function self:oneText(words,number)
-    self.medText = display.newText({ --утечка памяти, переменная ГЛОБАЛЬНАЯ!!!! КОСТЫЛь!!!!!!!
-        --parent = self.scene,
+    self.medText = display.newText({
+        parent = self.mainScene,
         text = words[number], --utf8.match(nazv[nameMedal], "%S+").."\n"..utf8.match(nazv[nameMedal], "%S+(.*)")
         width = display.contentWidth,
         align = "center",
@@ -103,8 +107,25 @@ function B:createRects(t)--rectGroup,collor, x, y, w, h, countX, centerY
         font = "font/Blogger_Sans-Bold.otf",
         fontSize = 640/math.floor(string.len(words[number]))+65,
       })
-    return self
+    return self.medText 
   end
+ 
+  function self:remove(obj, func)
+	local func = func or function() end
+    transition.to(obj, { time = 400, delay = 700, alpha = 0,
+    onComplete = function()
+      obj:removeSelf()
+	  func()
+    end})
+  end
+  
+  function self:resetColor(obj)
+    for i = 1, #obj do
+      obj[i]:setFillColor(190/255,215/255,239/255)
+      obj[i].tap = true
+    end
+  end
+  
   return self
 end
 

@@ -72,6 +72,7 @@ local level = {"text_3", "text_3", "medal_4", "kolodki_4"}
 _G.variant = "text_3"
 _G.marafon = false
 
+print(random_numbers,"CCCCCCCCCCCC")
 function touchIt(e)
   if(e.phase == "ended" ) then
     if (level[e.target.tag]) then

@@ -1,24 +1,36 @@
 
 local composer = require( "composer" )
 
+local modules = require("maket")
+local nazv    = require("words")
+
 local scene = composer.newScene()
-
--- -----------------------------------------------------------------------------------
--- Code outside of the scene event functions below will only be executed ONCE unless
--- the scene is removed entirely (not recycled) via "composer.removeScene()"
--- -----------------------------------------------------------------------------------
-
 
 composer.removeScene("scene.menu")
 
--- -----------------------------------------------------------------------------------
--- Scene event functions
--- -----------------------------------------------------------------------------------
+local random_numbers
+local pop 
+local images
+local number_name
+local name_medal
+
+local colorGreen = {145/255,209/255,79/255}
+local colorRed = {255,101/255,101/255}
 
 -- create()
 function scene:create( event )
-
-  -- Code here runs when the scene is first created but has not yet appeared on screen
+  random_numbers = modules:random(4,30).notRepeat()
+  pop = modules:createRects({
+	  countX=2,countY=2,
+	  h=300,w=300,
+	  x=200,y=700,
+	  indentX = 9, indentY = 9,
+      numbersList = random_numbers.randomList
+	})
+  images = pop:image(random_numbers.randomList)
+  number_name = random_numbers.returnOneNumber()
+  name_medal = pop:oneText(nazv,number_name)
+  print("D______")
 end
 -- show()
 function scene:show( event )
@@ -28,50 +40,58 @@ function scene:show( event )
 
     if ( phase == "will" ) then
 	
-	local modules = require("maket")
-	local nazv    = require("words")
-	
-	local random_numbers = modules:random(4,30).notRepeat()
-	
-	local pop = modules:createRects({
-	  countX=2,countY=2,
-	  h=300,w=300,
-	  x=200,y=700,
-	  indentX = 9, indentY = 9,
-      numbersList = random_numbers.randomList
-	})
-	local colorGreen = {145/255,209/255,79/255}
-    local colorRed = {255,101/255,101/255}
-	
-	pop:image(random_numbers.randomList)
-	
-	local number_name = random_numbers.returnOneNumber()
-	local name_medal = pop:oneText(nazv,number_name)
+	--local random_numbers = modules:random(4,30).notRepeat()
 	print(number_name, " S ", unpack(random_numbers.randomList) )
 	
+	local GroupText1 = display.newText({
+        parent = sceneGroup,
+        text = "Домой",
+        x = display.contentCenterX, y = 80,
+        font = "font/Blogger_Sans-Bold.otf",
+        fontSize = 90,
+      })
+      --
+      function GroupText1:touch()
+        composer.gotoScene("scene.menu", {time = 800, effect="crossFade"})
+        composer.removeScene("scene.scene.game_level_text3")
+      return true
+    end
+    GroupText1:addEventListener( "touch", GroupText1 )
+	
+	pop.tap = true
 	function touchIt(e)
-      if(e.phase == "ended" ) then
+	 if (pop.tap == true) then 
+      if (e.phase == "ended")  then
 	  print(random_numbers.randomList[e.target.tag])
         if (random_numbers.randomList[e.target.tag] == number_name) then
-          --great.start()
-        --sceneGroup:remove(0)
+         --images:removeSelf(images)
+		 pop.tap = false
+		 pop:remove(images, 
+		   function()
+		     images = pop:image(random_numbers.randomList) 
+			 pop:resetColor(pop.box)
+	         pop.tap = true
+		   end)
         -- score = score + 1
         -- timeGame.setScore(score)
         -- great.tumb = false
-        -- gt = gt + full
-        -- random(full,gt)
         -- transition.cancel("transTag")
         -- timeGame.timeStripe(sceneGroup,composer,9)
-        -- great:remove()
 	
         pop.box[e.target.tag]:setFillColor(unpack(colorGreen))
-
+		random_numbers = modules:random(4,30).notRepeat()
+		number_name = random_numbers.returnOneNumber()
+	    name_medal.text = nazv[number_name]
+		--images = pop:image(random_numbers.randomList)
+		--name_medal:removeSelf()
+		
       elseif (e.target.tap == true) then
        -- timeGame.starColor()
         pop.box[e.target.tag]:setFillColor(unpack(colorRed))
     -- --   minus = minus + 1
        -- e.target.tap = false
 	   end
+	  end
      end
   end
 
@@ -81,7 +101,7 @@ function scene:show( event )
 	--name_medal.medText.text = "DDDDD"
 	
 	--great.react(tabl,sceneGroup)
-
+sceneGroup:insert(pop.mainScene)
 -- sceneGroup:insert(stars)
 -- sceneGroup:insert(textMedal)
 -- sceneGroup:insert(med1)
