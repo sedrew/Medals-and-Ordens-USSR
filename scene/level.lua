@@ -79,7 +79,7 @@ function touchIt(e)
         _G.marafon = true
       end
       _G.variant = level[e.target.tag]
-      composer.gotoScene("scene", {delay = 400, time = 1000, effect="slideDown", onComplete = composer.removeScene("scene.level")})
+      composer.gotoScene("scene.game_level_text3", {delay = 400, time = 1000, effect="slideDown", onComplete = composer.removeScene("scene.level")})
   end
   end
 end

@@ -26,9 +26,6 @@ function scene:show( event )
       score	= setting.score
       minus = setting.minus
 
-      function goh()
-        print("sddsdDDDDD")
-      end
   --    local great = great.start(tabl)
   local full
   --local n = 4
@@ -82,7 +79,7 @@ function close(n)
     minus = minus,
     lovk = lovk,
   }
-  setting.score = score setting.minus  = minus
+  setting.score = score setting.minus = minus
 --  loadsave.saveTable( setting, "settings.json" )
   if (n == true) then
     composer.showOverlay("scene.gameOver", {time = 800, effect="crossFade", isModal = true,})
@@ -94,6 +91,23 @@ function close(n)
   end
 end
 
+
+
+
+function Color(t, i) --unpack in soul
+      i = i or 1
+      if t[i] ~= nil then
+        return t[i], Color(t, i + 1)
+      end
+ end
+
+
+local colorGreen = {145/255,209/255,79/255}
+local colorRed = {255,101/255,101/255}
+
+
+
+print("DDDDDDDD"..type(colorGreen), type(2), Color(colorGreen))
 
 timeGame.upBar(sceneGroup,tumb,score,composer)
 timeGame.timeStripe(sceneGroup,composer,15)
@@ -112,10 +126,10 @@ timeGame.timeStripe(sceneGroup,composer,15)
         transition.cancel("transTag")
         timeGame.timeStripe(sceneGroup,composer,9)
         great:remove()
-        great.box[e.target.tag]:setFillColor(145/255,209/255,79/255)
+        great.box[e.target.tag]:setFillColor(unpack(colorGreen))
       elseif (e.target.tap == true) then
        timeGame.starColor()
-       great.box[e.target.tag]:setFillColor( 255,101/255,101/255 )   --lifeH()
+       great.box[e.target.tag]:setFillColor(unpack(colorRed))   --lifeH()
     --   minus = minus + 1
        e.target.tap = false
       end

@@ -28,8 +28,10 @@ function scene:show( event )
 
     if ( phase == "will" ) then
 	
+	local modules = require("maket")
 	
-	
+	local def = modules:random(4,40).notRepeat()
+	print(def.returnOneNumber(), " S ", unpack(def.randomList) )
 	
 	
 	

@@ -4,6 +4,57 @@ local group2
 local group3
 B.box = {}
 B.med = {}
+B.tumb = true
+
+B.random_numbers = {}
+B.random_steps = 1
+function B:random(count, size_list)
+	local cash = {}
+	cash.randomList = {}
+	self.count = count or 1
+	self.size_list = size_list or 1
+	-- while #cash.randomList < self.count do
+		-- cash.randomList[#cash.randomList+1] = math.random(1, 100)
+	-- end
+	
+	function cash.notRepeat()
+		local count_nil = 0
+		if #B.random_numbers == 0 then
+			for i = 1, self.size_list do
+				B.random_numbers[i] = i
+			end
+		end
+		while #cash.randomList < self.count do
+			local i = math.random(1, self.size_list)
+			if B.random_numbers[i] ~= nil then
+				cash.randomList[#cash.randomList+1] = B.random_numbers[i]
+				B.random_numbers[i] = nil
+				--collectgarbage() print(collectgarbage ("count"))
+			else 
+				count_nil = count_nil + 1
+				print("hhh ",count_nil)
+				if count_nil == #B.random_numbers then
+					--break
+				end
+			end
+		end
+		return cash
+	end
+	
+	function cash.steps() --рандом с шагом count
+		local random_list = {}
+		for i = B.random_steps, count do
+		
+		end
+		return cash
+	end
+	
+	function cash.returnOneNumber()
+		return cash.randomList[math.random(1,#cash.randomList)]
+	end
+	return cash
+end
+
 
 function B.react(t,scene)
   group = display.newGroup()
@@ -105,7 +156,6 @@ function B:image(t)
     self.scene:insert(group2)
 end
 
-B.tumb = true
 function B:remove()
   local n = n
   full = self.markup.arrey.x * self.markup.arrey.y

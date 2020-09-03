@@ -86,7 +86,7 @@ local ar2 = math.random(2, math.random(2, #facts[ar1]))
 	text4:setTextColor(118/255,113/255,112/255)
 ---------------
   local setting = loadsave.loadTable( "settings.json" )
-	goh()
+	
 
 	function closer(tip)
 			if (tip == 'restart') then
