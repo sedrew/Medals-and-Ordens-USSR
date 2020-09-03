@@ -56,8 +56,8 @@ end
 function B:createRects(t)--rectGroup,collor, x, y, w, h, countX, centerY
   self.rectGroup = t.rectGroup or display.newGroup()
   self.setFillColor = t.collor or {190/255,215/255,239/255}
-  self.x, self.y = t.x or 10, t.y or 10
-  self.resetX, self.resetY = self.x, self.y
+  self.x, self.y = 0, 0
+  self.globalX, self.globalY = t.x, t.y
   self.w, self.h = t.w or 10, t.h or 10
   self.r = t.r or 10
   self.countX, self.countY = t.countX or 1, t.countY or 1
@@ -74,9 +74,10 @@ function B:createRects(t)--rectGroup,collor, x, y, w, h, countX, centerY
       self.y = self.y + self.indentY
       k = k + 1
     end
-	self.y = self.resetY
+	self.y = 0
     self.x = self.x + self.indentX
   end
+  self.rectGroup.x,self.rectGroup.y = self.globalX, self.globalY
   print(self.centerY)
   
   self.group2 = display.newGroup()
@@ -88,18 +89,20 @@ function B:createRects(t)--rectGroup,collor, x, y, w, h, countX, centerY
         self.med[i]:scale(0.9*(320/self.med[i].height), 0.9*(320/self.med[i].height)) --КОСТЫЛь!!!
         self.med[i].tag = i
     end
+	self.group2.x, self.group2.y = self.rectGroup.x,self.rectGroup.y
   end
   
-  function self:text(number)
+  function self:oneText(words,number)
     self.medText = display.newText({ --утечка памяти, переменная ГЛОБАЛЬНАЯ!!!! КОСТЫЛь!!!!!!!
-        parent = self.scene,
-        text = self.words[self.randomMedal], --utf8.match(nazv[nameMedal], "%S+").."\n"..utf8.match(nazv[nameMedal], "%S+(.*)")
+        --parent = self.scene,
+        text = words[number], --utf8.match(nazv[nameMedal], "%S+").."\n"..utf8.match(nazv[nameMedal], "%S+(.*)")
         width = display.contentWidth,
         align = "center",
-        x = display.contentCenterX, y = self.markup.y+320,
+        x = display.contentCenterX, y = self.rectGroup.y-120,
         font = "font/Blogger_Sans-Bold.otf",
-        fontSize = 640/math.floor(string.len(self.words[self.randomMedal]))+65,
+        fontSize = 640/math.floor(string.len(words[number]))+65,
       })
+    return self
   end
   return self
 end

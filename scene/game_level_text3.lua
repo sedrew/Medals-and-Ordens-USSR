@@ -29,6 +29,7 @@ function scene:show( event )
     if ( phase == "will" ) then
 	
 	local modules = require("maket")
+	local nazv    = require("words")
 	
 	local def = modules:random(4,30).notRepeat()
 	print(def.returnOneNumber(), " S ", unpack(def.randomList) )
@@ -36,11 +37,13 @@ function scene:show( event )
 	local pop = modules:createRects({
 	  countX=2,countY=2,
 	  h=300,w=300,
-	  x=200,y=600,
+	  x=200,y=700,
 	  indentX = 2, indentY = 2 
 	})
 	
 	pop:image(def.randomList)
+	
+	pop:oneText(nazv,def.returnOneNumber())
 	--great.react(tabl,sceneGroup)
 
 -- sceneGroup:insert(stars)
