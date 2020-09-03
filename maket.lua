@@ -9,51 +9,103 @@ B.tumb = true
 B.random_numbers = {}
 B.random_steps = 1
 function B:random(count, size_list)
-  local cash = {}
-  cash.randomList = {}
+  --local cash = {}
+  self.randomList = {}
   self.count = count or 1
   self.size_list = size_list or 1
-  -- while #cash.randomList < self.count do
-  -- cash.randomList[#cash.randomList+1] = math.random(1, 100)
-  -- end
 
-  function cash.notRepeat()
+  function self.notRepeat()
     local count_nil = 0
       if #B.random_numbers == 0 then
         for i = 1, self.size_list do
           B.random_numbers[i] = i
         end
       end
-      while #cash.randomList < self.count do
+      while #self.randomList < self.count do
         local i = math.random(1, self.size_list)
         if B.random_numbers[i] ~= nil then
-          cash.randomList[#cash.randomList+1] = B.random_numbers[i]
+          self.randomList[#self.randomList+1] = B.random_numbers[i]
           B.random_numbers[i] = nil
           --collectgarbage() print(collectgarbage ("count"))
           else 
-            count_nil = count_nil + 1
-            print("hhh ",count_nil)
-            if count_nil == #B.random_numbers then
-             --break
-            end
+            -- count_nil = count_nil + 1
+            -- print("hhh ",count_nil)
+            -- if count_nil == #B.random_numbers then
+             -- --break
+            -- end
           end
        end
-    return cash
+    return self
   end
 
-  function cash.steps() --рандом с шагом count
+  function self.steps() --рандом с шагом count
     local random_list = {}
     for i = B.random_steps, count do
 	end
-    return cash
+    return self
   end
 	
-  function cash.returnOneNumber()
-    return cash.randomList[math.random(1,#cash.randomList)]
+  function self.returnOneNumber()
+    return self.randomList[math.random(1,#self.randomList)]
   end
   
-  return cash
+  return self
 end
+
+
+function B:createRects(t)--rectGroup,collor, x, y, w, h, countX, centerY
+  self.rectGroup = t.rectGroup or display.newGroup()
+  self.setFillColor = t.collor or {190/255,215/255,239/255}
+  self.x, self.y = t.x or 10, t.y or 10
+  self.resetX, self.resetY = self.x, self.y
+  self.w, self.h = t.w or 10, t.h or 10
+  self.r = t.r or 10
+  self.countX, self.countY = t.countX or 1, t.countY or 1
+  self.indentX, self.indentY = self.w + (t.indentX or 20), self.h + (t.indentY or 20)
+  self.box = {}
+
+  local k = 1
+  for i = 1, self.countX do
+    for j = 1, self.countY do
+      self.box[k] = display.newRoundedRect( self.rectGroup, self.x, self.y, self.w, self.h, self.r)--:setFillColor(tabl.color.r, tabl.color.b, tabl.color.g )
+      self.box[k]:setFillColor(unpack(self.setFillColor))
+      self.box[k].tag = k
+      self.box[k].tap = true
+      self.y = self.y + self.indentY
+      k = k + 1
+    end
+	self.y = self.resetY
+    self.x = self.x + self.indentX
+  end
+  print(self.centerY)
+  
+  self.group2 = display.newGroup()
+  self.med = {}
+  function self:image(t)
+		print(t[1])
+    for i = 1, #t do
+        self.med[i] = display.newImage(self.group2, "img/medali_ten/" .. t[i] .. ".png", self.box[i].x, self.box[i].y)
+        self.med[i]:scale(0.9*(320/self.med[i].height), 0.9*(320/self.med[i].height)) --КОСТЫЛь!!!
+        self.med[i].tag = i
+    end
+  end
+  
+  function self:text(number)
+    self.medText = display.newText({ --утечка памяти, переменная ГЛОБАЛЬНАЯ!!!! КОСТЫЛь!!!!!!!
+        parent = self.scene,
+        text = self.words[self.randomMedal], --utf8.match(nazv[nameMedal], "%S+").."\n"..utf8.match(nazv[nameMedal], "%S+(.*)")
+        width = display.contentWidth,
+        align = "center",
+        x = display.contentCenterX, y = self.markup.y+320,
+        font = "font/Blogger_Sans-Bold.otf",
+        fontSize = 640/math.floor(string.len(self.words[self.randomMedal]))+65,
+      })
+  end
+  return self
+end
+
+
+
 
 
 function B.react(t,scene)
