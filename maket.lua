@@ -63,7 +63,8 @@ function B:createRects(t)--rectGroup,collor, x, y, w, h, countX, centerY
   self.countX, self.countY = t.countX or 1, t.countY or 1
   self.indentX, self.indentY = self.w + (t.indentX or 20), self.h + (t.indentY or 20)
   self.box = {}
-
+  self.numbersList = t.numbersList or {}
+  
   local k = 1
   for i = 1, self.countX do
     for j = 1, self.countY do
@@ -98,7 +99,7 @@ function B:createRects(t)--rectGroup,collor, x, y, w, h, countX, centerY
         text = words[number], --utf8.match(nazv[nameMedal], "%S+").."\n"..utf8.match(nazv[nameMedal], "%S+(.*)")
         width = display.contentWidth,
         align = "center",
-        x = display.contentCenterX, y = self.rectGroup.y-120,
+        x = display.contentCenterX, y = self.rectGroup.y-420,
         font = "font/Blogger_Sans-Bold.otf",
         fontSize = 640/math.floor(string.len(words[number]))+65,
       })

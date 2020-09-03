@@ -31,19 +31,55 @@ function scene:show( event )
 	local modules = require("maket")
 	local nazv    = require("words")
 	
-	local def = modules:random(4,30).notRepeat()
-	print(def.returnOneNumber(), " S ", unpack(def.randomList) )
+	local random_numbers = modules:random(4,30).notRepeat()
 	
 	local pop = modules:createRects({
 	  countX=2,countY=2,
 	  h=300,w=300,
 	  x=200,y=700,
-	  indentX = 2, indentY = 2 
+	  indentX = 9, indentY = 9,
+      numbersList = random_numbers.randomList
 	})
+	local colorGreen = {145/255,209/255,79/255}
+    local colorRed = {255,101/255,101/255}
 	
-	pop:image(def.randomList)
+	pop:image(random_numbers.randomList)
 	
-	pop:oneText(nazv,def.returnOneNumber())
+	local number_name = random_numbers.returnOneNumber()
+	local name_medal = pop:oneText(nazv,number_name)
+	print(number_name, " S ", unpack(random_numbers.randomList) )
+	
+	function touchIt(e)
+      if(e.phase == "ended" ) then
+	  print(random_numbers.randomList[e.target.tag])
+        if (random_numbers.randomList[e.target.tag] == number_name) then
+          --great.start()
+        --sceneGroup:remove(0)
+        -- score = score + 1
+        -- timeGame.setScore(score)
+        -- great.tumb = false
+        -- gt = gt + full
+        -- random(full,gt)
+        -- transition.cancel("transTag")
+        -- timeGame.timeStripe(sceneGroup,composer,9)
+        -- great:remove()
+	
+        pop.box[e.target.tag]:setFillColor(unpack(colorGreen))
+
+      elseif (e.target.tap == true) then
+       -- timeGame.starColor()
+        pop.box[e.target.tag]:setFillColor(unpack(colorRed))
+    -- --   minus = minus + 1
+       -- e.target.tap = false
+	   end
+     end
+  end
+
+  for i=1, #pop.box do
+    pop.box[i]:addEventListener("touch",touchIt)
+  end
+	--name_medal.medText.text = "DDDDD"
+	
 	--great.react(tabl,sceneGroup)
 
 -- sceneGroup:insert(stars)
