@@ -9,9 +9,9 @@ local scene = composer.newScene()
 composer.removeScene("scene.menu")
 
 local random_numbers
+local number_name
 local pop 
 local images
-local number_name
 local name_medal
 
 local colorGreen = {145/255,209/255,79/255}
@@ -20,6 +20,8 @@ local colorRed = {255,101/255,101/255}
 -- create()
 function scene:create( event )
   random_numbers = modules:random(4,30).notRepeat()
+  number_name = random_numbers.returnOneNumber()
+  
   pop = modules:createRects({
 	  countX=2,countY=2,
 	  h=300,w=300,
@@ -27,8 +29,7 @@ function scene:create( event )
 	  indentX = 9, indentY = 9,
       numbersList = random_numbers.randomList
 	})
-  images = pop:image(random_numbers.randomList)
-  number_name = random_numbers.returnOneNumber()
+  images = pop:imagesMedal(random_numbers.randomList)
   name_medal = pop:oneText(nazv,number_name)
   print("D______")
 end
@@ -68,13 +69,12 @@ function scene:show( event )
 		 pop.tap = false
 		 pop:remove(images, 
 		   function()
-		     images = pop:image(random_numbers.randomList) 
+		     images = pop:imagesMedal(random_numbers.randomList) 
 			 pop:resetColor(pop.box)
 	         pop.tap = true
 		   end)
         -- score = score + 1
         -- timeGame.setScore(score)
-        -- great.tumb = false
         -- transition.cancel("transTag")
         -- timeGame.timeStripe(sceneGroup,composer,9)
 	
@@ -94,18 +94,11 @@ function scene:show( event )
 	  end
      end
   end
-
   for i=1, #pop.box do
     pop.box[i]:addEventListener("touch",touchIt)
   end
-	--name_medal.medText.text = "DDDDD"
-	
-	--great.react(tabl,sceneGroup)
+
 sceneGroup:insert(pop.mainScene)
--- sceneGroup:insert(stars)
--- sceneGroup:insert(textMedal)
--- sceneGroup:insert(med1)
--- sceneGroup:insert(toMenu)
 
 elseif ( phase == "did" ) then
 
@@ -121,13 +114,10 @@ function scene:hide( event )
 
     if ( phase == "will" ) then
         -- Code here runs when the scene is on screen (but is about to go off screen)
-
     elseif ( phase == "did" ) then
         -- Code here runs immediately after the scene goes entirely off screen
-
     end
 end
-
 
 -- destroy()
 function scene:destroy( event )
@@ -137,11 +127,7 @@ function scene:destroy( event )
 
     local sceneGroup = self.view
     -- Code here runs prior to the removal of scene's view
-
-
-
 end
-
 
 -- -----------------------------------------------------------------------------------
 -- Scene event function listeners

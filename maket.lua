@@ -21,7 +21,7 @@ function B:random(count, size_list)
           B.random_numbers[i] = i
         end
       end
-      while #self.randomList < self.count do
+      while #self.randomList < self.count do --BUG!!! 
         local i = math.random(1, self.size_list)
         if B.random_numbers[i] ~= nil then
           self.randomList[#self.randomList+1] = B.random_numbers[i]
@@ -84,19 +84,35 @@ function B:createRects(t)--rectGroup,collor, x, y, w, h, countX, centerY
   
   self.med = {}
   --self.imagesGroup = display.newGroup() 
-  function self:image(t)
-    self.imagesGroup = display.newGroup()
+  function self:imagesMedal(t)
+    local imagesGroup = display.newGroup()--self.imagesGroup = display.newGroup()
 		print(t[1])
     for i = 1, #t do
-        self.med[i] = display.newImage(self.imagesGroup, "img/medali_ten/" .. t[i] .. ".png", self.box[i].x, self.box[i].y)
+        self.med[i] = display.newImage(imagesGroup, "img/medali_ten/" .. t[i] .. ".png", self.box[i].x, self.box[i].y)
         self.med[i]:scale(0.9*(320/self.med[i].height), 0.9*(320/self.med[i].height)) --КОСТЫЛь!!!
         self.med[i].tag = i
     end
-	self.imagesGroup.x, self.imagesGroup.y = self.rectGroup.x, self.rectGroup.y
-    self.mainScene:insert(self.imagesGroup)
-	return self.imagesGroup
+	imagesGroup.x, imagesGroup.y = self.rectGroup.x, self.rectGroup.y
+    self.mainScene:insert(imagesGroup)
+	return imagesGroup --self.imagesGroup
+  end
+  
+  function self:imagesKolodki(t)
+    local imagesGroup = display.newGroup()
+	local kol = {}
+	for i = 1, #t do
+          kol[i] = display.newImage(imagesGroup, "img/kolodki/"  .. t[i] .. ".png", self.box[i].x, self.box[i].y)
+          kol[i]:scale(0.9*(120/kol[i].height), 0.9*(120/kol[i].height))
+          kol[i].tag = i
+     end
+	imagesGroup.x, imagesGroup.y = self.rectGroup.x, self.rectGroup.y
+	self.mainScene:insert(imagesGroup)
+    return imagesGroup
   end
 
+  function self:oneImages(words,number)
+  end 
+  
   function self:oneText(words,number)
     self.medText = display.newText({
         parent = self.mainScene,
@@ -110,6 +126,26 @@ function B:createRects(t)--rectGroup,collor, x, y, w, h, countX, centerY
     return self.medText 
   end
  
+  function self:textsMedals(words,t)
+    local imagesGroup = display.newGroup()
+	local kol = {}
+	for i = 1, #t do
+      kol[i] = display.newText({
+        parent = imagesGroup,
+        text = words[t[i]], --utf8.match(nazv[nameMedal], "%S+").."\n"..utf8.match(nazv[nameMedal], "%S+(.*)")
+        width = display.contentWidth,
+        align = "center",
+        x = self.box[i].x, y = self.box[i].y,
+        font = "font/Blogger_Sans-Bold.otf",
+        fontSize = 640/math.floor(string.len(words[t[i]]))+65,
+      })
+          kol[i].tag = i
+     end
+	imagesGroup.x, imagesGroup.y = self.rectGroup.x, self.rectGroup.y
+	self.mainScene:insert(imagesGroup)
+    return imagesGroup
+  end
+  
   function self:remove(obj, func)
 	local func = func or function() end
     transition.to(obj, { time = 400, delay = 700, alpha = 0,
@@ -133,28 +169,28 @@ end
 
 
 
-function B.react(t,scene)
-  group = display.newGroup()
-  local tabl = t
-  local x, y = tabl.x, tabl.y
-  local k = 1
-  for i = 1, tabl.arrey.x do
-    for j = 1, tabl.arrey.y do
-      B.box[k] = display.newRoundedRect(group, x, y, tabl.w, tabl.h, tabl.r)--:setFillColor(tabl.color.r, tabl.color.b, tabl.color.g )
-      B.box[k]:setFillColor(tabl.color.r, tabl.color.b, tabl.color.g )
-      B.box[k].tag = k
-      B.box[k].tap = true
-      y = y + tabl.vr
-      k = k + 1
-    end
-    y = tabl.y
-    x = x + tabl.vr
-  end
-  group.anchorChildren = true
-  group.anchorX, group.anchorY  = 0.5, 0.5
-  group.x, group.y = display.contentCenterX, display.contentCenterY+270--340 --КОСТЫЛь!!!!!!!!!!!
-  scene:insert(group)
-end
+-- function B.react(t,scene)
+  -- group = display.newGroup()
+  -- local tabl = t
+  -- local x, y = tabl.x, tabl.y
+  -- local k = 1
+  -- for i = 1, tabl.arrey.x do
+    -- for j = 1, tabl.arrey.y do
+      -- B.box[k] = display.newRoundedRect(group, x, y, tabl.w, tabl.h, tabl.r)--:setFillColor(tabl.color.r, tabl.color.b, tabl.color.g )
+      -- B.box[k]:setFillColor(tabl.color.r, tabl.color.b, tabl.color.g )
+      -- B.box[k].tag = k
+      -- B.box[k].tap = true
+      -- y = y + tabl.vr
+      -- k = k + 1
+    -- end
+    -- y = tabl.y
+    -- x = x + tabl.vr
+  -- end
+  -- group.anchorChildren = true
+  -- group.anchorX, group.anchorY  = 0.5, 0.5
+  -- group.x, group.y = display.contentCenterX, display.contentCenterY+270--340 --КОСТЫЛь!!!!!!!!!!!
+  -- scene:insert(group)
+-- end
 
 
 
@@ -233,19 +269,5 @@ function B:image(t)
     self.scene:insert(group2)
 end
 
-function B:remove()
-  local n = n
-  full = self.markup.arrey.x * self.markup.arrey.y
-  transition.to(group2, { time = 400, delay = 700, alpha = 0,
-    onComplete = function()
-      for i = 1, full do
-        B.box[i]:setFillColor(self.markup.color.r, self.markup.color.b, self.markup.color.g )
-        B.box[i].tap = true
-      end
-      group2:removeSelf()
-      B:image()
-      B.tumb = true
-    end})
-end
 
 return B
