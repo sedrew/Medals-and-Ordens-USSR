@@ -1,11 +1,3 @@
-local centerX    = display.contentCenterX
-local centerY    = display.contentCenterY
-local fullw      = display.actualContentWidth
-local fullh      = display.actualContentHeight
-local left       = centerX - fullw/2
-local right      = left + fullw
-local top        = centerY - fullh/2
-local bottom     = top + fullh
 local B = {}
 
 lovkost = {}

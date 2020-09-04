@@ -71,7 +71,7 @@ function scene:show( event )
 	  composer.showOverlay("scene.gameOver", {time = 800, effect="crossFade", isModal = true,})
       transition.pause( "transTag" )
 	end
-	
+	--print("SDCCCCCC", bottom)
 	
 	
 	pop.tap = true

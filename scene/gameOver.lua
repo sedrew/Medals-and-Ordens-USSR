@@ -7,17 +7,7 @@ local scene = composer.newScene()
 function scene:create(event)
 	local sceneGroup = self.view
 
-	local centerX    = display.contentCenterX
-	local centerY    = display.contentCenterY
-	local fullw      = display.actualContentWidth
-	local fullh      = display.actualContentHeight
-	local left       = centerX - fullw/2
-	local right      = left + fullw
-	local top        = centerY - fullh/2
-	local bottom     = top + fullh
-
-
-	display.newRect(sceneGroup, centerX , centerY, fullw, fullh):setFillColor(37/255, 39/255, 46/255, 0.7)
+  display.newRect(sceneGroup, centerX , centerY, fullw, fullh):setFillColor(37/255, 39/255, 46/255, 0.7)
   local plant = display.newRoundedRect(sceneGroup, display.contentCenterX, 600, 560, 920, 15)
 				plant:setFillColor(244/255,229/255,209/255)
 
