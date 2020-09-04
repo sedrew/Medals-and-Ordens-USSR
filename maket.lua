@@ -6,42 +6,56 @@ B.box = {}
 B.med = {}
 B.tumb = true
 
-B.random_numbers = {}
-B.random_steps = 1
-function B:random(count, size_list)
+--self.random_numbers = {}
+--B.random_steps = 1
+function B:random(count, size_list, random_numbers) --два странных пареметра возможны BUGs
   --local cash = {}
   self.randomList = {}
+  self.random_numbers = random_numbers or {}
   self.count = count or 1
   self.size_list = size_list or 1
-
+  self.random_steps_start = 1
+  self.random_steps_end = count
+  
+  if #self.random_numbers == 0 then
+	for i = 1, self.size_list do
+	  self.random_numbers[i] = i
+	end
+  end
   function self.notRepeat()
-    local count_nil = 0
-      if #B.random_numbers == 0 then
-        for i = 1, self.size_list do
-          B.random_numbers[i] = i
-        end
-      end
-      while #self.randomList < self.count do --BUG!!! 
-        local i = math.random(1, self.size_list)
-        if B.random_numbers[i] ~= nil then
-          self.randomList[#self.randomList+1] = B.random_numbers[i]
-          B.random_numbers[i] = nil
+    --local count_nil = 0
+	local size = #self.random_numbers
+	print(unpack(self.random_numbers))
+      while #self.randomList < self.count do -- <--BUG!!! 
+        local i = math.random(1, size)
+        if self.random_numbers[i] ~= nil then
+          self.randomList[#self.randomList+1] = self.random_numbers[i]
+          self.random_numbers[i] = nil
           --collectgarbage() print(collectgarbage ("count"))
           else 
             -- count_nil = count_nil + 1
             -- print("hhh ",count_nil)
-            -- if count_nil == #B.random_numbers then
+            -- if count_nil == #self.random_numbers then
              -- --break
             -- end
           end
        end
     return self
   end
-
-  function self.steps() --рандом с шагом count
-    local random_list = {}
-    for i = B.random_steps, count do
+  
+  self.save_random_numbers = self.random_numbers
+  function self.steps() --срез
+    self.random_numbers = {}
+    for i = self.random_steps_start, self.random_steps_end do
+	  self.random_numbers[i] = self.save_random_numbers[i]
+	end 
+	self.random_steps_start = self.random_steps_start + count
+	self.random_steps_end = self.random_steps_end + count
+	self.finish = true 
+	if self.random_steps_end > self.random_steps_end then
+	  return self, self.finish 
 	end
+	print(unpack(self.random_numbers))
     return self
   end
 	
