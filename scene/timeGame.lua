@@ -1,8 +1,6 @@
 local B = {}
 
-lovkost = {}
-
- function B:upBar(score)
+function B:upBar(score)
   self.sceneGroup = display.newGroup()
   self.score =  score or 0 
   
@@ -14,7 +12,7 @@ lovkost = {}
     font = "font/Blogger_Sans-Bold.otf",
     fontSize = 75,
   })
-  local  textScore = display.newText({
+  local textScore = display.newText({
     parent   = self.sceneGroup,
     text =  0,
     width =display.contentWidth,
@@ -34,52 +32,48 @@ lovkost = {}
     star[i]:setStrokeColor( 255/255,242/255,107/255 )
   end
   
- function self.timeStripe(time)
-      self.time = time or 10
-      self.time = self.time * 1000
-      local rt = 100
+  function self.timeStripe(time)
+    self.time = time or 10
+    self.time = self.time * 1000
+    local rt = 100
 
-       function manageTime( event )
-            rt = rt - 100/(self.time/100)
-          end
-      local evs = timer.performWithDelay( 100, manageTime, 0 )
-
-      local plane = display.newRoundedRect(self.sceneGroup, left, 105, fullw, 10, 12)
-        plane:setFillColor( 255/255,242/255,107/255 )
-        plane.anchorX = 0
-        transition.to(plane,{
-        time=self.time,
-        alpha=1, x = -fullw+left,
-        tag="transTag",
-        onCancel = function()
-          lovkost[#lovkost+1] = rt
-          timer.cancel(evs)
-          --group:removeSelf()
-		  self.gameOver()
-        end,
-        onComplete = function()
-          timer.cancel(evs)
-           --res = 1
-           
-          end
-      } )
-    return self
+    function manageTime( event )
+      rt = rt - 100/(self.time/100)
+    end
+	self.time_game = timer.performWithDelay( 100, manageTime, 0 )
+	
+    self.line_time = display.newRoundedRect(self.sceneGroup, left, 105, fullw, 10, 12)
+    self.line_time:setFillColor(255/255,242/255,107/255)
+    self.line_time.anchorX = 0
+	
+    transition.to(self.line_time,{
+      time=self.time,
+      alpha=1, x = -fullw+left,
+      tag="tagPauseLineTime",
+      onCancel = function()
+        timer.cancel(self.time_game)
+      end,
+      onComplete = function()
+        timer.cancel(self.time_game)
+		self.gameOver()
+      end
+    })
+   return self
   end
   
- self.mistake = 0
- function self.update()
-   if (self.mistake > 0 and self.mistake < 4) then
-        star[self.mistake]:setStrokeColor(0.5, 0.5, 0.5)
-        star[self.mistake].fill = {0.5, 0.5, 0.5}
-       -- self.life =  self.life - 1
-     else self.gameOver()--B.gameOV(composer) --composer.showOverlay("scene.gameOver", {time = 800, effect="crossFade", isModal = true,})
+  self.mistake = 0
+  function self.update()
+    if (self.mistake > 0 and self.mistake < 4) then
+      star[self.mistake]:setStrokeColor(0.5, 0.5, 0.5)
+      star[self.mistake].fill = {0.5, 0.5, 0.5}
+    elseif (self.mistake > 3) then 
+	   self.gameOver()
+	   --B.gameOV(composer) --composer.showOverlay("scene.gameOver", {time = 800, effect="crossFade", isModal = true,})
+    end
+    textScore.text = self.score
    end
-   textScore.text = self.score
- end
 
--- function self.gameOver()
-  -- self.gameOver()
--- end 
+
 
   -- function toMenu:touch(e)
     -- if (tumb == true) then
@@ -94,6 +88,5 @@ lovkost = {}
   -- toMenu:addEventListener( "touch", toMenu )
   return self
 end
-
 
 return B

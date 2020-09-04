@@ -2,14 +2,11 @@ local B = {}
 local group
 local group2
 local group3
-B.box = {}
-B.med = {}
-B.tumb = true
+
 
 --self.random_numbers = {}
 --B.random_steps = 1
 function B:random(count, size_list, random_numbers) --два странных пареметра возможны BUGs
-  --local cash = {}
   self.randomList = {}
   self.random_numbers = random_numbers or {}
   self.count = count or 1
@@ -66,8 +63,7 @@ function B:random(count, size_list, random_numbers) --два странных п
   return self
 end
 
-
-function B:createRects(t)--rectGroup,collor, x, y, w, h, countX, centerY
+function B:createRects(t)
   self.rectGroup = t.rectGroup or display.newGroup()
   self.setFillColor = t.collor or {190/255,215/255,239/255}
   self.x, self.y = 0, 0
@@ -83,7 +79,7 @@ function B:createRects(t)--rectGroup,collor, x, y, w, h, countX, centerY
   local k = 1
   for i = 1, self.countX do
     for j = 1, self.countY do
-      self.box[k] = display.newRoundedRect( self.rectGroup, self.x, self.y, self.w, self.h, self.r)--:setFillColor(tabl.color.r, tabl.color.b, tabl.color.g )
+      self.box[k] = display.newRoundedRect( self.rectGroup, self.x, self.y, self.w, self.h, self.r)
       self.box[k]:setFillColor(unpack(self.setFillColor))
       self.box[k].tag = k
       self.box[k].tap = true
@@ -116,7 +112,7 @@ function B:createRects(t)--rectGroup,collor, x, y, w, h, countX, centerY
 	local kol = {}
 	for i = 1, #t do
           kol[i] = display.newImage(imagesGroup, "img/kolodki/"  .. t[i] .. ".png", self.box[i].x, self.box[i].y)
-          kol[i]:scale(0.9*(120/kol[i].height), 0.9*(120/kol[i].height))
+          kol[i]:scale(0.9*(120/kol[i].height), 0.9*(120/kol[i].height))--КОСТЫЛь!!!
           kol[i].tag = i
      end
 	imagesGroup.x, imagesGroup.y = self.rectGroup.x, self.rectGroup.y
@@ -133,9 +129,9 @@ function B:createRects(t)--rectGroup,collor, x, y, w, h, countX, centerY
         text = words[number], --utf8.match(nazv[nameMedal], "%S+").."\n"..utf8.match(nazv[nameMedal], "%S+(.*)")
         width = display.contentWidth,
         align = "center",
-        x = display.contentCenterX, y = self.rectGroup.y-420,
+        x = display.contentCenterX, y = self.rectGroup.y-420, --КОСТЫЛь!!!
         font = "font/Blogger_Sans-Bold.otf",
-        fontSize = 640/math.floor(string.len(words[number]))+65,
+        fontSize = 640/math.floor(string.len(words[number]))+65, --КОСТЫЛь!!!
       })
     return self.medText 
   end
@@ -178,35 +174,6 @@ function B:createRects(t)--rectGroup,collor, x, y, w, h, countX, centerY
   
   return self
 end
-
-
-
-
-
--- function B.react(t,scene)
-  -- group = display.newGroup()
-  -- local tabl = t
-  -- local x, y = tabl.x, tabl.y
-  -- local k = 1
-  -- for i = 1, tabl.arrey.x do
-    -- for j = 1, tabl.arrey.y do
-      -- B.box[k] = display.newRoundedRect(group, x, y, tabl.w, tabl.h, tabl.r)--:setFillColor(tabl.color.r, tabl.color.b, tabl.color.g )
-      -- B.box[k]:setFillColor(tabl.color.r, tabl.color.b, tabl.color.g )
-      -- B.box[k].tag = k
-      -- B.box[k].tap = true
-      -- y = y + tabl.vr
-      -- k = k + 1
-    -- end
-    -- y = tabl.y
-    -- x = x + tabl.vr
-  -- end
-  -- group.anchorChildren = true
-  -- group.anchorX, group.anchorY  = 0.5, 0.5
-  -- group.x, group.y = display.contentCenterX, display.contentCenterY+270--340 --КОСТЫЛь!!!!!!!!!!!
-  -- scene:insert(group)
--- end
-
-
 
 function B:image(t)
   group2 = display.newGroup()

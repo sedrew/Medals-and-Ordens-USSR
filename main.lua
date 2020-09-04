@@ -12,9 +12,6 @@ right      = left + fullw
 top        = centerY - fullh/2
 bottom     = top + fullh
 ------------------------------------------
-
---require("mobdebug").start() --zeroBrane откладка
-
 local options = {
     effect = "fade",
     time = 500,

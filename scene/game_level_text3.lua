@@ -1,4 +1,3 @@
-
 local composer = require( "composer" )
 
 local modules = require("maket")
@@ -33,89 +32,65 @@ function scene:create( event )
 	})
   images = pop:imagesMedal(random_numbers.randomList)
   name_medal = pop:oneText(nazv,number_name)
-  
   sceneGroup:insert(pop.mainScene)
-  print("D______")
+
 end
 -- show()
 function scene:show( event )
 
-    local sceneGroup = self.view
-    local phase = event.phase
+  local sceneGroup = self.view
+  local phase = event.phase
 
-    if ( phase == "will" ) then
-	
-	-- print(number_name, " S ", unpack(random_numbers.randomList) )
-	-- local GroupText1 = display.newText({
-        -- parent = sceneGroup,
-        -- text = "Домой",
-        -- x = display.contentCenterX, y = 80,
-        -- font = "font/Blogger_Sans-Bold.otf",
-        -- fontSize = 90,
-      -- })
-      -- --
-      -- function GroupText1:touch()
-        -- composer.gotoScene("scene.menu", {time = 800, effect="crossFade"})
-        -- composer.removeScene("scene.scene.game_level_text3")
-		-- --sceneGroup:removeSelf()
-      -- return true
-    -- end
-    -- GroupText1:addEventListener( "touch", GroupText1 )
-	
-	local timeGame  = require("scene.timeGame")
-	local upBar_event = timeGame:upBar()
-    --timeGame.timeStripe(sceneGroup,composer,15)
+  if ( phase == "will" ) then
+    local timeGame  = require("scene.timeGame")
+    local upBar_event = timeGame:upBar()
 	upBar_event.timeStripe()
 	
 	function upBar_event.gameOver() 
 	  composer.showOverlay("scene.gameOver", {time = 800, effect="crossFade", isModal = true,})
-      transition.pause( "transTag" )
-	end
-	--print("SDCCCCCC", bottom)
-	
-	
+    end
+
 	pop.tap = true
-	function touchIt(e)
-	 if (pop.tap == true) then 
-      if (e.phase == "ended")  then
-	  print(random_numbers.randomList[e.target.tag])
-        if (random_numbers.randomList[e.target.tag] == number_name) then
+    function touchIt(e)
+      if (pop.tap == true) then 
+        if (e.phase == "ended")  then
+	      print(random_numbers.randomList[e.target.tag])
+          if (random_numbers.randomList[e.target.tag] == number_name) then
          --images:removeSelf(images)
-		 pop.tap = false
-		 pop:remove(images, 
-		   function()
-		     images = pop:imagesMedal(random_numbers.randomList) 
-			 pop:resetColor(pop.box)
-	         pop.tap = true
-		   end)
-        -- score = score + 1
-        -- transition.cancel("transTag")
-        upBar_event.score = upBar_event.score + 1 
+            pop.tap = false
+            pop:remove(images, 
+              function()
+                images = pop:imagesMedal(random_numbers.randomList) 
+                pop:resetColor(pop.box)
+                pop.tap = true
+              end)
+			  
+            transition.cancel("tagPauseLineTime")
+            upBar_event.score = upBar_event.score + 1 
+
+            pop.box[e.target.tag]:setFillColor(unpack(colorGreen))
+            random_numbers = modules:random(4,30).notRepeat()
+            number_name = random_numbers.returnOneNumber()
+            name_medal.text = nazv[number_name]
+          elseif (e.target.tap == true) then
+            upBar_event.mistake = upBar_event.mistake + 1
+            pop.box[e.target.tag]:setFillColor(unpack(colorRed))
+            e.target.tap = false
+          end
+          upBar_event.update()
+        end
+      end
+    end
 	
-        pop.box[e.target.tag]:setFillColor(unpack(colorGreen))
-		random_numbers = modules:random(4,30).notRepeat()
-		number_name = random_numbers.returnOneNumber()
-	    name_medal.text = nazv[number_name]
-		--images = pop:image(random_numbers.randomList)
-		
-      elseif (e.target.tap == true) then
-        upBar_event.mistake = upBar_event.mistake + 1
-        pop.box[e.target.tag]:setFillColor(unpack(colorRed))
-        e.target.tap = false
-	   end
-	   upBar_event.update()
-	  end
-     end
+    for i=1, #pop.box do
+      pop.box[i]:addEventListener("touch",touchIt)
+    end
+
+    sceneGroup:insert(pop.mainScene)
+
+  elseif ( phase == "did" ) then
+
   end
-  for i=1, #pop.box do
-    pop.box[i]:addEventListener("touch",touchIt)
-  end
-
-sceneGroup:insert(pop.mainScene)
-
-elseif ( phase == "did" ) then
-
- end
 end
 
 

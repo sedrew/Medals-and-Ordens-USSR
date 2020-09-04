@@ -5,8 +5,6 @@ function scene:create( event )
 
     local sceneGroup = self.view
 
-
-
 end
 
 function scene:show( event )
