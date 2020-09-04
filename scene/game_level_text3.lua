@@ -19,6 +19,8 @@ local colorRed = {255,101/255,101/255}
 
 -- create()
 function scene:create( event )
+  local sceneGroup = self.view
+  
   random_numbers = modules:random(4,30).notRepeat()
   number_name = random_numbers.returnOneNumber()
   
@@ -31,6 +33,8 @@ function scene:create( event )
 	})
   images = pop:imagesMedal(random_numbers.randomList)
   name_medal = pop:oneText(nazv,number_name)
+  
+  sceneGroup:insert(pop.mainScene)
   print("D______")
 end
 -- show()
@@ -55,6 +59,7 @@ function scene:show( event )
       function GroupText1:touch()
         composer.gotoScene("scene.menu", {time = 800, effect="crossFade"})
         composer.removeScene("scene.scene.game_level_text3")
+		--sceneGroup:removeSelf()
       return true
     end
     GroupText1:addEventListener( "touch", GroupText1 )
