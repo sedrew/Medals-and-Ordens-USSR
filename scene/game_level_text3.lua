@@ -63,10 +63,11 @@ function scene:show( event )
     -- GroupText1:addEventListener( "touch", GroupText1 )
 	
 	local timeGame  = require("scene.timeGame")
-	local game_event = timeGame:upBar()
+	local upBar_event = timeGame:upBar()
     --timeGame.timeStripe(sceneGroup,composer,15)
+	upBar_event.timeStripe()
 	
-	function game_event.gameOver() 
+	function upBar_event.gameOver() 
 	  composer.showOverlay("scene.gameOver", {time = 800, effect="crossFade", isModal = true,})
       transition.pause( "transTag" )
 	end
@@ -89,22 +90,20 @@ function scene:show( event )
 		   end)
         -- score = score + 1
         -- transition.cancel("transTag")
-        game_event.score = game_event.score + 1 
+        upBar_event.score = upBar_event.score + 1 
 	
         pop.box[e.target.tag]:setFillColor(unpack(colorGreen))
 		random_numbers = modules:random(4,30).notRepeat()
 		number_name = random_numbers.returnOneNumber()
 	    name_medal.text = nazv[number_name]
 		--images = pop:image(random_numbers.randomList)
-		--name_medal:removeSelf()
 		
       elseif (e.target.tap == true) then
-        game_event.mistake = game_event.mistake + 1
+        upBar_event.mistake = upBar_event.mistake + 1
         pop.box[e.target.tag]:setFillColor(unpack(colorRed))
-    -- --   minus = minus + 1
-       -- e.target.tap = false
+        e.target.tap = false
 	   end
-	   game_event.update()
+	   upBar_event.update()
 	  end
      end
   end

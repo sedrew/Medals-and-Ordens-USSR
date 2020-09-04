@@ -10,43 +10,6 @@ local B = {}
 
 lovkost = {}
 
--- function B.gameOV(composer)
-  -- local composer  = require( "composer" )
-  -- composer.showOverlay("scene.gameOver", {time = 800, effect="crossFade", isModal = true,})
-  -- transition.pause( "transTag" )
--- end
-
- function B.timeStripe(a,composer,time)
-      local time = time * 1000
-      local group = display.newGroup()
-      local rt = 100
-
-       function manageTime( event )
-            rt = rt - 100/(time/100)
-          end
-      local evs = timer.performWithDelay( 100, manageTime, 0 )
-
-      local plane = display.newRoundedRect(group, left, 105, fullw, 10, 12)
-        plane:setFillColor( 255/255,242/255,107/255 )
-        plane.anchorX = 0
-        transition.to(plane,{
-        time=time,
-        alpha=1, x = -fullw+left,
-        tag="transTag",
-        onCancel = function()
-          lovkost[#lovkost+1] = rt
-          timer.cancel(evs)
-          group:removeSelf()
-        end,
-        onComplete = function()
-          timer.cancel(evs)
-           res = 1
-           B.gameOV(composer)
-          end
-      } )
-a:insert(group)
-end
-
  function B:upBar(score)
   self.sceneGroup = display.newGroup()
   self.score =  score or 0 
@@ -79,9 +42,40 @@ end
     star[i]:setStrokeColor( 255/255,242/255,107/255 )
   end
   
+ function self.timeStripe(time)
+      self.time = time or 10
+      self.time = self.time * 1000
+      local rt = 100
+
+       function manageTime( event )
+            rt = rt - 100/(self.time/100)
+          end
+      local evs = timer.performWithDelay( 100, manageTime, 0 )
+
+      local plane = display.newRoundedRect(self.sceneGroup, left, 105, fullw, 10, 12)
+        plane:setFillColor( 255/255,242/255,107/255 )
+        plane.anchorX = 0
+        transition.to(plane,{
+        time=self.time,
+        alpha=1, x = -fullw+left,
+        tag="transTag",
+        onCancel = function()
+          lovkost[#lovkost+1] = rt
+          timer.cancel(evs)
+          --group:removeSelf()
+		  self.gameOver()
+        end,
+        onComplete = function()
+          timer.cancel(evs)
+           --res = 1
+           
+          end
+      } )
+    return self
+  end
+  
  self.mistake = 0
  function self.update()
-   
    if (self.mistake > 0 and self.mistake < 4) then
         star[self.mistake]:setStrokeColor(0.5, 0.5, 0.5)
         star[self.mistake].fill = {0.5, 0.5, 0.5}
