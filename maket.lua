@@ -52,7 +52,6 @@ function B:random(count, size_list, random_numbers) --два странных п
 	if self.random_steps_end > self.random_steps_end then
 	  return self, self.finish 
 	end
-	print(unpack(self.random_numbers))
     return self
   end
 	

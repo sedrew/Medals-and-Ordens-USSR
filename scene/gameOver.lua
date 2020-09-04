@@ -13,8 +13,7 @@ function scene:create(event)
 
   local textTab = {"Время вышло\n", "Звезды закончились\n", "Очки", "Ловкость ", "Правельных ответов"}
 
-  local text = display.newText
-  ({
+  local text = display.newText({
     parent = sceneGroup,
     text =  textTab[1],
     width = 490,
@@ -27,27 +26,27 @@ function scene:create(event)
 
   transition.cancel("tagPauseLineTime")
 
-  local lov = 0
-  for i = 1, #lovkost do
-    lov = math.ceil(lov + lovkost[i])
-		--print(lovkost[i])
-   end
+  -- local lov = 0
+  -- for i = 1, #lovkost do
+    -- lov = math.ceil(lov + lovkost[i])
+		-- --print(lovkost[i])
+   -- end
 
-  display.newRoundedRect(sceneGroup, display.contentCenterX, plant.y-320, 350, 55, 15):setFillColor(118/255,113/255,112/255)
-  local plane = display.newRoundedRect(sceneGroup, display.contentCenterX-175, plant.y-320, (350/100)*(lov/#lovkost), 55, 15)
-    plane:setFillColor(0.272+(38/(lov/#lovkost+10)), (0.815/100)*(lov/#lovkost+30), 80/255) --red 0.572 .428
-    plane.anchorX = 0
+  -- display.newRoundedRect(sceneGroup, display.contentCenterX, plant.y-320, 350, 55, 15):setFillColor(118/255,113/255,112/255)
+  -- local plane = display.newRoundedRect(sceneGroup, display.contentCenterX-175, plant.y-320, (350/100)*(lov/#lovkost), 55, 15)
+    -- plane:setFillColor(0.272+(38/(lov/#lovkost+10)), (0.815/100)*(lov/#lovkost+30), 80/255) --red 0.572 .428
+    -- plane.anchorX = 0
 
-  local text2 = display.newText({
-	parent = sceneGroup,
-	text =  textTab[4] .. math.ceil(lov/#lovkost) .. '%', --.."%\n" .. textTab[5] .." ".. math.floor((score/minus)*100) .. "%"
-	width = 490,
-	align = "center",
-	x = display.contentCenterX, y = plant.y-320,
-	font = "font/Blogger_Sans-Bold.otf",
-	fontSize = 45,
-  })
-  text2:setTextColor(1,1,1)
+  -- local text2 = display.newText({
+	-- parent = sceneGroup,
+	-- text =  textTab[4] .. math.ceil(lov/#lovkost) .. '%', --.."%\n" .. textTab[5] .." ".. math.floor((score/minus)*100) .. "%"
+	-- width = 490,
+	-- align = "center",
+	-- x = display.contentCenterX, y = plant.y-320,
+	-- font = "font/Blogger_Sans-Bold.otf",
+	-- fontSize = 45,
+  -- })
+  -- text2:setTextColor(1,1,1)
 
   local ar1 = math.random(1, #facts)
   local ar2 = math.random(2, math.random(2, #facts[ar1]))
@@ -76,13 +75,13 @@ function scene:create(event)
 
   local setting = loadsave.loadTable( "settings.json" )
 	
-  function closer(tip)
-    if (tip == 'restart') then
+  function closer(event)
+    if (event == 'restart') then
 	  composer.removeHidden( false )
 	  composer.hideOverlay("fade", 400)
 	  composer.removeScene("scene")-- composer.getVariable( "name" )
-	  composer.gotoScene( "scene", {time = 800, effect="crossFade"} )
-    elseif (tip == 'close') then
+	  composer.gotoScene( "scene.game_level_text3", {time = 800, effect="crossFade"} )
+    elseif (event == 'close') then
 	  composer.hideOverlay("fade", 400) -- закрываем сцену
 	  --composer.gotoScene("scene.menu", {time = 800, effect="crossFade"})
 	  composer.removeScene("scene")

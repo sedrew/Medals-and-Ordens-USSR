@@ -33,7 +33,7 @@ function B:upBar(score)
   end
   
   function self.timeStripe(time)
-    self.time = time or 10
+    self.time = time or 2
     self.time = self.time * 1000
     local rt = 100
 

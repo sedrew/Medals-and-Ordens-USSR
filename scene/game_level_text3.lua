@@ -54,7 +54,6 @@ function scene:show( event )
     function touchIt(e)
       if (pop.tap == true) then 
         if (e.phase == "ended")  then
-	      print(random_numbers.randomList[e.target.tag])
           if (random_numbers.randomList[e.target.tag] == number_name) then
          --images:removeSelf(images)
             pop.tap = false
