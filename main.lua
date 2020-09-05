@@ -21,19 +21,25 @@ local options = {
     }
 }
 
-local loadsave  = require("scr.loadsave")
-local properties = loadsave.loadTable( "settings.json" )
+local loadsave  = require("lib.loadsave")
+local props = loadsave.loadTable( "settings.json" )
 
-if properties ~= nil then
-  print("logging")
+PROP   = {}
+ACHIEVE = {}
+
+if props ~= nil then
+  --print("logging")
   --print(unpack(setting),"SSSS")
-  local table = {
+  PROPS= props.settings
+  ACHIEVES  = props.game_achieve
+else
+  local tabl = {
     settings = {
      color_theme = 0,
      font = 0,
      music = true,
      sounds = true,
-     language = "Ru_ru"
+     lang = "ru"
     },
     game_achieve = {
       all_count = 0,
@@ -41,10 +47,18 @@ if properties ~= nil then
       achieve_name = {}
     }
   }
-  loadsave.saveTable(table, "settings.json")
-
+  PROPS = tabl.settings
+  ACHIEVES  = tabl.game_achieve
+  loadsave.saveTable(tabl, "settings.json")
 end
 
+i18n = require('lib.i18n.init')
+i18n.load(require('lib.i18n.languages'))
+--i18n.loadFile(system.pathForFile(system.ResourceDirectory) ..'/lib/i18n/ru.lua') -- load French language file
+i18n.setLocale(PROPS.lang)
+
+print("sdsdsds %{age}", 3)
+print(i18n('good_bye')) -- Good-bye!
 
 
 composer.gotoScene( "scene.menu", options )
