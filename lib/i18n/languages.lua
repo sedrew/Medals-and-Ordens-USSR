@@ -8,7 +8,10 @@ return {
     }
   },
   ru = {
-    good_bye = "пока!",
+    name_game = "Медали и Ордена",
+    play = "Играть",
+    home = "Домой",
+    setting = "Настройки",
     age_msg = "выше %{age}.",
     phone_msg = {
       one = "you have one new message.",

@@ -12,34 +12,34 @@ right      = left + fullw
 top        = centerY - fullh/2
 bottom     = top + fullh
 ------------------------------------------
-local options = {
-    effect = "fade",
-    time = 500,
-    params = {
-        someKey = "someValue",
-        someOtherKey = 10
-    }
-}
 
 local loadsave  = require("lib.loadsave")
 local props = loadsave.loadTable( "settings.json" )
 
-PROP   = {}
+PROPS   = {}
 ACHIEVE = {}
-
+print(0/255, 143/255, 126/255)
 if props ~= nil then
-  --print("logging")
-  --print(unpack(setting),"SSSS")
   PROPS= props.settings
   ACHIEVES  = props.game_achieve
 else
   local tabl = {
     settings = {
-     color_theme = 0,
-     font = 0,
+     color = {
+       background = {0,	0.560,	0.494},
+       up_bar = {},
+       achieve = {},
+       text = {},
+     },
+     font = "font/Blogger_Sans-Bold.otf",
+     font_size = 80,
      music = true,
      sounds = true,
-     lang = "ru"
+     lang = "ru",
+     animation = {
+       scene = {delay = 100, time = 200, effect="crossFade"},
+       object = {time = 400, delay = 700, alpha = 0},
+     }
     },
     game_achieve = {
       all_count = 0,
@@ -54,11 +54,11 @@ end
 
 i18n = require('lib.i18n.init')
 i18n.load(require('lib.i18n.languages'))
---i18n.loadFile(system.pathForFile(system.ResourceDirectory) ..'/lib/i18n/ru.lua') -- load French language file
 i18n.setLocale(PROPS.lang)
+--i18n.loadFile(system.pathForFile(system.ResourceDirectory) ..'/lib/i18n/ru.lua') -- load French language file
 
 print("sdsdsds %{age}", 3)
 print(i18n('good_bye')) -- Good-bye!
 
 
-composer.gotoScene( "scene.menu", options )
+composer.gotoScene("scene.menu", PROPS.animation.scene)

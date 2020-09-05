@@ -13,7 +13,7 @@ function B:random(count, size_list, random_numbers) --два странных п
   self.size_list = size_list or 1
   self.random_steps_start = 1
   self.random_steps_end = count
-  
+
   if #self.random_numbers == 0 then
 	for i = 1, self.size_list do
 	  self.random_numbers[i] = i
@@ -23,13 +23,13 @@ function B:random(count, size_list, random_numbers) --два странных п
     --local count_nil = 0
 	local size = #self.random_numbers
 	print(unpack(self.random_numbers))
-      while #self.randomList < self.count do -- <--BUG!!! 
+      while #self.randomList < self.count do -- <--BUG!!!
         local i = math.random(1, size)
         if self.random_numbers[i] ~= nil then
           self.randomList[#self.randomList+1] = self.random_numbers[i]
           self.random_numbers[i] = nil
           --collectgarbage() print(collectgarbage ("count"))
-          else 
+          else
             -- count_nil = count_nil + 1
             -- print("hhh ",count_nil)
             -- if count_nil == #self.random_numbers then
@@ -39,26 +39,26 @@ function B:random(count, size_list, random_numbers) --два странных п
        end
     return self
   end
-  
+
   self.save_random_numbers = self.random_numbers
   function self.steps() --срез
     self.random_numbers = {}
     for i = self.random_steps_start, self.random_steps_end do
 	  self.random_numbers[i] = self.save_random_numbers[i]
-	end 
+	end
 	self.random_steps_start = self.random_steps_start + count
 	self.random_steps_end = self.random_steps_end + count
-	self.finish = true 
+	self.finish = true
 	if self.random_steps_end > self.random_steps_end then
-	  return self, self.finish 
+	  return self, self.finish
 	end
     return self
   end
-	
+
   function self.returnOneNumber()
     return self.randomList[math.random(1,#self.randomList)]
   end
-  
+
   return self
 end
 
@@ -74,7 +74,7 @@ function B:createRects(t)
   self.box = {}
   self.numbersList = t.numbersList or {}
   self.mainScene = display.newGroup()
-  
+
   local k = 1
   for i = 1, self.countX do
     for j = 1, self.countY do
@@ -90,9 +90,9 @@ function B:createRects(t)
   end
   self.rectGroup.x,self.rectGroup.y = self.globalX, self.globalY
   self.mainScene:insert(self.rectGroup)
-  
+
   self.med = {}
-  --self.imagesGroup = display.newGroup() 
+  --self.imagesGroup = display.newGroup()
   function self:imagesMedal(t)
     local imagesGroup = display.newGroup()--self.imagesGroup = display.newGroup()
 		print(t[1])
@@ -105,7 +105,7 @@ function B:createRects(t)
     self.mainScene:insert(imagesGroup)
 	return imagesGroup --self.imagesGroup
   end
-  
+
   function self:imagesKolodki(t)
     local imagesGroup = display.newGroup()
 	local kol = {}
@@ -120,8 +120,8 @@ function B:createRects(t)
   end
 
   function self:oneImages(words,number)
-  end 
-  
+  end
+
   function self:oneText(words,number)
     self.medText = display.newText({
         parent = self.mainScene,
@@ -129,12 +129,12 @@ function B:createRects(t)
         width = display.contentWidth,
         align = "center",
         x = display.contentCenterX, y = self.rectGroup.y-420, --КОСТЫЛь!!!
-        font = "font/Blogger_Sans-Bold.otf",
+        font = PROPS.font,
         fontSize = 640/math.floor(string.len(words[number]))+65, --КОСТЫЛь!!!
       })
-    return self.medText 
+    return self.medText
   end
- 
+
   function self:textsMedals(words,t)
     local imagesGroup = display.newGroup()
 	local kol = {}
@@ -145,7 +145,7 @@ function B:createRects(t)
         width = display.contentWidth,
         align = "center",
         x = self.box[i].x, y = self.box[i].y,
-        font = "font/Blogger_Sans-Bold.otf",
+        font = PROPS.font,
         fontSize = 640/math.floor(string.len(words[t[i]]))+65,
       })
           kol[i].tag = i
@@ -154,23 +154,24 @@ function B:createRects(t)
 	self.mainScene:insert(imagesGroup)
     return imagesGroup
   end
-  
+
   function self:remove(obj, func)
 	local func = func or function() end
-    transition.to(obj, { time = 400, delay = 700, alpha = 0,
+    local props = PROPS.animation.object
+    transition.to(obj, {time = props.time, delay = props.delay, alpha = props.alpha,
     onComplete = function()
       obj:removeSelf()
 	  func()
     end})
   end
-  
+
   function self:resetColor(obj)
     for i = 1, #obj do
       obj[i]:setFillColor(190/255,215/255,239/255)
       obj[i].tap = true
     end
   end
-  
+
   return self
 end
 
@@ -189,7 +190,7 @@ function B:image(t)
         width = display.contentWidth,
         align = "center",
         x = display.contentCenterX, y = self.markup.y+320,
-        font = "font/Blogger_Sans-Bold.otf",
+        font = PROPS.font,
         fontSize = 640/math.floor(string.len(self.words[self.randomMedal]))+65,
       })
     end

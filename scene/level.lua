@@ -14,13 +14,6 @@ function scene:show( event )
     local phase = event.phase
 
     if ( phase == "will" ) then
-
--- local loadsave  = require("scene.loadsave")
--- local setting = loadsave.loadTable( "settings.json" )
--- --local touchPlay = setting.touchPlay
--- score	= setting.score
--- minus = setting.minus
-
       local GroupText1 = display.newText({
         parent = sceneGroup,
         text = "Домой",
@@ -32,111 +25,52 @@ function scene:show( event )
       function GroupText1:touch()
         composer.gotoScene("scene.menu", {time = 800, effect="crossFade"})
         composer.removeScene("scene.level")
-      return true
-    end
-    GroupText1:addEventListener( "touch", GroupText1 )
+       return true
+      end
+      GroupText1:addEventListener( "touch", GroupText1 )
 
 -- local myRoundedRect = display.newRoundedRect(sceneGroup, display.contentCenterX, 560, display.actualContentWidth, 1000, 0)
 --       myRoundedRect:setFillColor(190/255,215/255,239/255)
-
-      local centerX    = display.contentCenterX
-      local centerY    = display.contentCenterY
-      local fullw      = display.actualContentWidth
-      local fullh      = display.actualContentHeight-300
-      local left       = centerX - fullw/2
-      local right      = left + fullw
-      local top        = centerY - fullh/2
-      local bottom     = top + fullh
-
 
       local but = display.newGroup()
       sceneGroup:insert(but)
       local im = {}
 
-    function img()
-      x = centerX
-      y = 200
-      for i = 1, 4 do
-        y = y + 200
-        im[i] = display.newImage(but, "scene/menu/im" .. i-1 .. ".png", x, y)
-        im[i]:scale(0.7, 0.7)
-        im[i].tag = i
+      function img()
+        x = centerX
+        y = 200
+        for i = 1, 4 do
+          y = y + 200
+          im[i] = display.newImage(but, "scene/menu/im" .. i-1 .. ".png", x, y)
+          im[i]:scale(0.7, 0.7)
+          im[i].tag = i
+        end
       end
-    end
-img()
+      img()
 
-local levels = {"scene", "scene" ,"scene","scene"}
+      local levels = {"scene", "scene" ,"scene","scene"}
 
-local level = {"text_3", "text_3", "medal_4", "kolodki_4"}
+      local level = {"text_3", "text_3", "medal_4", "kolodki_4"}
 
-_G.variant = "text_3"
-_G.marafon = false
+      _G.variant = "text_3"
+      _G.marafon = false
 
-print(random_numbers,"CCCCCCCCCCCC")
-function touchIt(e)
-  if(e.phase == "ended" ) then
-    if (level[e.target.tag]) then
-      if (level[e.target.tag] == 1) then
-        _G.marafon = true
+      function touchIt(e)
+        if(e.phase == "ended" ) then
+          if (level[e.target.tag]) then
+            if (level[e.target.tag] == 1) then
+              _G.marafon = true
+            end
+            _G.variant = level[e.target.tag]
+            composer.gotoScene("scene.game_level_text3", {delay = 400, time = 1000, effect="slideDown", onComplete = composer.removeScene("scene.level")})
+          end
+        end
       end
-      _G.variant = level[e.target.tag]
-      composer.gotoScene("scene.game_level_text3", {delay = 400, time = 1000, effect="slideDown", onComplete = composer.removeScene("scene.level")})
-  end
-  end
-end
 
 for i=1,4 do
    im[i]:addEventListener("touch",touchIt)
 end
 
-
-
------------
--- local left = display.newText({
---   parent = sceneGroup,
---   text = "<<",
---   x = 80, y = 1150,
---   font = "font/Blogger_Sans-Bold.otf",
---   fontSize = 100,
--- })
---
--- local right = display.newText({
---   parent = sceneGroup,
---   text = ">>",
---   x = 650, y = 1150,
---   font = "font/Blogger_Sans-Bold.otf",
---   fontSize = 100,
--- })
---
--- function right:touch(event)
---   if ( event.phase == "began" ) then
---
---
---   end
---   return true
--- end
--- right:addEventListener( "touch", right )
---
--- -- function left:touch(event)
--- --   if ( event.phase == "began" ) then
--- --     toX = x + (buttonW-dy)
--- --   end
--- --   return true
--- -- end
--- --left:addEventListener( "touch", left )
--- left:addEventListener( "touch", left )
---
--- local levels = {"scene.scene2","scene.scene1","scene.kolodki"}
---
--- local centerX    = display.contentCenterX
--- local centerY    = display.contentCenterY
--- local fullw      = display.actualContentWidth
--- local fullh      = display.actualContentHeight-300
--- local left       = centerX - fullw/2
--- local right      = left + fullw
--- local top        = centerY - fullh/2
--- local bottom     = top + fullh
---
 -- local scrollThreshold = 100
 -- local resetColorOnScrolled = false
 -- local snapRate = 800 -- pixels per second
