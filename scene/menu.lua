@@ -37,26 +37,27 @@ function scene:show( event )
     fontSize = fSize,
   })
 
-  function GroupText:insertText(text, fontname, size, x, y)
-    local offset = size/10
-    local label = display.newText(text, x, y, "Blogger_Sans-Bold.otf", size)
-    local shadow = display.newText(text, x+offset, y+offset, "Blogger_Sans-Bold.otf", size)
-    label:setTextColor(255, 255, 255)
-    shadow:setTextColor(0, 0, 0, 128)
-    self:insert(shadow)
-    self:insert(label)
-  end
+  -- function GroupText:insertText(text, fontname, size, x, y)
+  --   local offset = size/10
+  --   local label = display.newText(text, x, y, "Blogger_Sans-Bold.otf", size)
+  --   local shadow = display.newText(text, x+offset, y+offset, "Blogger_Sans-Bold.otf", size)
+  --   label:setTextColor(255, 255, 255)
+  --   shadow:setTextColor(0, 0, 0, 128)
+  --   self:insert(shadow)
+  --   self:insert(label)
+  -- end
 
   function PlayGame:touch(event)
     if ( event.phase == "began" ) then
-      transition.to(PlayGame, {time = 50, size = 75})
-      composer.gotoScene("scene.level", PROPS.animation.scene)
-      composer.removeScene("scene.menu")
+      transition.to(PlayGame, {time = 50, size = 75,
+        onComplete = function()
+          composer.removeScene("scene.menu")
+          composer.gotoScene("scene.level", PROPS.animation.scene)
+        end})
     end
       return true
   end
   PlayGame:addEventListener( "touch", PlayGame )
-
 
   local GroupText3 = display.newText({
     parent = GroupText3,
@@ -66,7 +67,6 @@ function scene:show( event )
     fontSize = fSize,
   })
   sceneGroup:insert(GroupText3)
-
 
   function GroupText3:touch(event)
     if ( event.phase == "began" ) then
