@@ -2,8 +2,8 @@ local B = {}
 
 function B:upBar(score)
   self.sceneGroup = display.newGroup()
-  self.score =  score or 0 
-  
+  self.score =  score or 0
+
   display.newRoundedRect(self.sceneGroup, display.contentCenterX, 50, display.actualContentWidth, 100, 10):setFillColor(0/255, 130/255, 116/255 );
   local toMenu = display.newText({
     parent = self.sceneGroup,
@@ -31,42 +31,48 @@ function B:upBar(score)
     star[i].strokeWidth = 10
     star[i]:setStrokeColor( 255/255,242/255,107/255 )
   end
-  
+
   function self.timeStripe(time)
+    local rt = 100
+    local child_class = {}
     self.time = time or 2
     self.time = self.time * 1000
-    local rt = 100
-
-    function manageTime( event )
-      rt = rt - 100/(self.time/100)
-    end
-	self.time_game = timer.performWithDelay( 100, manageTime, 0 )
-	
     self.line_time = display.newRoundedRect(self.sceneGroup, left, 105, fullw, 10, 12)
     self.line_time:setFillColor(255/255,242/255,107/255)
     self.line_time.anchorX = 0
-	
-    transition.to(self.line_time,{
-      time=self.time,
-      alpha=1, x = -fullw+left,
-      tag="tagPauseLineTime",
-      onCancel = function()
-        timer.cancel(self.time_game)
-      end,
-      onComplete = function()
-        timer.cancel(self.time_game)
-		self.gameOver()
+
+    function child_class.startTime()
+      function manageTime( event )
+        rt = rt - 100/(self.time/100)
       end
-    })
-   return self
+  	  self.time_game = timer.performWithDelay( 100, manageTime, 0 )
+
+      transition.to(self.line_time,{
+        time=self.time,
+        alpha=1, x = -fullw+left,
+        tag="tagPauseLineTime",
+        onCancel = function()
+          timer.cancel(self.time_game)
+          self.line_time.x = left
+          --self.line_time:removeSelf()
+        end,
+        onComplete = function()
+          timer.cancel(self.time_game)
+    	    self.gameOver()
+        end
+       })
+      return child_class
+     end
+     child_class.startTime()
+   return child_class
   end
-  
+
   self.mistake = 0
   function self.update()
     if (self.mistake > 0 and self.mistake < 4) then
       star[self.mistake]:setStrokeColor(0.5, 0.5, 0.5)
       star[self.mistake].fill = {0.5, 0.5, 0.5}
-    elseif (self.mistake > 3) then 
+    elseif (self.mistake > 3) then
 	   self.gameOver()
 	   --B.gameOV(composer) --composer.showOverlay("scene.gameOver", {time = 800, effect="crossFade", isModal = true,})
     end
