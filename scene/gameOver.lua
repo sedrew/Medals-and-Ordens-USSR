@@ -74,17 +74,17 @@ function scene:create(event)
   text4:setTextColor(118/255,113/255,112/255)
 
   local setting = loadsave.loadTable( "settings.json" )
-	
+
   function closer(event)
     if (event == 'restart') then
-	  composer.removeHidden( false )
-	  composer.hideOverlay("fade", 400)
-	  composer.removeScene("scene")-- composer.getVariable( "name" )
-	  composer.gotoScene( "scene.game_level_text3", {time = 800, effect="crossFade"} )
+	    composer.removeHidden( false )
+	    composer.hideOverlay("fade", 400)
+	    composer.removeScene("scene.game_level_text3")-- composer.getVariable( "name" )
+	    composer.gotoScene( "scene.game_level_text3", {time = 800, effect="crossFade"} )
     elseif (event == 'close') then
-	  composer.hideOverlay("fade", 400) -- закрываем сцену
-	  --composer.gotoScene("scene.menu", {time = 800, effect="crossFade"})
-	  composer.removeScene("scene")
+	    composer.hideOverlay("fade", 400) -- закрываем сцену
+	    composer.gotoScene("scene.menu", {time = 800, effect="crossFade"})
+	    composer.removeScene("scene.game_level_text3")
 	  --	composer.removeScene(composer.getVariable( "name" ))
     end
   end
