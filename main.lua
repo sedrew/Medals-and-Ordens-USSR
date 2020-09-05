@@ -26,8 +26,7 @@ local properties = loadsave.loadTable( "settings.json" )
 
 if properties ~= nil then
   print("logging")
-  print(unpack(setting),"SSSS")
-else
+  --print(unpack(setting),"SSSS")
   local table = {
     settings = {
      color_theme = 0,
