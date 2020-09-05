@@ -11,6 +11,8 @@ return {
     name_game = "Медали и Ордена",
     play = "Играть",
     home = "Домой",
+    back = "Назад",
+    restart = "Заново",
     setting = "Настройки",
     age_msg = "выше %{age}.",
     phone_msg = {

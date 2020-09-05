@@ -48,11 +48,12 @@ function scene:show( event )
 
     time_start = upBar_event.timeStripe(5)
 
-	function upBar_event.gameOver()
-	  composer.showOverlay("scene.gameOver", {time = 800, effect="crossFade", isModal = true,})
+    composer.setVariable("old_scene_name", "scene.game_level_text3")
+	  function upBar_event.gameOver()
+	    composer.showOverlay("scene.gameOver", {time = 800, effect="crossFade", isModal = true,})
     end
 
-	pop.tap = true
+	  pop.tap = true
     function touchIt(e)
       if (pop.tap == true) then
         if (e.phase == "ended")  then

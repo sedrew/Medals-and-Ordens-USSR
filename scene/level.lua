@@ -18,12 +18,12 @@ function scene:show( event )
         parent = sceneGroup,
         text = "Домой",
         x = display.contentCenterX, y = 80,
-        font = "font/Blogger_Sans-Bold.otf",
+        font = PROPS.font,
         fontSize = 90,
       })
       --
       function GroupText1:touch()
-        composer.gotoScene("scene.menu", {time = 800, effect="crossFade"})
+        composer.gotoScene("scene.menu", PROPS.animation.scene)
         composer.removeScene("scene.level")
        return true
       end

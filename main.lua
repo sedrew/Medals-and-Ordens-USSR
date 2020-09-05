@@ -1,5 +1,4 @@
 local composer = require( "composer" )
-local background = display.setDefault("background", 0/255, 143/255, 126/255 )
 ------------------------------------------
 --GLOBAL VARIABLE
 ------------------------------------------
@@ -30,6 +29,8 @@ else
        up_bar = {},
        achieve = {},
        text = {},
+       right = {},
+       mistake = {},
      },
      font = "font/Blogger_Sans-Bold.otf",
      font_size = 80,
@@ -37,7 +38,7 @@ else
      sounds = true,
      lang = "ru",
      animation = {
-       scene = {delay = 100, time = 200, effect="crossFade"},
+       scene = {delay = 100, time = 300, effect="crossFade"},
        object = {time = 400, delay = 700, alpha = 0},
      }
     },
@@ -61,4 +62,5 @@ print("sdsdsds %{age}", 3)
 print(i18n('good_bye')) -- Good-bye!
 
 
+local background = display.setDefault("background", 0/255, 143/255, 126/255 )
 composer.gotoScene("scene.menu", PROPS.animation.scene)
