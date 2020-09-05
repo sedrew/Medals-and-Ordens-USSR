@@ -1,3 +1,0 @@
-[submodule "i18n.lua"]
-	path = i18n.lua
-	url = https://github.com/kikito/i18n.lua.git
