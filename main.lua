@@ -16,7 +16,7 @@ local loadsave  = require("lib.loadsave")
 local props = loadsave.loadTable( "settings.json" )
 
 PROPS   = {}
-ACHIEVE = {}
+ACHIEVES = {}
 print(0/255, 143/255, 126/255)
 if props ~= nil then
   PROPS= props.settings
@@ -43,9 +43,15 @@ else
      }
     },
     game_achieve = {
-      all_count = 0,
+      all_score = 0,
+      all_right_answer = 0,
+      all_mistake_answer = 0,
       all_time = 0,
-      achieve_name = {}
+      middle_time = 0,
+      count_game = 0,
+      achieve_name = {},
+      week_progres = {},
+      recent_visit = {},
     }
   }
   PROPS = tabl.settings

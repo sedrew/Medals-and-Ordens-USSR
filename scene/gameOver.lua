@@ -19,13 +19,28 @@ function scene:create(event)
     width = 490,
     align = "center",
     x = display.contentCenterX, y = plant.y-plant.width+175,
-    font = "font/Blogger_Sans-Bold.otf",
+    font = PROPS.font,
     fontSize = 75,
   })
   text:setTextColor(255/255,129/255,129/255)
 
   transition.cancel("tagPauseLineTime")
 
+  local settings = require("lib.loadsave")
+  local table_achieve = settings.loadTable("settings.json")
+
+  table_achieve.game_achieve = {
+    all_score = ACHIEVES.all_score + composer.getVariable("score"),
+    all_right_answer = ACHIEVES.all_right_answer,
+    all_mistake_answer = ACHIEVES.all_mistake_answer,
+    all_time = ACHIEVES.all_time,
+    middle_time = ACHIEVES.middle_time,
+    count_game = ACHIEVES.count_game,
+    achieve_name = {},
+    week_progres = {},
+    recent_visit = {},
+  }
+  settings.saveTable(table_achieve, "settings.json")
   -- local lov = 0
   -- for i = 1, #lovkost do
     -- lov = math.ceil(lov + lovkost[i])
@@ -47,10 +62,18 @@ function scene:create(event)
 	-- fontSize = 45,
   -- })
   -- text2:setTextColor(1,1,1)
+  local text_score = display.newText({
+    parent = sceneGroup,
+    text =  composer.getVariable("score"),
+    width = 490,
+    align = "center",
+    x = display.contentCenterX, y = text.y+150,
+    font = PROPS.font,
+    fontSize = 75,
+  })
 
   local ar1 = math.random(1, #facts)
   local ar2 = math.random(2, math.random(2, #facts[ar1]))
-
 
   local text_ask = display.newText({
 	  parent = sceneGroup,

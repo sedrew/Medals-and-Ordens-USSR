@@ -43,13 +43,16 @@ function scene:show( event )
   local phase = event.phase
 
   if ( phase == "will" ) then
+    ACHIEVES.count_game = ACHIEVES.count_game + 1
+
     local timeGame  = require("scene.timeGame")
     local upBar_event = timeGame:upBar()
 
     time_start = upBar_event.timeStripe(5)
-
+    print(upBar_event.score)
     composer.setVariable("old_scene_name", "scene.game_level_text3")
 	  function upBar_event.gameOver()
+      composer.setVariable("score",upBar_event.score)
 	    composer.showOverlay("scene.gameOver", {time = 800, effect="crossFade", isModal = true,})
     end
 
@@ -58,7 +61,7 @@ function scene:show( event )
       if (pop.tap == true) then
         if (e.phase == "ended")  then
           if (random_numbers.randomList[e.target.tag] == number_name) then
-         --images:removeSelf(images)
+            ACHIEVES.all_right_answer = ACHIEVES.all_right_answer + 1
             pop.tap = false
             pop:remove(images,
               function()
@@ -76,6 +79,7 @@ function scene:show( event )
             number_name = random_numbers.returnOneNumber()
             name_medal.text = nazv[number_name]
           elseif (e.target.tap == true) then
+            ACHIEVES.all_mistake_answer = ACHIEVES.all_mistake_answer + 1
             upBar_event.mistake = upBar_event.mistake + 1
             pop.box[e.target.tag]:setFillColor(unpack(colorRed))
             e.target.tap = false

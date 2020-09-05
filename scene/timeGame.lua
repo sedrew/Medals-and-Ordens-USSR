@@ -4,21 +4,22 @@ function B:upBar(score)
   self.sceneGroup = display.newGroup()
   self.score =  score or 0
 
+
   display.newRoundedRect(self.sceneGroup, display.contentCenterX, 50, display.actualContentWidth, 100, 10):setFillColor(0/255, 130/255, 116/255 );
   local toMenu = display.newText({
     parent = self.sceneGroup,
     text = "Домой",
     x = display.contentCenterX, y = 40,
-    font = "font/Blogger_Sans-Bold.otf",
+    font = PROPS.font,
     fontSize = 75,
   })
   local textScore = display.newText({
-    parent   = self.sceneGroup,
-    text =  0,
-    width =display.contentWidth,
-    align = "center",
-    x = 50, y = 40,
-    font = "font/Blogger_Sans-Bold.otf",
+    parent = self.sceneGroup,
+    text = "0",
+    width = 100,
+    align = "left",
+    x = left+70, y = top+45,
+    font =  PROPS.font,
     fontSize = 80,
   })
 
