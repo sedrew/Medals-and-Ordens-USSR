@@ -40,15 +40,15 @@ function B:random(count, size_list, random_numbers) --два странных п
   function self.steps() --срез
     self.random_numbers = {}
     for i = self.random_steps_start, self.random_steps_end do
-	  self.random_numbers[i] = self.save_random_numbers[i]
-	end
-	self.random_steps_start = self.random_steps_start + count
-	self.random_steps_end = self.random_steps_end + count
-	self.finish = true
-	if self.random_steps_end > self.random_steps_end then
-	  return self, self.finish
-	end
-    return self
+	    self.random_numbers[i] = self.save_random_numbers[i]
+	  end
+	  self.random_steps_start = self.random_steps_start + count
+	  self.random_steps_end = self.random_steps_end + count
+	  self.finish = true
+	  if self.random_steps_end > self.random_steps_end then
+	    return self, self.finish
+	  end
+   return self
   end
 
   function self.returnOneNumber()
@@ -121,7 +121,7 @@ function B:createRects(t)
   function self:oneText(words,number)
     self.medText = display.newText({
         parent = self.mainScene,
-        text = words[number],--utf8.match(words[number], '.- ').."\n"..utf8.match(words[number], ' .+'), 
+        text = words[number],--utf8.match(words[number], '.- ').."\n"..utf8.match(words[number], ' .+'),
         width = display.contentWidth-30,
         align = "center",
         x = display.contentCenterX, y = self.rectGroup.y-420, --КОСТЫЛь!!!

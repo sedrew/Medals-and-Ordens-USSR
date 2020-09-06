@@ -106,10 +106,6 @@ function scene:show( event )
   })
   sceneGroup:insert(case)
 
-    --   local utf8 = require( "plugin.utf8" )
-    --   print(utf8.match("Медаль «За победу над Германией в Великой Отечественной войне 1941-1945 гг.»",
-    -- "%S+"))
---
 -- level = {one = "text_3", two = "medal_4", free = "kolodki_4"}
 --
 -- composer.setVariable( "level", level.two)
