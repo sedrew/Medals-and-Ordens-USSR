@@ -169,7 +169,7 @@ function scene:show( event )
    local i = 1
    local med = display.newGroup()
 
-   local nazv = require("words")
+   local nazv = require("resource.words")
    local gr = display.newGroup()
 
 

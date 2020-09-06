@@ -41,7 +41,7 @@ function scene:show( event )
         y = 200
         for i = 1, 4 do
           y = y + 200
-          im[i] = display.newImage(but, "scene/menu/im" .. i-1 .. ".png", x, y)
+          im[i] = display.newImage(but, "img/menu/im" .. i-1 .. ".png", x, y)
           im[i]:scale(0.7, 0.7)
           im[i].tag = i
         end

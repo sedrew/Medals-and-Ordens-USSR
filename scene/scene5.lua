@@ -1,6 +1,6 @@
 local composer  = require( "composer" )
 local fs        = require("imge")
-local nazv      = require("words")
+local nazv      = require("resource.words")
 
 
 local scene = composer.newScene()

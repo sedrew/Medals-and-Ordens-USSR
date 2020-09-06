@@ -1,6 +1,6 @@
 local composer  = require( "composer" )
 local fs        = require("imge")
-local nazv      = require("words")
+local nazv      = require("resource.words")
 -- local json      = require("json")
 local loadsave  = require("scene.loadsave")
 local timeGame  = require("scene.timeGame")

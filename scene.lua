@@ -16,7 +16,7 @@ function scene:show( event )
       local great     = require( "maket" )
       local tab       = require( "markup" )
       local timeGame  = require("timeGame")
-      local nazv      = require("words")
+      local nazv      = require("resource.words")
       local tabl = tab.tabl.scene1
       local position = tab.tabl.orint
       local loadsave  = require("scene.loadsave")

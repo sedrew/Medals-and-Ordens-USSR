@@ -17,7 +17,7 @@ function scene:show( event )
 
  if ( phase == "will" ) then
   local myGroup = display.newGroup()
-  local ic = display.newImage(myGroup, "scene/menu/ic.png")
+  local ic = display.newImage(myGroup, "img/menu/ic.png")
       ic.x = 140 ic.y = 970 ic:scale(0.6, 0.6)
 
   local GroupText = display.newText({
@@ -125,7 +125,7 @@ function scene:show( event )
   end
   case:addEventListener( "touch", case )
 
-  local logo = display.newImage("scene/menu/logo.jpg")
+  local logo = display.newImage("img/menu/logo.jpg")
   logo:scale( 0.7, 0.7 )
   logo.x = display.contentCenterX
   logo.y = 480

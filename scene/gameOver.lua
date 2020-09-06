@@ -1,7 +1,7 @@
 local composer = require("composer")
 local widget = require("widget")
 local loadsave = require( "lib.loadsave" )
-local facts	= require("facts")
+local facts	= require("resource.facts")
 local scene = composer.newScene()
 
 function scene:create(event)
