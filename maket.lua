@@ -121,12 +121,12 @@ function B:createRects(t)
   function self:oneText(words,number)
     self.medText = display.newText({
         parent = self.mainScene,
-        text = words[number], --utf8.match(nazv[nameMedal], "%S+").."\n"..utf8.match(nazv[nameMedal], "%S+(.*)")
-        width = display.contentWidth,
+        text = words[number],--utf8.match(words[number], '.- ').."\n"..utf8.match(words[number], ' .+'), 
+        width = display.contentWidth-30,
         align = "center",
         x = display.contentCenterX, y = self.rectGroup.y-420, --КОСТЫЛь!!!
         font = PROPS.font,
-        fontSize = 640/math.floor(string.len(words[number]))+65, --КОСТЫЛь!!!
+        fontSize = 60--/((utf8.len(words[number]))/10), --КОСТЫЛь!!!
       })
     return self.medText
   end
@@ -137,7 +137,7 @@ function B:createRects(t)
 	for i = 1, #t do
       kol[i] = display.newText({
         parent = imagesGroup,
-        text = words[t[i]], --utf8.match(nazv[nameMedal], "%S+").."\n"..utf8.match(nazv[nameMedal], "%S+(.*)")
+        text = words[t[i]],
         width = display.contentWidth,
         align = "center",
         x = self.box[i].x, y = self.box[i].y,

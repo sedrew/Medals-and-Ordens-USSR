@@ -11,7 +11,11 @@ right      = left + fullw
 top        = centerY - fullh/2
 bottom     = top + fullh
 ------------------------------------------
-
+utf8 = require("lib.utf8")
+local str = "Медаль\n «Партизану Отечественной войны»\n I степени"
+local sd = utf8.gsub(str,'\n.-')
+print(sd)
+--utf8.gsub("Медаль «Партизану Отечественной войны» I степени", "(%w+)%s*(%w+)", "%2 %1"))
 local loadsave  = require("lib.loadsave")
 local props = loadsave.loadTable( "settings.json" )
 
@@ -32,7 +36,7 @@ else
        right = {},
        mistake = {},
      },
-     font = "font/Blogger_Sans-Bold.otf",
+     font = "font/Blogger_Sans-Medium.otf",
      font_size = 80,
      music = true,
      sounds = true,
@@ -60,12 +64,12 @@ else
 end
 
 i18n = require('lib.i18n.init')
-i18n.load(require('lib.i18n.languages'))
+i18n.load(require('resource.languages'))
 i18n.setLocale(PROPS.lang)
 --i18n.loadFile(system.pathForFile(system.ResourceDirectory) ..'/lib/i18n/ru.lua') -- load French language file
+-- print("sdsdsds %{age}", 3)
+-- print(i18n('good_bye'))
 
-print("sdsdsds %{age}", 3)
-print(i18n('good_bye')) -- Good-bye!
 
 
 local background = display.setDefault("background", 0/255, 143/255, 126/255 )

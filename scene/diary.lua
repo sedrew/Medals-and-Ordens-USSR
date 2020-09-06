@@ -70,7 +70,7 @@ function scene:show( event )
       sceneGroup:insert(1,box)
 
     -- elseif ( phase == "did" ) then
-      local dir = display.newImage("img/diary.jpg", display.contentCenterX,display.contentCenterY )
+      local dir = display.newImage("img/diary.png", display.contentCenterX,display.contentCenterY )
             dir:scale(0.9*(720/display.contentHeight),0.9*(720/display.contentHeight))
             sceneGroup:insert(1,dir)
 

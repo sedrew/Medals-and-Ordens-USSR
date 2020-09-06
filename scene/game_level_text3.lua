@@ -77,7 +77,9 @@ function scene:show( event )
             pop.box[e.target.tag]:setFillColor(unpack(colorGreen))
             random_numbers = modules:random(4,30).notRepeat()
             number_name = random_numbers.returnOneNumber()
-            name_medal.text = nazv[number_name]
+
+            name_medal.text = nazv[number_name]--utf8.match(nazv[number_name], '.- ').."\n"..utf8.match(nazv[number_name], ' .+')
+            --name_medal.fontSize = 75*((utf8.len(nazv[number_name]))/100
           elseif (e.target.tap == true) then
             ACHIEVES.all_mistake_answer = ACHIEVES.all_mistake_answer + 1
             upBar_event.mistake = upBar_event.mistake + 1
