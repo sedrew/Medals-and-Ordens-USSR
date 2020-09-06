@@ -11,45 +11,48 @@ function B:random(count, size_list, random_numbers) --два странных п
   self.random_steps_end = count
 
   if #self.random_numbers == 0 then
-	for i = 1, self.size_list do
-	  self.random_numbers[i] = i
-	end
-  end
-  function self.notRepeat()
-    --local count_nil = 0
-	local size = #self.random_numbers
-	print(unpack(self.random_numbers))
-      while #self.randomList < self.count do -- <--BUG!!!
-        local i = math.random(1, size)
-        if self.random_numbers[i] ~= nil then
-          self.randomList[#self.randomList+1] = self.random_numbers[i]
-          self.random_numbers[i] = nil
-          --collectgarbage() print(collectgarbage ("count"))
-          else
-            -- count_nil = count_nil + 1
-            -- print("hhh ",count_nil)
-            -- if count_nil == #self.random_numbers then
-             -- --break
-            -- end
-          end
-       end
-    return self
+	  for i = 1, self.size_list do
+	    self.random_numbers[i] = i
+	  end
   end
 
   self.save_random_numbers = self.random_numbers
   function self.steps() --срез
     self.random_numbers = {}
+    local iter = 1
     for i = self.random_steps_start, self.random_steps_end do
-	    self.random_numbers[i] = self.save_random_numbers[i]
-	  end
-	  self.random_steps_start = self.random_steps_start + count
-	  self.random_steps_end = self.random_steps_end + count
-	  self.finish = true
-	  if self.random_steps_end > self.random_steps_end then
-	    return self, self.finish
-	  end
-   return self
+      self.random_numbers[iter] = self.save_random_numbers[i]
+      iter = iter + 1
+    end
+    self.random_steps_start = self.random_steps_start + count
+    self.random_steps_end = self.random_steps_end + count
+    self.finish = true
+    if self.random_steps_end > self.random_steps_end then
+      return self, self.finish
+    end
+    return self
   end
+
+  function self.notRepeat()
+    self.randomList = {}
+	  local size = #self.random_numbers
+    while #self.randomList < self.count do -- <--BUG!!!
+        local i = math.random(1, size)
+        if self.random_numbers[i] ~= nil then
+          self.randomList[#self.randomList+1] = self.random_numbers[i]
+          self.random_numbers[i] = nil
+          --collectgarbage() print(collectgarbage ("count"))
+        else
+            -- count_nil = count_nil + 1
+            -- print("hhh ",count_nil)
+            -- if count_nil == #self.random_numbers then
+             -- --break
+            -- end
+        end
+      end
+    return self
+  end
+
 
   function self.returnOneNumber()
     return self.randomList[math.random(1,#self.randomList)]
