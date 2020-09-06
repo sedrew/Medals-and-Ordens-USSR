@@ -60,7 +60,7 @@ end
 
 function B:createRects(t)
   self.rectGroup = t.rectGroup or display.newGroup()
-  self.setFillColor = t.collor or {190/255,215/255,239/255}
+  self.setFillColor = t.collor or {unpack(PROPS.color.cart)}
   self.x, self.y = 0, 0
   self.globalX, self.globalY = t.x, t.y
   self.w, self.h = t.w or 10, t.h or 10
@@ -163,7 +163,7 @@ function B:createRects(t)
 
   function self:resetColor(obj)
     for i = 1, #obj do
-      obj[i]:setFillColor(190/255,215/255,239/255)
+      obj[i]:setFillColor(unpack(PROPS.color.cart))
       obj[i].tap = true
     end
   end

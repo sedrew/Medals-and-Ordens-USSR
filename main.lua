@@ -21,7 +21,7 @@ local props = loadsave.loadTable( "settings.json" )
 
 PROPS   = {}
 ACHIEVES = {}
-print(0/255, 143/255, 126/255)
+--print(255,101/255,101/255)
 if props ~= nil then
   PROPS= props.settings
   ACHIEVES  = props.game_achieve
@@ -29,12 +29,15 @@ else
   local tabl = {
     settings = {
      color = {
-       background = {0,	0.560,	0.494},
-       up_bar = {},
-       achieve = {},
-       text = {},
-       right = {},
-       mistake = {},
+       background = {0,	0.560, 0.494},
+       up_bar = {0, 0.509, 0.454},
+       achieve = {1, 0.949,	0.419},
+       text = {0,0,0},
+       cart = {0.745,	0.843, 0.937},
+       right = {0.568, 0.819, 0.309},
+       mistake = {1, 0.396, 0.396},
+       white = {0,0,0},
+       grey = {0.5,0.5,0.5},
      },
      font = "font/Blogger_Sans-Medium.otf",
      font_size = 80,

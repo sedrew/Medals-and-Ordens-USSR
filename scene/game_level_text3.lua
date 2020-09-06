@@ -13,9 +13,6 @@ local pop
 local images
 local name_medal
 
-local colorGreen = {145/255,209/255,79/255}
-local colorRed = {255,101/255,101/255}
-
 local time_start
 -- create()
 function scene:create( event )
@@ -74,7 +71,7 @@ function scene:show( event )
             transition.cancel("tagPauseLineTime")
             upBar_event.score = upBar_event.score + 1
 
-            pop.box[e.target.tag]:setFillColor(unpack(colorGreen))
+            pop.box[e.target.tag]:setFillColor(unpack(PROPS.color.right))
             random_numbers = modules:random(4,30).notRepeat()
             number_name = random_numbers.returnOneNumber()
 
@@ -83,7 +80,7 @@ function scene:show( event )
           elseif (e.target.tap == true) then
             ACHIEVES.all_mistake_answer = ACHIEVES.all_mistake_answer + 1
             upBar_event.mistake = upBar_event.mistake + 1
-            pop.box[e.target.tag]:setFillColor(unpack(colorRed))
+            pop.box[e.target.tag]:setFillColor(unpack(PROPS.color.mistake))
             e.target.tap = false
           end
           upBar_event.update()

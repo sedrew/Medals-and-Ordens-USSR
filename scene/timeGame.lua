@@ -5,7 +5,7 @@ function B:upBar(score)
   self.score =  score or 0
 
 
-  display.newRoundedRect(self.sceneGroup, display.contentCenterX, 50, display.actualContentWidth, 100, 10):setFillColor(0/255, 130/255, 116/255 );
+  display.newRoundedRect(self.sceneGroup, display.contentCenterX, 50, display.actualContentWidth, 100, 10):setFillColor(unpack(PROPS.color.up_bar));
   local toMenu = display.newText({
     parent = self.sceneGroup,
     text = "Домой",
@@ -30,7 +30,7 @@ function B:upBar(score)
     star[i] = display.newPolygon(self.sceneGroup, 750-(i*70), 50, vertices )
     star[i].fill = {1, 1, 0}
     star[i].strokeWidth = 10
-    star[i]:setStrokeColor( 255/255,242/255,107/255 )
+    star[i]:setStrokeColor(unpack(PROPS.color.achieve))
   end
 
   function self.timeStripe(time)
@@ -39,7 +39,7 @@ function B:upBar(score)
     self.time = time or 2
     self.time = self.time * 1000
     self.line_time = display.newRoundedRect(self.sceneGroup, left, 105, fullw, 10, 12)
-    self.line_time:setFillColor(255/255,242/255,107/255)
+    self.line_time:setFillColor(unpack(PROPS.color.achieve))
     self.line_time.anchorX = 0
 
     function child_class.startTime()
@@ -71,8 +71,8 @@ function B:upBar(score)
   self.mistake = 0
   function self.update()
     if (self.mistake > 0 and self.mistake < 4) then
-      star[self.mistake]:setStrokeColor(0.5, 0.5, 0.5)
-      star[self.mistake].fill = {0.5, 0.5, 0.5}
+      star[self.mistake]:setStrokeColor(unpack(PROPS.color.grey))
+      star[self.mistake].fill = {unpack(PROPS.color.grey)}
     elseif (self.mistake > 3) then
 	   self.gameOver()
 	   --B.gameOV(composer) --composer.showOverlay("scene.gameOver", {time = 800, effect="crossFade", isModal = true,})
