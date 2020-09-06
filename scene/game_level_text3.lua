@@ -18,7 +18,7 @@ local time_start
 function scene:create( event )
   local sceneGroup = self.view
   local kod = {1,3,4,6,7,8,9,10,12,13,14,15,16,18,19,20,21,22,23,25,26,27,28,29,31,32,33,34,35,36,38,39,40,41,42,43,44,45,46,47,49,50,52,53,54,55,56,57,58}
-  random_numbers = modules:random(4,30).steps().notRepeat()
+  random_numbers = modules:random(4,60).steps().notRepeat()
   number_name = random_numbers.returnOneNumber()
 
   pop = modules:createRects({
@@ -72,7 +72,7 @@ function scene:show( event )
             upBar_event.score = upBar_event.score + 1
 
             pop.box[e.target.tag]:setFillColor(unpack(PROPS.color.right))
-            random_numbers = modules:random(4,30).notRepeat()
+            random_numbers = random_numbers.steps().notRepeat()
             number_name = random_numbers.returnOneNumber()
 
             name_medal.text = nazv[number_name]--utf8.match(nazv[number_name], '.- ').."\n"..utf8.match(nazv[number_name], ' .+')

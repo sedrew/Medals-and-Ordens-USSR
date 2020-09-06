@@ -14,17 +14,21 @@ bottom     = top + fullh
 utf8 = require("lib.utf8")
 local str = "Медаль\n «Партизану Отечественной войны»\n I степени"
 local sd = utf8.gsub(str,'\n.-')
-print(sd)
+local os_date = os.date( "*t" )
+print(system.getPreference("locale", "language"))
 --utf8.gsub("Медаль «Партизану Отечественной войны» I степени", "(%w+)%s*(%w+)", "%2 %1"))
 local loadsave  = require("lib.loadsave")
-local props = loadsave.loadTable( "settings.json" )
+local props = loadsave.loadTable("settings.json")
 
 PROPS   = {}
 ACHIEVES = {}
 --print(255,101/255,101/255)
+do
+
 if props ~= nil then
-  PROPS= props.settings
+  PROPS = props.settings
   ACHIEVES  = props.game_achieve
+  PROPS.recent_visit = os_date
 else
   local tabl = {
     settings = {
@@ -44,6 +48,7 @@ else
      music = true,
      sounds = true,
      lang = "ru",
+     recent_visit = os_date,
      animation = {
        scene = {delay = 100, time = 300, effect="crossFade"},
        object = {time = 400, delay = 700, alpha = 0},
@@ -58,20 +63,28 @@ else
       count_game = 0,
       achieve_name = {},
       week_progres = {},
-      recent_visit = {},
     }
   }
   PROPS = tabl.settings
   ACHIEVES  = tabl.game_achieve
   loadsave.saveTable(tabl, "settings.json")
 end
-
+end
 i18n = require('lib.i18n.init')
 i18n.load(require('resource.languages'))
 i18n.setLocale(PROPS.lang)
 --i18n.loadFile(system.pathForFile(system.ResourceDirectory) ..'/lib/i18n/ru.lua') -- load French language file
 -- print("sdsdsds %{age}", 3)
 -- print(i18n('good_bye'))
+--print(PROPS.lang)
+local function onSystemEvent( event )
+    local eventType = event.type
+    if (eventType == "applicationExit") then
+      local table_save = {settings = PROPS,game_achieve = ACHIEVES}
+      loadsave.saveTable(table_save, "settings.json")
+    end
+end
+Runtime:addEventListener( "system", onSystemEvent )
 
-local background = display.setDefault("background", 0/255, 143/255, 126/255 )
+local background = display.setDefault("background", unpack(PROPS.color.background))
 composer.gotoScene("scene.menu", PROPS.animation.scene)
