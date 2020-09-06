@@ -1,7 +1,7 @@
 local composer = require( "composer" )
 
 local modules = require("maket")
-local nazv    = require("resource.words")
+local nazv    = require("resource.words")[PROPS.lang]
 
 local scene = composer.newScene()
 

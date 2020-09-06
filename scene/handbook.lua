@@ -169,7 +169,7 @@ function scene:show( event )
    local i = 1
    local med = display.newGroup()
 
-   local nazv = require("resource.words")
+   local nazv = require("resource.words")[PROPS.lang]
    local gr = display.newGroup()
 
 
@@ -254,7 +254,7 @@ right:addEventListener("touch", right)
     sceneGroup:insert(myRoundedRect)
     sceneGroup:insert(med)
     sceneGroup:insert(gr)
-    
+
   end
 end
 

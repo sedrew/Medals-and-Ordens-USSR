@@ -73,7 +73,5 @@ i18n.setLocale(PROPS.lang)
 -- print("sdsdsds %{age}", 3)
 -- print(i18n('good_bye'))
 
-
-
 local background = display.setDefault("background", 0/255, 143/255, 126/255 )
 composer.gotoScene("scene.menu", PROPS.animation.scene)
