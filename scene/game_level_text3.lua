@@ -80,7 +80,7 @@ function scene:show( event )
             upBar_event.score = upBar_event.score + 1
 
             pop.box[e.target.tag]:setFillColor(unpack(PROPS.color.right))
-            random_numbers = random_numbers.steps().notRepeat()
+            random_numbers = random_numbers.notRepeat()
             number_name = random_numbers.returnOneNumber()
 
             name_medal.text = nazv[number_name]--utf8.match(nazv[number_name], '.- ').."\n"..utf8.match(nazv[number_name], ' .+')

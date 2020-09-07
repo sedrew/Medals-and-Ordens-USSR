@@ -17,6 +17,7 @@ function B:random(count, size_list, random_numbers) --два странных п
   end
 
   self.save_random_numbers = self.random_numbers
+  self.steps_bool = false
   function self.steps() --срез
     self.random_numbers = {}
     local iter = 1
@@ -34,6 +35,9 @@ function B:random(count, size_list, random_numbers) --два странных п
   end
 
   function self.notRepeat()
+    if (#self.random_numbers == 0 or nil) then --КОСТЫЛь
+      self.random_numbers = self.save_random_numbers
+    end
     self.randomList = {}
 	  local size = #self.random_numbers
     while #self.randomList < self.count do -- <--BUG!!!
@@ -124,7 +128,7 @@ function B:createRects(t)
   function self:oneText(words,number)
     self.medText = display.newText({
         parent = self.mainScene,
-        text = words[number],--utf8.match(words[number], '.- ').."\n"..utf8.match(words[number], ' .+'),
+        text = words[number],
         width = display.contentWidth-30,
         align = "center",
         x = display.contentCenterX, y = self.rectGroup.y-420, --КОСТЫЛь!!!

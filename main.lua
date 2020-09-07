@@ -22,9 +22,10 @@ local props = loadsave.loadTable("settings.json")
 
 PROPS   = {}
 ACHIEVES = {}
---print(255,101/255,101/255)
-do
-
+local se = {nil,2,5,nil,4}
+collectgarbage() 
+se = se
+print(#se)
 if props ~= nil then
   PROPS = props.settings
   ACHIEVES  = props.game_achieve
@@ -69,7 +70,7 @@ else
   ACHIEVES  = tabl.game_achieve
   loadsave.saveTable(tabl, "settings.json")
 end
-end
+
 i18n = require('lib.i18n.init')
 i18n.load(require('resource.languages'))
 i18n.setLocale(PROPS.lang)
