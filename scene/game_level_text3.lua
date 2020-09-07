@@ -14,7 +14,7 @@ local images
 local name_medal
 
 local time_start
-local all_variant = 60
+local all_variant = 4
 local all_cards = 4
 -- create()
 function scene:create( event )
@@ -64,7 +64,7 @@ function scene:show( event )
             count_steps = count_steps + 1
             if (count_steps >= all_variant/all_cards) then
               print("STOOOP")
-              return upBar_event.gameOver()
+            --  return upBar_event.gameOver()
             end
             ACHIEVES.all_right_answer = ACHIEVES.all_right_answer + 1
             pop.tap = false

@@ -37,18 +37,18 @@ function B:random(count, size_list, random_numbers) --два странных п
     end
     self.random_steps_start = self.random_steps_start + count
     self.random_steps_end = self.random_steps_end + count
-    if (self.random_steps_end > self.random_steps_end) then
+    if (self.random_steps_end > self.size_list) then
       self.finish_step = true
-     return self
-    elseif (self.finish_step == true) then
       self.random_steps_start = 1
       self.random_steps_end = count
+    -- return self
+    elseif (self.finish_step == true) then
       self.finish_step = false
      return self
     end
     return self
   end
-  
+
   function self.returnOneNumber()
     return self.randomList[math.random(1,#self.randomList)]
   end
