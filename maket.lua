@@ -10,54 +10,45 @@ function B:random(count, size_list, random_numbers) --два странных п
   self.random_steps_start = 1
   self.random_steps_end = count
 
-  if #self.random_numbers == 0 then
+  if (#self.random_numbers == 0) then
 	  for i = 1, self.size_list do
 	    self.random_numbers[i] = i
 	  end
   end
 
-  self.save_random_numbers = self.random_numbers
-  self.steps_bool = false
-  function self.steps() --срез
-    self.random_numbers = {}
-    local iter = 1
+  function self.notRepeat() -- Yates shuffle's algorithm (Sottolo)
+    local i = #self.random_numbers
+    while i > 1 do
+      i = i - 1
+      local j = math.random(i)
+      self.random_numbers[j], self.random_numbers[i] = self.random_numbers[i], self.random_numbers[j]
+    end
+     self.randomList = self.random_numbers
+    return self
+  end
+
+  self.finish_step = false
+  function self.step()
+    local j = 1
+    self.randomList = {}
     for i = self.random_steps_start, self.random_steps_end do
-      self.random_numbers[iter] = self.save_random_numbers[i]
-      iter = iter + 1
+      self.randomList[j] = self.random_numbers[i]
+      j = j + 1
     end
     self.random_steps_start = self.random_steps_start + count
     self.random_steps_end = self.random_steps_end + count
-    self.finish = true
-    if self.random_steps_end > self.random_steps_end then
-      return self, self.finish
+    if (self.random_steps_end > self.random_steps_end) then
+      self.finish_step = true
+     return self
+    elseif (self.finish_step == true) then
+      self.random_steps_start = 1
+      self.random_steps_end = count
+      self.finish_step = false
+     return self
     end
     return self
   end
-
-  function self.notRepeat()
-    if (#self.random_numbers == 0 or nil) then --КОСТЫЛь
-      self.random_numbers = self.save_random_numbers
-    end
-    self.randomList = {}
-	  local size = #self.random_numbers
-    while #self.randomList < self.count do -- <--BUG!!!
-        local i = math.random(1, size)
-        if self.random_numbers[i] ~= nil then
-          self.randomList[#self.randomList+1] = self.random_numbers[i]
-          self.random_numbers[i] = nil
-          --collectgarbage() print(collectgarbage ("count"))
-        else
-            -- count_nil = count_nil + 1
-            -- print("hhh ",count_nil)
-            -- if count_nil == #self.random_numbers then
-             -- --break
-            -- end
-        end
-      end
-    return self
-  end
-
-
+  
   function self.returnOneNumber()
     return self.randomList[math.random(1,#self.randomList)]
   end
@@ -98,7 +89,6 @@ function B:createRects(t)
   --self.imagesGroup = display.newGroup()
   function self:imagesMedal(t)
     local imagesGroup = display.newGroup()--self.imagesGroup = display.newGroup()
-		print(t[1])
     for i = 1, #t do
         self.med[i] = display.newImage(imagesGroup, "img/medali_ten/" .. t[i] .. ".png", self.box[i].x, self.box[i].y)
         self.med[i]:scale(0.9*(320/self.med[i].height), 0.9*(320/self.med[i].height)) --КОСТЫЛь!!!
