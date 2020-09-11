@@ -49,7 +49,7 @@ function scene:show( event )
 
     time_start = upBar_event.timeStripe(5)
     print(upBar_event.score)
-    composer.setVariable("old_scene_name", "scene.game_level_text3")
+    composer.setVariable("old_scene_name", "scene.three_games")
 	  function upBar_event.gameOver()
       composer.setVariable("score",upBar_event.score)
 	    composer.showOverlay("scene.gameOver", {time = 800, effect="crossFade", isModal = true,})

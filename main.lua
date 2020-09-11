@@ -2,7 +2,7 @@ local composer = require( "composer" )
 ------------------------------------------
 --GLOBAL VARIABLE
 ------------------------------------------
-centerX    = display.contentCenterX
+centerX    = display.contentCenterX -- привести к глобальной таблице G
 centerY    = display.contentCenterY
 fullw      = display.actualContentWidth
 fullh      = display.actualContentHeight
@@ -23,7 +23,7 @@ local props = loadsave.loadTable("settings.json")
 PROPS   = {}
 ACHIEVES = {}
 local se = {nil,2,5,nil,4}
-collectgarbage() 
+collectgarbage()
 se = se
 print(#se)
 if props ~= nil then
