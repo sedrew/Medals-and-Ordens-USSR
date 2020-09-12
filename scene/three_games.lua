@@ -29,7 +29,7 @@ function scene:create( event )
    elseif (pick_mode == "text_3") then
       all_cards = 3
      random_numbers = modules:random(all_cards,all_variant).notRepeat().step()
-     
+
      pop = modules:createRects({
        countX=1,countY=3,
        h=180,w=600,
@@ -96,9 +96,7 @@ function scene:show( event )
       number_name = random_numbers.returnOneNumber()
       if (pick_mode == "marathon") then
 
-
-
-
+        --Дописать!!!
 
       elseif (pick_mode == "text_3") then
         name_medal = pop:oneImage(number_name)
@@ -128,8 +126,6 @@ function scene:show( event )
               print("STOOOP")
             --  return upBar_event.gameOver()
             end
-
-            print(pick_mode)
             ACHIEVES.all_right_answer = ACHIEVES.all_right_answer + 1
             pop.tap = false
             pop:remove(pop.unite_group,

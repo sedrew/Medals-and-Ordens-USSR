@@ -27,7 +27,7 @@ function scene:show( event )
 	  font = PROPS.font,
 	  fontSize = 85,
   })
-  ---
+
   local fSize = 80
   local PlayGame =  display.newText({
     parent = sceneGroup,
@@ -36,16 +36,6 @@ function scene:show( event )
     font = PROPS.font,
     fontSize = fSize,
   })
-
-  -- function GroupText:insertText(text, fontname, size, x, y)
-  --   local offset = size/10
-  --   local label = display.newText(text, x, y, "Blogger_Sans-Bold.otf", size)
-  --   local shadow = display.newText(text, x+offset, y+offset, "Blogger_Sans-Bold.otf", size)
-  --   label:setTextColor(255, 255, 255)
-  --   shadow:setTextColor(0, 0, 0, 128)
-  --   self:insert(shadow)
-  --   self:insert(label)
-  -- end
 
   function PlayGame:touch(event)
     if ( event.phase == "began" ) then
@@ -91,7 +81,6 @@ function scene:show( event )
     if ( event.phase == "ended" ) then
       composer.gotoScene("scene.diary", {time = 800, effect="slideUp"})
       composer.removeScene("scene.menu")
-      composer.removeScene("scene.menu")
       end
     return true
   end
@@ -106,11 +95,7 @@ function scene:show( event )
   })
   sceneGroup:insert(case)
 
--- level = {one = "text_3", two = "medal_4", free = "kolodki_4"}
---
--- composer.setVariable( "level", level.two)
-
-  local loadsave  = require("lib.loadsave")
+  --local loadsave  = require("lib.loadsave")
   function case:touch(event)
     if ( event.phase == "began" ) then
       transition.to(case, {time = 250, size = 75, transition=easing.continuousLoop})

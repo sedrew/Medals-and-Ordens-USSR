@@ -50,8 +50,7 @@ function button:play(t)
   self.gotoScene = t.gotoScene or "scene.menu"
   self.options_dealy = t.options_dealy or {delay = 400, time = 1000, effect="slideDown"}
   self.sceneGroup = t.sceneGroup or sceneGroup
---  self.game_mode = t.game_mode or "medal_4"
-
+  
   self.widget = display.newImage(sceneGroup, "img/menu/im" .. self.vr .. ".png", self.x, self.y)
   function self.widget:touch(e)
     if(e.phase == "ended" ) then
