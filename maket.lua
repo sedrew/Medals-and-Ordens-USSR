@@ -94,25 +94,32 @@ function B:createRects(t)
         self.med[i]:scale(0.9*(320/self.med[i].height), 0.9*(320/self.med[i].height)) --КОСТЫЛь!!!
         self.med[i].tag = i
     end
-	imagesGroup.x, imagesGroup.y = self.rectGroup.x, self.rectGroup.y
+	  imagesGroup.x, imagesGroup.y = self.rectGroup.x, self.rectGroup.y
     self.mainScene:insert(imagesGroup)
-	return imagesGroup --self.imagesGroup
+	 return imagesGroup --self.imagesGroup
   end
 
   function self:imagesKolodki(t)
     local imagesGroup = display.newGroup()
-	local kol = {}
-	for i = 1, #t do
+	  local kol = {}
+	  for i = 1, #t do
           kol[i] = display.newImage(imagesGroup, "img/kolodki/"  .. t[i] .. ".png", self.box[i].x, self.box[i].y)
-          kol[i]:scale(0.9*(120/kol[i].height), 0.9*(120/kol[i].height))--КОСТЫЛь!!!
+          kol[i]:scale(0.9*(320/kol[i].width), 0.9*(120/kol[i].height))--КОСТЫЛь!!!
           kol[i].tag = i
-     end
-	imagesGroup.x, imagesGroup.y = self.rectGroup.x, self.rectGroup.y
-	self.mainScene:insert(imagesGroup)
-    return imagesGroup
+    end
+	  imagesGroup.x, imagesGroup.y = self.rectGroup.x, self.rectGroup.y
+	  self.mainScene:insert(imagesGroup)
+   return imagesGroup
   end
 
-  function self:oneImages(words,number)
+
+
+  function self:oneImage(n)
+    local gr = self.other_object or {x = 0, y = 0, height = 100, width = 100}
+    local imagesGroup = display.newGroup()
+    self.one_image = display.newImage(imagesGroup, "img/medali_ten/"  .. n .. ".png", gr.x, gr.y)
+    self.one_image:scale(0.9*(600/gr.height), 0.9*(600/gr.height))--КОСТЫЛь!!!
+   return imagesGroup
   end
 
   function self:oneText(words,number)
@@ -130,26 +137,35 @@ function B:createRects(t)
 
   function self:textsMedals(words,t)
     local imagesGroup = display.newGroup()
-	local kol = {}
-	for i = 1, #t do
-      kol[i] = display.newText({
-        parent = imagesGroup,
-        text = words[t[i]],
-        width = display.contentWidth,
-        align = "center",
-        x = self.box[i].x, y = self.box[i].y,
-        font = PROPS.font,
-        fontSize = 640/math.floor(string.len(words[t[i]]))+65,
-      })
-          kol[i].tag = i
-     end
-	imagesGroup.x, imagesGroup.y = self.rectGroup.x, self.rectGroup.y
-	self.mainScene:insert(imagesGroup)
-    return imagesGroup
+	  local kol = {}
+  	for i = 1, #t do
+        kol[i] = display.newText({
+          parent = imagesGroup,
+          text = words[t[i]],
+          width = self.box[i].width,
+          align = "center",
+          x = self.box[i].x, y = self.box[i].y,
+          font = PROPS.font,
+          fontSize = 320/math.floor(utf8.len(words[t[i]]))+35,
+        })
+        kol[i].tag = i
+    end
+    imagesGroup.x, imagesGroup.y = self.rectGroup.x, self.rectGroup.y
+    self.mainScene:insert(imagesGroup)
+   return imagesGroup
+  end
+
+  function self:uniteGroup(one, two)
+    self.unite_group = display.newGroup()
+    self.unite_group:insert(one)
+    self.unite_group:insert(two)
+    self.mainScene:insert(self.unite_group)
+      --self:insert(two)
+    return self.unite_group
   end
 
   function self:remove(obj, func)
-	local func = func or function() end
+	  local func = func or function() end
     local props = PROPS.animation.object
     transition.to(obj, {time = props.time, delay = props.delay, alpha = props.alpha,
     onComplete = function()

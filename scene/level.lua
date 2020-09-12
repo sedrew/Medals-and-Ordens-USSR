@@ -1,6 +1,8 @@
 local composer = require( "composer" )
 
 local scene = composer.newScene()
+_G.game_mode = "medal_4"
+
 
 function scene:create( event )
 
@@ -40,6 +42,7 @@ function scene:show( event )
       _G.variant = "text_3"
       _G.marafon = false
 
+
 local button = {}
 function button:play(t)
   self.vr = t.vr or 0
@@ -47,14 +50,14 @@ function button:play(t)
   self.gotoScene = t.gotoScene or "scene.menu"
   self.options_dealy = t.options_dealy or {delay = 400, time = 1000, effect="slideDown"}
   self.sceneGroup = t.sceneGroup or sceneGroup
-  self.game_mode = t.game_mode or "medal_4"
+--  self.game_mode = t.game_mode or "medal_4"
 
   self.widget = display.newImage(sceneGroup, "img/menu/im" .. self.vr .. ".png", self.x, self.y)
   function self.widget:touch(e)
     if(e.phase == "ended" ) then
+      _G.game_mode = t.game_mode
       composer.gotoScene("scene.three_games", self.options_dealy)
       composer.removeScene("scene.level")
-      composer.setVariable("game_mode", self.game_mode)
     end
   end
     self.widget:addEventListener("touch",self.widget)
@@ -82,7 +85,7 @@ local two_button = button:play({
   vr = 1,
   game_mode = "text_3"
 })
-one_button.widget:scale(0.7, 0.7)
+two_button.widget:scale(0.7, 0.7)
 
 local three_button = button:play({
   sceneGroup = button_group,
@@ -92,9 +95,9 @@ local three_button = button:play({
   vr = 2,
   game_mode = "medal_4"
 })
-one_button.widget:scale(0.7, 0.7)
+three_button.widget:scale(0.7, 0.7)
 
-local three_button = button:play({
+local four_button = button:play({
   sceneGroup = button_group,
   x = centerX, y = 1000,
   gotoScene = "scene.three_games",
@@ -102,7 +105,7 @@ local three_button = button:play({
   vr = 3,
   game_mode = "kolodki_4"
 })
-one_button.widget:scale(0.7, 0.7)
+four_button.widget:scale(0.7, 0.7)
 
     end
 end

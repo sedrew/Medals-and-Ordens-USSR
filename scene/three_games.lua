@@ -14,26 +14,61 @@ local images
 local name_medal
 
 local time_start
-local all_variant = 4
+local all_variant = 60
 local all_cards = 4
 -- create()
+local kod = {1,3,4,6,7,8,9,10,12,13,14,15,16,18,19,20,21,22,23,25,26,27,28,29,31,32,33,34,35,36,38,39,40,41,42,43,44,45,46,47,49,50,52,53,54,55,56,57,58}
+
+local pick_mode = _G.game_mode
+
 function scene:create( event )
   local sceneGroup = self.view
-  local kod = {1,3,4,6,7,8,9,10,12,13,14,15,16,18,19,20,21,22,23,25,26,27,28,29,31,32,33,34,35,36,38,39,40,41,42,43,44,45,46,47,49,50,52,53,54,55,56,57,58}
-  random_numbers = modules:random(all_cards,all_variant).notRepeat().step()
-  number_name = random_numbers.returnOneNumber()
 
-  pop = modules:createRects({
-	  countX=2,countY=2,
-	  h=300,w=300,
-	  x=200,y=700,
-	  indentX = 9, indentY = 9,
-    numbersList = random_numbers.randomList
-	})
-  images = pop:imagesMedal(random_numbers.randomList)
-  name_medal = pop:oneText(nazv,number_name)
-  sceneGroup:insert(pop.mainScene)
+   if (pick_mode == "marathon") then
 
+   elseif (pick_mode == "text_3") then
+      all_cards = 3
+     random_numbers = modules:random(all_cards,all_variant).notRepeat().step()
+     
+     pop = modules:createRects({
+       countX=1,countY=3,
+       h=180,w=600,
+       x=centerX,y=800,
+       indentX = 10, indentY = 10,
+       numbersList = random_numbers.randomList
+     })
+     sceneGroup:insert(pop.mainScene)
+
+     pop.other_object = display.newRoundedRect(sceneGroup, centerX, top+400, 600,  600, 12)
+     pop.other_object:setFillColor(unpack(PROPS.color.cart))
+   elseif (pick_mode == "medal_4") then
+     random_numbers = modules:random(all_cards,all_variant).notRepeat().step()
+     pop = modules:createRects({
+       countX=2,countY=2,
+       h=300,w=300,
+       x=200,y=700,
+       indentX = 9, indentY = 9,
+       numbersList = random_numbers.randomList
+     })
+     sceneGroup:insert(pop.mainScene)
+
+   elseif (pick_mode == "kolodki_4") then
+     random_numbers = modules:random(all_cards)
+     random_numbers.random_numbers = kod
+     random_numbers.notRepeat().step()
+
+     pop = modules:createRects({
+       countX=2,countY=2,
+       h=150,w=320,
+       x=200,y=900,
+       indentX = 9, indentY = 9,
+       numbersList = random_numbers.randomList
+     })
+     sceneGroup:insert(pop.mainScene)
+
+     pop.other_object = display.newRoundedRect(sceneGroup, centerX, top+450, 600,  600, 12)
+     pop.other_object:setFillColor(unpack(PROPS.color.cart))
+   end
 end
 -- show()
 function scene:show( event )
@@ -46,14 +81,41 @@ function scene:show( event )
 
     local timeGame  = require("scene.timeGame")
     local upBar_event = timeGame:upBar()
-
     time_start = upBar_event.timeStripe(5)
-    print(upBar_event.score)
+
     composer.setVariable("old_scene_name", "scene.three_games")
 	  function upBar_event.gameOver()
       composer.setVariable("score",upBar_event.score)
 	    composer.showOverlay("scene.gameOver", {time = 800, effect="crossFade", isModal = true,})
     end
+
+
+
+    function game_mode_spawn_sheet()
+      random_numbers = random_numbers.notRepeat().step()
+      number_name = random_numbers.returnOneNumber()
+      if (pick_mode == "marathon") then
+
+
+
+
+
+      elseif (pick_mode == "text_3") then
+        name_medal = pop:oneImage(number_name)
+
+        images = pop:textsMedals(nazv, random_numbers.randomList)
+        pop:uniteGroup(name_medal,images)
+      elseif (pick_mode == "medal_4") then
+        images = pop:imagesMedal(random_numbers.randomList)
+        name_medal = pop:oneText(nazv,number_name)
+        pop:uniteGroup(name_medal,images)
+      elseif (pick_mode == "kolodki_4") then
+        name_medal = pop:oneImage(number_name)
+        images = pop:imagesKolodki(random_numbers.randomList)
+        pop:uniteGroup(name_medal,images)
+      end
+    end
+    game_mode_spawn_sheet()
 
     local count_steps = 0
 	  pop.tap = true
@@ -66,25 +128,21 @@ function scene:show( event )
               print("STOOOP")
             --  return upBar_event.gameOver()
             end
+
+            print(pick_mode)
             ACHIEVES.all_right_answer = ACHIEVES.all_right_answer + 1
             pop.tap = false
-            pop:remove(images,
+            pop:remove(pop.unite_group,
               function()
-                images = pop:imagesMedal(random_numbers.randomList)
+                game_mode_spawn_sheet()
                 pop:resetColor(pop.box)
                 pop.tap = true
                 time_start.startTime()
               end)
+            pop.box[e.target.tag]:setFillColor(unpack(PROPS.color.right))
 
             transition.cancel("tagPauseLineTime")
             upBar_event.score = upBar_event.score + 1
-
-            pop.box[e.target.tag]:setFillColor(unpack(PROPS.color.right))
-            random_numbers = random_numbers.notRepeat().step()
-            number_name = random_numbers.returnOneNumber()
-
-            name_medal.text = nazv[number_name]--utf8.match(nazv[number_name], '.- ').."\n"..utf8.match(nazv[number_name], ' .+')
-            --name_medal.fontSize = 75*((utf8.len(nazv[number_name]))/100
           elseif (e.target.tap == true) then
             ACHIEVES.all_mistake_answer = ACHIEVES.all_mistake_answer + 1
             upBar_event.mistake = upBar_event.mistake + 1
