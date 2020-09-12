@@ -13,29 +13,11 @@ function scene:show( event )
     local phase = event.phase
 
     if ( phase == "will" ) then
-      local json = require("json")
-
-      function loadSettings(filename)
-        -- получаем путь к файлу
-        local path = system.pathForFile(filename, system.ResourceDirectory)
-        local contents = ""
-        local myTable = {}
-        local file = io.open(path, "r") -- открываем файл
-        if (file) then -- если такой файл существует
-           local contents = file:read( "*a" ) -- читаем из него данные
-           myTable = json.decode(contents) -- расшифровываем их
-           io.close(file) -- закрываем файл
-           return myTable -- возвращаем параметры из файла
-        end
-        return nil
-      end
 
 
-      setting = loadSettings("settings.json"); -- загружаем параметры из файла
-      if (setting) then
-        score	= setting.score
-        minus = setting.minus
-      end
+      score	= 10
+      minus = 60
+
 
       local box = display.newGroup()
       local vp = {}

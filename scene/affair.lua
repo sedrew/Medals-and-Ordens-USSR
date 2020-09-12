@@ -8,9 +8,6 @@ function scene:show( event )
 
     if ( phase == "will" ) then
 
-      local loadsave = require( "scene.loadsave" )
-      local setting = loadsave.loadTable( "settings.json" )
-
       local toMenu = display.newText({
         parent = sceneGroup,
         text = "Домой",
@@ -18,6 +15,14 @@ function scene:show( event )
         font = "font/Blogger_Sans-Bold.otf",
         fontSize = 75,
       })
+
+
+      function statistic()
+
+      end
+
+
+
 
       local sbros = display.newText({
         parent = sceneGroup,
@@ -29,13 +34,7 @@ function scene:show( event )
 
       function sbros:touch(e)
         if (e.phase == "began") then
-          local setting = {
-      			PlayGame = 0,
-      			score = 0,
-      			minus = 0,
-      			lovk = 0,
-      		}
-      		loadsave.saveTable( setting, "settings.json" )
+
         end
         return true
       end
@@ -54,11 +53,11 @@ function scene:show( event )
 
 
 
-local PlayGame = setting.PlayGame
-local score	= setting.score
-local minus = setting.minus
-local lovk = setting.lovk
-local res = math.ceil(lovk/PlayGame)
+      local PlayGame = 40
+      local score	= 100
+      local minus = 30
+      local lovk = 70
+      local res = 30
 
 
 
@@ -85,22 +84,22 @@ local res = math.ceil(lovk/PlayGame)
         fontSize = 50,
       })
 
-local ragdogLib = require "ragdogLib";
+      local ragdogLib = require "scene.ragdogLib"
 
 
-local data = {
-  radius = 100,
-  values = {
-    {percentage = 100-res, color = {118/255,113/255,112/255}},
-    {percentage = res, color = {0.572,0.815,80/255}},
-  }
-};
+      local data = {
+        radius = 100,
+        values = {
+          {percentage = 100-res, color = {118/255,113/255,112/255}},
+          {percentage = res, color = {0.572,0.815,80/255}},
+          }
+        }
 
 
-local pie = ragdogLib.createPieChart(data);
-pie.x, pie.y = display.contentCenterX-200, display.contentCenterY-200;
+    local pie = ragdogLib.createPieChart(data)
+    pie.x, pie.y = display.contentCenterX-200, display.contentCenterY-200
 
-sceneGroup:insert(pie)
+    sceneGroup:insert(pie)
 
 
     end
