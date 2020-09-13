@@ -35,7 +35,6 @@ function scene:create( event )
        h=180,w=600,
        x=centerX,y=800,
        indentX = 10, indentY = 10,
-       numbersList = random_numbers.randomList
      })
      sceneGroup:insert(pop.mainScene)
 
@@ -48,7 +47,6 @@ function scene:create( event )
        h=300,w=300,
        x=200,y=700,
        indentX = 9, indentY = 9,
-       numbersList = random_numbers.randomList
      })
      sceneGroup:insert(pop.mainScene)
 
@@ -62,7 +60,6 @@ function scene:create( event )
        h=150,w=320,
        x=200,y=900,
        indentX = 9, indentY = 9,
-       numbersList = random_numbers.randomList
      })
      sceneGroup:insert(pop.mainScene)
 

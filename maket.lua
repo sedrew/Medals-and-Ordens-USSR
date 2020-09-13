@@ -66,7 +66,7 @@ function B:createRects(t)
   self.countX, self.countY = t.countX or 1, t.countY or 1
   self.indentX, self.indentY = self.w + (t.indentX or 20), self.h + (t.indentY or 20)
   self.box = {}
-  self.numbersList = t.numbersList or {}
+  --self.numbersList = t.numbersList or {}
   self.mainScene = display.newGroup()
 
   local k = 1
