@@ -38,83 +38,86 @@ function scene:show( event )
   GroupText1:addEventListener( "touch", GroupText1 )
 
 
--- local card = display.newGroup()
--- local box = {}
---
--- function bx()
---   x, y = 0, 100
---   n = 2
---   for i = 1, 10 do
---     if (i > n ) then
---       y = y + 320
---       n = n + 2
---       x = 0
---     end
---     x = x + 270
---     box[i] = display.newRoundedRect(card, x, y, 250, 300, 15)
---   end
--- end
--- bx()
---
--- -- local card = display.newcard( display.contentWidth*0.5,display.contentHeight*0.5, 75)
--- -- card:setFillColor( 120 )
---
--- -- touch listener function
---
--- local dead = 2
--- local creat = true
--- local vector = {}
--- local nul = 0
--- function card:touch( event )
---   if event.phase == "began" then
---     -- first we set the focus on the object
---     display.getCurrentStage():setFocus( self, event.id )
---     self.isFocus = true
---
---
---     -- then we store the original x and y position
---     --self.markX = self.x
---     self.markY = self.y
---
---   elseif self.isFocus then
---
---     if event.phase == "moved" then
---
---       if (self.y < nul ) then
---         vector.y1 = box[dead-1].y   vector.y2 = box[dead].y
---         box[dead-1]:removeSelf()    box[dead]:removeSelf()
---         box[dead-1] = nil           box[dead] = nil
---         creat = false
---         dead = dead+2
---         nul = nul - 160
---       end
---       print(self.y)
---
---       if (self.y > nul and creat == false) then
---       --  nul = nul + 160
---         box[dead-1]=display.newRoundedRect(card, 270, vector.y1, 250, 300, 15)
---         box[dead]=display.newRoundedRect(card, 270*2, vector.y2, 250, 300, 15)
---         dead = dead-2
---         creat = true
---       end
---
---       -- then drag our object
---     --  self.x = event.x - event.xStart + self.markX
---       self.y = event.y - event.yStart + self.markY
---     elseif event.phase == "ended" or event.phase == "cancelled" then
---       -- we end the movement by removing the focus from the object
---       display.getCurrentStage():setFocus( self, nil )
---       self.isFocus = false
---
---     end
---
---   end
---
--- -- return true so Corona knows that the touch event was handled propertly
---  return true
--- end
---
--- card:addEventListener( "touch", card )
+
+
+
+local card = display.newRoundedRect(300, 300, 400,150, 50)
+local pop = require("maket")
+
+
+local tool = {}
+--tool.box = {}
+
+pop:createRects({
+  countX=3,countY=1,
+  h=40,w=100,
+  x=200,y=900,
+  indentX = 9, indentY = 9,
+  color = {1,0,0.3}
+})
+
+function tool:create_reacts()
+end
+
+
+
+function tool:table_left(t)
+  table.remove(t,1)
+ return t
+end
+
+function tool:table_right(t)
+  local t2 = {nil}
+  table.remove(t,#t)
+  for i = 1, #t do
+    t2[#t2+i] = t[i]
+  end
+  t = t2
+ return t
+end
+
+
+function tool:slider(t)
+    local t = t or {}
+    self.x, self.y = t.box[1].x or 0, t.box[1].y or 0
+    self.pos_left, self.pos_right = t.left or 0, t.right or 1
+    self.pos = t.position or 0
+
+    if self.x+self.pos < self.pos_left then
+      print("LEFT")
+    elseif self.x+self.pos > self.pos_right then
+      print("RIGHT")
+    end
+end
+
+
+function pop.rectGroup:touch( event )
+  if event.phase == "began" then
+    display.getCurrentStage():setFocus( self, event.id )
+    self.isFocus = true
+
+    self.markX = self.x
+    --self.markY = self.y
+
+  elseif self.isFocus then
+    if event.phase == "moved" then
+
+      self.x = event.x - event.xStart + self.markX
+      --self.y = event.y - event.yStart + self.markY
+      tool:slider({
+        box = pop.box,
+        left = 10, right = 400,
+        position = event.x - event.xStart
+      })
+
+    elseif event.phase == "ended" or event.phase == "cancelled" then
+      display.getCurrentStage():setFocus( self, nil )
+      self.isFocus = false
+    end
+  end
+ return true
+end
+pop.rectGroup:addEventListener( "touch", pop.rectGroup )
 --------
 
 -- -- touch listener function
@@ -122,15 +125,16 @@ function scene:show( event )
 --   if event.phase == "began" then
 --     -- first we set the focus on the object
 --     display.getCurrentStage():setFocus( card.self, event.id )
---       self.isFocus = true
+--     self.isFocus = true
 --     -- then we store the original x and y position
---     card.self.markX = card.self.x
---     card.self.markY = card.self.y
+--     self.markX = self.x
+--     self.markY = self.y
 --   elseif self.isFocus then
+--
 --     if event.phase == "moved" then
 --       -- then drag our object
---       card.self.x = event.x - event.xStart + card.self.markX
---       card.self.y = event.y - event.yStart + card.self.markY
+--       self.x = event.x - event.xStart + self.markX
+--       self.y = event.y - event.yStart + self.markY
 --     elseif event.phase == "ended" or event.phase == "cancelled" then
 --       -- we end the movement by removing the focus from the object
 --       display.getCurrentStage():setFocus( self, nil )

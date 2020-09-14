@@ -58,7 +58,7 @@ end
 
 function B:createRects(t)
   self.rectGroup = t.rectGroup or display.newGroup()
-  self.setFillColor = t.collor or {unpack(PROPS.color.cart)}
+  self.setFillColor = t.color or {unpack(PROPS.color.cart)}
   self.x, self.y = 0, 0
   self.globalX, self.globalY = t.x, t.y
   self.w, self.h = t.w or 10, t.h or 10

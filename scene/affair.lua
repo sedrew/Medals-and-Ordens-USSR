@@ -18,16 +18,30 @@ function scene:show( event )
 
       local pop = require("maket")
       pop:createRects({
-        countX=2,countY=2,
-        h=150,w=320,
-        x=200,y=900,
-        indentX = 9, indentY = 9,
+        countX=1,countY=3,
+        h=4,w=right-30,
+        x=centerX,y=500,
+        indentX = 200, indentY = 100,
       })
 
+
+
       function statistic()
-
+        local y = 0
+        for i = 1, 5 do
+          local kol = display.newText({
+            parent = sceneGroup,
+            text = i*10,
+            width = 100,
+            align = "center",
+            x = centerX, y = y,
+            font = PROPS.font,
+            fontSize = 75,
+          })
+          y = y + 100
+        end
       end
-
+statistic()
 
 -- function newSuperellipse(t)
 --   local t = t or {}
