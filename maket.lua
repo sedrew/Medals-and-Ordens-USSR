@@ -112,8 +112,6 @@ function B:createRects(t)
    return imagesGroup
   end
 
-
-
   function self:oneImage(n)
     local gr = self.other_object or {x = 0, y = 0, height = 100, width = 100}
     local imagesGroup = display.newGroup()
@@ -153,6 +151,26 @@ function B:createRects(t)
     imagesGroup.x, imagesGroup.y = self.rectGroup.x, self.rectGroup.y
     self.mainScene:insert(imagesGroup)
    return imagesGroup
+  end
+
+  function self:animationScores(t, score)
+    local x, y = t:localToContent(0,0)
+    self.animText = display.newText({
+        parent = self.mainScene,
+        text = score,
+        width = display.contentWidth-30,
+        align = "center",
+        x = x, y = y,
+        font = PROPS.font,
+        fontSize = 80
+      })
+    transition.to(self.animText,
+      {time=900, alpha=0, y=y-300,
+        onComplete = function()
+          self.animText:removeSelf()
+          self.animText = nil
+        end
+      })
   end
 
   function self:uniteGroup(one, two)

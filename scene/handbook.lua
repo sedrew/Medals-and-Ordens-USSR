@@ -69,6 +69,7 @@ end
 function tool:table_right(t)
   local t2 = {nil}
   table.remove(t,#t)
+
   for i = 1, #t do
     t2[#t2+i] = t[i]
   end
@@ -78,14 +79,29 @@ end
 
 
 function tool:slider(t)
-    local t = t or {}
-    self.x, self.y = t.box[1].x or 0, t.box[1].y or 0
-    self.pos_left, self.pos_right = t.left or 0, t.right or 1
+
+    self.x1, self.y1 = t.box[1]:localToContent(0,0)
+    self.x2, self.y2 = t.box[#t.box]:localToContent(0,0)
+    self.pos_left, self.pos_right = t.one_left or 0, t.one_right or 1
+    self.pos2_left, self.pos2_right = t.two_left or 0, t.two_right or 1
     self.pos = t.position or 0
 
-    if self.x+self.pos < self.pos_left then
-      print("LEFT")
-    elseif self.x+self.pos > self.pos_right then
+    print(self.x1,"*",self.pos_right)
+    if self.x1 < self.pos_left then
+      t.box[1]:removeSelf()
+      tool:table_left(t.box)
+      t.box[#t.box+1] = display.newRoundedRect(pop.rectGroup, t.box[#t.box].x+120, t.box[#t.box].y, 100, 40, 12)
+    elseif self.x2 > self.pos_right then
+      t.box[#t.box]:removeSelf()
+      t.box = tool:table_right(t.box)
+      --print(t.box[1], t.box[#t.box])
+      t.box[1] = display.newRoundedRect(pop.rectGroup, t.box[2].x-120, t.box[2].y, 100, 40, 12)
+    end
+    if self.x2 < self.pos2_left then
+
+      t.box[#t.box]:setFillColor(0,1,0)
+    elseif self.x2 > self.pos2_right then
+      t.box[#t.box]:setFillColor(1,0,0)
       print("RIGHT")
     end
 end
@@ -106,8 +122,8 @@ function pop.rectGroup:touch( event )
       --self.y = event.y - event.yStart + self.markY
       tool:slider({
         box = pop.box,
-        left = 10, right = 400,
-        position = event.x - event.xStart
+        one_left = 20, one_right = 500,
+        two_left = 400, two_right = 800,
       })
 
     elseif event.phase == "ended" or event.phase == "cancelled" then

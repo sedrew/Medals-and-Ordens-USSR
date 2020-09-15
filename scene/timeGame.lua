@@ -16,11 +16,11 @@ function B:upBar(score)
   local textScore = display.newText({
     parent = self.sceneGroup,
     text = "0",
-    width = 100,
+    width = 200,
     align = "left",
-    x = left+70, y = top+45,
+    x = left+120, y = top+45,
     font =  PROPS.font,
-    fontSize = 80,
+    fontSize = 70,
   })
 
   local star = {}

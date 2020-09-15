@@ -97,7 +97,6 @@ function scene:show( event )
 
       elseif (pick_mode == "text_3") then
         name_medal = pop:oneImage(number_name)
-
         images = pop:textsMedals(nazv, random_numbers.randomList)
         pop:uniteGroup(name_medal,images)
       elseif (pick_mode == "medal_4") then
@@ -124,6 +123,7 @@ function scene:show( event )
             --  return upBar_event.gameOver()
             end
             ACHIEVES.all_right_answer = ACHIEVES.all_right_answer + 1
+            pop:animationScores(e.target, 20)
             pop.tap = false
             pop:remove(pop.unite_group,
               function()
@@ -131,11 +131,12 @@ function scene:show( event )
                 pop:resetColor(pop.box)
                 pop.tap = true
                 time_start.startTime()
+
               end)
             pop.box[e.target.tag]:setFillColor(unpack(PROPS.color.right))
 
             transition.cancel("tagPauseLineTime")
-            upBar_event.score = upBar_event.score + 1
+            upBar_event.score = upBar_event.score + 20
           elseif (e.target.tap == true) then
             ACHIEVES.all_mistake_answer = ACHIEVES.all_mistake_answer + 1
             upBar_event.mistake = upBar_event.mistake + 1
