@@ -43,40 +43,41 @@ function scene:show( event )
       end
 statistic()
 
--- function newSuperellipse(t)
---   local t = t or {}
---   local len_vert = 40
---   local n,m = 5,6
---   local a, b = (t.width or 100)/2, (t.height or 100)/2
---   local i = 0
---   local lerp = (math.pi*2)/len_vert
---   local x_coord, y_coord = t.x or 0, t.y or 0
---
---   function sgn(x)
---     local sign = 0
---     if x<0  then sign=1  end
---     if x>0  then sign=-1 end
---     if x==0 then sign=0  end
---    return sign
---   end
---
---   local vertices = {}
---   local len = #vertices
---   local indices = {}
---
---   for k = 1, len_vert*2, 2 do
---     i = i + lerp
---     local ys = ((math.abs(math.sin(i))^(2/n))*sgn(math.sin(i)))*b-- b*(math.sin(i)^(2/n))
---     local xs = ((math.abs(math.cos(i))^(2/m))*sgn(math.cos(i)))*a--a*(math.cos(i)^(2/n))
---     vertices[k] = xs
---     vertices[k+1] = ys
---   end
---   --display.newRoundedRect(400, 400, 500, 500,70 )
---   local p = display.newPolygon(x_coord, y_coord, vertices)
---  return p
--- end
+function newSuperellipse(t)
+  local t = t or {}
+  local len_vert = 40
+  local n,m = 5,6
+  local a, b = (t.width or 100)/2, (t.height or 100)/2
+  local i = 0
+  local lerp = (math.pi*2)/len_vert
+  local x_coord, y_coord = t.x or 0, t.y or 0
 
+  function sgn(x)
+    local sign = 0
+    if x<0  then sign=1  end
+    if x>0  then sign=-1 end
+    if x==0 then sign=0  end
+   return sign
+  end
 
+  local vertices = {}
+  local len = #vertices
+  local indices = {}
+
+  for k = 1, len_vert*2, 2 do
+    i = i + lerp
+    local ys = ((math.abs(math.sin(i))^(2/n))*sgn(math.sin(i)))*b-- b*(math.sin(i)^(2/n))
+    local xs = ((math.abs(math.cos(i))^(2/m))*sgn(math.cos(i)))*a--a*(math.cos(i)^(2/n))
+    vertices[k] = xs
+    vertices[k+1] = ys
+  end
+  --display.newRoundedRect(400, 400, 500, 500,70 )
+  local p = display.newPolygon(x_coord, y_coord, vertices)
+ return p
+end
+newSuperellipse({x=left+200,y=990, width=400,height=400})
+
+--display.newRoundedRect(left+200, 990, 400, 400,70 )
 
       local sbros = display.newText({
         parent = sceneGroup,
