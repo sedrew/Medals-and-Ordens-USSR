@@ -12,7 +12,7 @@ function scene:show( event )
         parent = sceneGroup,
         text = "Домой",
         x = display.contentCenterX, y = 40,
-        font = "font/Blogger_Sans-Bold.otf",
+        font = PROPS.font,
         fontSize = 75,
       })
 

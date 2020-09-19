@@ -1,5 +1,6 @@
 return {
   en = {
+   name_game = "Medals and Ordens",
     good_bye = "good-bye!",
     age_msg = "your age is %{age}.",
     phone_msg = {
