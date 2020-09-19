@@ -42,7 +42,7 @@ function scene:show( event )
       transition.to(PlayGame, {time = 50, size = 75,
         onComplete = function()
           composer.removeScene("scene.menu")
-          composer.gotoScene("scene.level", PROPS.animation.scene)
+          composer.gotoScene("scene.menuSetting", PROPS.animation.scene)
         end})
     end
       return true

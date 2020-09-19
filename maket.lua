@@ -80,7 +80,7 @@ function B:createRects(t)
       k = k + 1
     end
 	self.y = 0
-    self.x = self.x + self.indentX
+  self.x = self.x + self.indentX
   end
   self.rectGroup.x,self.rectGroup.y = self.globalX, self.globalY
   self.mainScene:insert(self.rectGroup)
