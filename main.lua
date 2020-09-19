@@ -63,7 +63,7 @@ else
       middle_time = 0,
       count_game = 0,
       achieve_name = {},
-      week_progres = {},
+      week_progres = {0,0,0,0,0,0,0},
     }
   }
   PROPS = tabl.settings

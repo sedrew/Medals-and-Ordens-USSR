@@ -17,79 +17,66 @@ function scene:show( event )
       })
 
       local pop = require("maket")
+      local stats_group = display.newGroup()
       pop:createRects({
-        countX=1,countY=3,
-        h=4,w=right-30,
+        countX=1,countY=5,
+        h=4,w=right-200,
         x=centerX,y=500,
-        indentX = 200, indentY = 100,
+        indentX = 100, indentY = 80,
       })
-
+      sceneGroup:insert(pop.rectGroup)
 
 
       function statistic()
         local y = 0
+        local score = 80
         for i = 1, 5 do
           local kol = display.newText({
-            parent = sceneGroup,
-            text = i*10,
+            parent = pop.rectGroup,
+            text = score,
             width = 100,
-            align = "center",
-            x = centerX, y = y,
+            align = "right",
+            x = (pop.box[i].x-pop.w/2)-70, y = y,
             font = PROPS.font,
-            fontSize = 75,
+            fontSize = 40,
           })
-          y = y + 100
+          kol:setFillColor(unpack(PROPS.color.cart))
+          y = y + pop.indentY
+          score = score - 20
+        end
+
+        local x_cr = -250
+        local x_cradd = pop.w/6
+        local week_text = {"ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"}
+        for i = 1, 7 do
+          local circl = display.newCircle(pop.rectGroup, x_cr, pop.box[#pop.box].y, 10)
+          local week = display.newText({
+            parent = pop.rectGroup,
+            text = week_text[i],
+            width = right,
+            align = "center",
+            x = x_cr, y = pop.box[#pop.box].y+60,
+            font = PROPS.font,
+            fontSize = 40,
+          })
+          week:setFillColor(unpack(PROPS.color.cart))
+
+          x_cr = x_cr + x_cradd
         end
       end
-statistic()
+      statistic()
 
-function newSuperellipse(t)
-  local t = t or {}
-  local len_vert = 40
-  local n,m = 5,6
-  local a, b = (t.width or 100)/2, (t.height or 100)/2
-  local i = 0
-  local lerp = (math.pi*2)/len_vert
-  local x_coord, y_coord = t.x or 0, t.y or 0
-
-  function sgn(x)
-    local sign = 0
-    if x<0  then sign=1  end
-    if x>0  then sign=-1 end
-    if x==0 then sign=0  end
-   return sign
-  end
-
-  local vertices = {}
-  local len = #vertices
-  local indices = {}
-
-  for k = 1, len_vert*2, 2 do
-    i = i + lerp
-    local ys = ((math.abs(math.sin(i))^(2/n))*sgn(math.sin(i)))*b-- b*(math.sin(i)^(2/n))
-    local xs = ((math.abs(math.cos(i))^(2/m))*sgn(math.cos(i)))*a--a*(math.cos(i)^(2/n))
-    vertices[k] = xs
-    vertices[k+1] = ys
-  end
-  --display.newRoundedRect(400, 400, 500, 500,70 )
-  local p = display.newPolygon(x_coord, y_coord, vertices)
- return p
-end
-newSuperellipse({x=left+200,y=990, width=400,height=400})
-
---display.newRoundedRect(left+200, 990, 400, 400,70 )
 
       local sbros = display.newText({
         parent = sceneGroup,
         text = "Сбросить статистику",
         x = display.actualContentWidth-200, y = display.actualContentHeight-25,
-        font = "font/Blogger_Sans-Bold.otf",
+        font = PROPS.font,
         fontSize = 40,
       })
 
       function sbros:touch(e)
         if (e.phase == "began") then
-
         end
         return true
       end
@@ -122,39 +109,25 @@ newSuperellipse({x=left+200,y=990, width=400,height=400})
         align = "left",
         text = text,
         x = display.contentCenterX, y = 200,
-        font = "font/Blogger_Sans-Bold.otf",
+        font = PROPS.font,
         fontSize = 50,
       })
 
       local halfW = display.contentWidth * 0.5
       local halfH = display.contentHeight * 0.5
 
-      local text = 'Ловкость '..res..'%'
-      local case = display.newText({
-        parent = sceneGroup,
-        align = "left",
-        text = text,
-        x = display.contentCenterX+100, y = display.contentCenterY-200,
-        font = "font/Blogger_Sans-Bold.otf",
-        fontSize = 50,
-      })
-
-      local ragdogLib = require "scene.ragdogLib"
-
-
-      local data = {
-        radius = 100,
-        values = {
-          {percentage = 100-res, color = {118/255,113/255,112/255}},
-          {percentage = res, color = {0.572,0.815,80/255}},
-          }
-        }
-
-
-    local pie = ragdogLib.createPieChart(data)
-    pie.x, pie.y = display.contentCenterX-200, display.contentCenterY-200
-
-    sceneGroup:insert(pie)
+    --Radian deogram
+    --   local ragdogLib = require "scene.ragdogLib"
+    --   local data = {
+    --     radius = 100,
+    --     values = {
+    --       {percentage = 100-res, color = {118/255,113/255,112/255}},
+    --       {percentage = res, color = {0.572,0.815,80/255}},
+    --       }
+    --     }
+    -- local pie = ragdogLib.createPieChart(data)
+    -- pie.x, pie.y = display.contentCenterX-200, display.contentCenterY-200
+    -- sceneGroup:insert(pie)
 
 
     end
