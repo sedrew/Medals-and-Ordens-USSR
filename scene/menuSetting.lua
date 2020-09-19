@@ -121,7 +121,7 @@ function scene:show( event )
         print( "Switch with ID '"..switch.id.."' is on: "..tostring(switch.isOn) )
     end
     local music_switch = widget.newSwitch({
-            x = music.x,
+            x = right-150,
             y = music.y,
             -- left = right-300,
             -- top = 200,
@@ -139,7 +139,7 @@ function scene:show( event )
         print( "Switch with ID '"..switch.id.."' is on: "..tostring(switch.isOn) )
     end
     local sound_switch = widget.newSwitch({
-            x = music.x,
+            x = right-150,
             y = sound.y,
             -- left = right-300,
             -- top = 200,
