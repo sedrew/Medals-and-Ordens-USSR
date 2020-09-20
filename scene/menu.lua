@@ -16,9 +16,8 @@ function scene:show( event )
  local phase = event.phase
 
  if ( phase == "will" ) then
-  local myGroup = display.newGroup()
-  local ic = display.newImage(myGroup, "img/menu/ic.png")
-      ic.x = 140 ic.y = 970 ic:scale(0.6, 0.6)
+
+
 
   local GroupText = display.newText({
     parent = sceneGroup,
@@ -28,11 +27,18 @@ function scene:show( event )
 	  fontSize = 85,
   })
 
+  local logo = display.newImage("img/menu/logo.png")
+  logo:scale( 0.7, 0.7 )
+  logo.x = display.contentCenterX
+  logo.y = 480
+
+  local button_rect = display.newRoundedRect( sceneGroup, centerX, 800, 400, 100, 20 )
+  button_rect:setFillColor(1,0.396,0.396)
   local fSize = 80
   local PlayGame =  display.newText({
     parent = sceneGroup,
     text = i18n('play'),
-    x = display.contentCenterX-20, y = 800,
+    x = display.contentCenterX, y = 800,
     font = PROPS.font,
     fontSize = fSize,
   })
@@ -47,73 +53,78 @@ function scene:show( event )
     end
       return true
   end
-  PlayGame:addEventListener( "touch", PlayGame )
+  PlayGame:addEventListener("touch", PlayGame)
 
-  local GroupText3 = display.newText({
-    parent = GroupText3,
-    text = "Справочник",
-    x = display.contentCenterX+70, y = 1015,
-    font = PROPS.font,
-    fontSize = fSize,
-  })
-  sceneGroup:insert(GroupText3)
 
-  function GroupText3:touch(event)
-    if ( event.phase == "began" ) then
-      elseif ( event.phase == "ended" ) then
-        composer.gotoScene("scene.handbook", {time = 800, effect="slideUp"})
-        composer.removeScene("scene.menu")
-      end
-    return true
-  end
-  GroupText3:addEventListener( "touch", GroupText3 )
 
-  local diary = display.newText({
-    parent = diary,
-    text = "Дневник",
-    x = display.contentCenterX+10, y = 910,
-    font = PROPS.font,
-    fontSize = fSize,
-  })
-  sceneGroup:insert(diary)
 
-  function diary:touch(event)
-    if ( event.phase == "ended" ) then
-      composer.gotoScene("scene.diary", {time = 800, effect="slideUp"})
-      composer.removeScene("scene.menu")
-      end
-    return true
-  end
-  diary:addEventListener( "touch", diary)
 
-  local case = display.newText({
-    parent = sceneGroup,
-    text = "Личное дело",
-    x = display.contentCenterX+80, y = 1125,
-    font = PROPS.font,
-    fontSize = fSize,
-  })
-  sceneGroup:insert(case)
+  --Old disigne
+    -- local myGroup = display.newGroup()
+  -- local ic = display.newImage(myGroup, "img/menu/ic.png")
+  --     ic.x = 140 ic.y = 970 ic:scale(0.6, 0.6)
+  -- local GroupText3 = display.newText({
+  --   parent = GroupText3,
+  --   text = "Справочник",
+  --   x = display.contentCenterX+70, y = 1015,
+  --   font = PROPS.font,
+  --   fontSize = fSize,
+  -- })
+  -- sceneGroup:insert(GroupText3)
+  --
+  -- function GroupText3:touch(event)
+  --   if ( event.phase == "began" ) then
+  --     elseif ( event.phase == "ended" ) then
+  --       composer.gotoScene("scene.handbook", {time = 800, effect="slideUp"})
+  --       composer.removeScene("scene.menu")
+  --     end
+  --   return true
+  -- end
+  -- GroupText3:addEventListener( "touch", GroupText3 )
+  --
+  -- local diary = display.newText({
+  --   parent = diary,
+  --   text = "Дневник",
+  --   x = display.contentCenterX+10, y = 910,
+  --   font = PROPS.font,
+  --   fontSize = fSize,
+  -- })
+  -- sceneGroup:insert(diary)
+  --
+  -- function diary:touch(event)
+  --   if ( event.phase == "ended" ) then
+  --     composer.gotoScene("scene.diary", {time = 800, effect="slideUp"})
+  --     composer.removeScene("scene.menu")
+  --     end
+  --   return true
+  -- end
+  -- diary:addEventListener( "touch", diary)
+  --
+  -- local case = display.newText({
+  --   parent = sceneGroup,
+  --   text = "Личное дело",
+  --   x = display.contentCenterX+80, y = 1125,
+  --   font = PROPS.font,
+  --   fontSize = fSize,
+  -- })
+  -- sceneGroup:insert(case)
+  --
+  --
+  -- function case:touch(event)
+  --   if ( event.phase == "began" ) then
+  --     transition.to(case, {time = 250, size = 75, transition=easing.continuousLoop})
+  --     composer.gotoScene("scene.affair", PROPS.animation.scene)
+  --     composer.removeScene("scene.menu")
+  --   end
+  --  return true
+  -- end
+  -- case:addEventListener( "touch", case )
+  --
 
-  --local loadsave  = require("lib.loadsave")
-  function case:touch(event)
-    if ( event.phase == "began" ) then
-      transition.to(case, {time = 250, size = 75, transition=easing.continuousLoop})
-      composer.gotoScene("scene.affair", PROPS.animation.scene)
-      composer.removeScene("scene.menu")
-    end
-   return true
-  end
-  case:addEventListener( "touch", case )
-
-  local logo = display.newImage("img/menu/logo.jpg")
-  logo:scale( 0.7, 0.7 )
-  logo.x = display.contentCenterX
-  logo.y = 480
-
-  sceneGroup:insert(myGroup)
-  sceneGroup:insert(GroupText)
-  myGroup:insert(logo)
+  --
+  -- sceneGroup:insert(myGroup)
+  -- myGroup:insert(logo)
+  sceneGroup:insert(logo)
   end
 end
 

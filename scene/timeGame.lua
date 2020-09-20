@@ -29,24 +29,15 @@ function B:upBar(score)
 --  local vertices = {}
 
 
-  for i = 1, 1 do
+  for i = 1, 3 do
     star[i] = display.newPolygon(self.sceneGroup, 750-(i*70), 50, vertices )
     star[i].fill = {unpack(PROPS.color.achieve)}
     star[i].strokeWidth = 0
     star[i]:setStrokeColor(unpack(PROPS.color.achieve))
-    star[i]:rotate(36)
-    star[i]:scale(0.5,0.5)
     --star[i].x = centerX
     --star[i].y = centerY
   end
 
-local df = display.newGroup()
-  for i = 1, #vertices, 2 do
-   display.newCircle(df, vertices[i]*10, vertices[i+1]*10, 10 )
-  end
---df:scale(0.1,0.1)
-df.x = centerX
-df.y = centerY
 
   function self.timeStripe(time)
     local rt = 100
