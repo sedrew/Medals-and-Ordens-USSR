@@ -32,13 +32,13 @@ function scene:show( event )
   logo.x = display.contentCenterX
   logo.y = 480
 
-  local button_rect = display.newRoundedRect( sceneGroup, centerX, 800, 400, 100, 20 )
+  local button_rect = display.newRoundedRect(sceneGroup, centerX, 850, 500, 150, 30)
   button_rect:setFillColor(1,0.396,0.396)
-  local fSize = 80
+  local fSize = 90
   local PlayGame =  display.newText({
     parent = sceneGroup,
     text = i18n('play'),
-    x = display.contentCenterX, y = 800,
+    x = display.contentCenterX, y = button_rect.y,
     font = PROPS.font,
     fontSize = fSize,
   })
@@ -55,7 +55,51 @@ function scene:show( event )
   end
   PlayGame:addEventListener("touch", PlayGame)
 
+  local bt = {}
+  function bt:buttons(t)
+    self.button_rect = display.newRoundedRect(sceneGroup, t.x, t.y, 150, 150, 30)
+    self.scene = t.scene
+    self.button_rect:setFillColor(unpack(t.color))
+    self.img = display.newImage(sceneGroup, t.img_url, t.x, t.y)
+    self.img:scale( (self.button_rect.height/100)*2, (self.button_rect.height/100)*2)
 
+    function self.button_rect:touch(event)
+      if ( event.phase == "began" ) then
+
+            composer.removeScene("scene.menu")
+            composer.gotoScene("scene.affair", PROPS.animation.scene)
+      end
+        return true
+    end
+    self.button_rect:addEventListener("touch", self.button_rect )
+    return self
+  end
+
+  local affair = bt:buttons({
+    x = button_rect.x-button_rect.width/2+75,
+    y = button_rect.y+160,
+    color = {1,0.396,0.396},
+    img_url = "img/UI/lightbulb.png",
+    scene = "scene.menuSetting",
+  })
+  affair.img:scale(0.075,0.075)
+
+  local book = bt:buttons({
+    x = button_rect.x,
+    y = button_rect.y+160,
+    color = {1,0.396,0.396},
+    img_url = "img/UI/android-book.png",
+    scene = "scene.handbook",
+  })
+  book.img:scale(0.075,0.075)
+
+  local sett = bt:buttons({
+    x = button_rect.x+button_rect.width/2-75,
+    y = button_rect.y+160,
+    color = {1,0.396,0.396},
+    img_url = "img/UI/1x/gear.png",
+    scene = "scene.menuSetting",
+  })
 
 
 
