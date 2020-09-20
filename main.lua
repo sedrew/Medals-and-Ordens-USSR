@@ -48,7 +48,7 @@ else
      font_size = 80,
      music = true,
      sounds = true,
-     lang = "ru",
+     lang = "en",
      recent_visit = os_date,
      animation = {
        scene = {delay = 100, time = 300, effect="crossFade"},
