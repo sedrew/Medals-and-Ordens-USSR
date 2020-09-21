@@ -28,6 +28,7 @@ function B:upBar(score)
   local vertices = { 0,-110/del, 27/del,-35/del, 105/del,-35/del, 43/del,16/del, 65/del,90/del, 0,45/del, -65/del,90/del, -43/del,15/del, -105/del,-35/del, -27/del,-35/del, }
 --  local vertices = {}
 
+  local star_img = display.newImage(self.sceneGroup, "img/UI/2x/star.png", 0, 50)
 
   for i = 1, 3 do
     star[i] = display.newPolygon(self.sceneGroup, 750-(i*70), 50, vertices )

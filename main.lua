@@ -22,10 +22,7 @@ local props = loadsave.loadTable("settings.json")
 
 PROPS   = {}
 ACHIEVES = {}
-local se = {nil,2,5,nil,4}
-collectgarbage()
-se = se
-print(#se)
+
 if props ~= nil then
   PROPS = props.settings
   ACHIEVES  = props.game_achieve
@@ -63,7 +60,13 @@ else
       middle_time = 0,
       count_game = 0,
       achieve_name = {},
-      week_progres = {0,0,0,0,0,0,0},
+      week_progres = {{all_score=0,all_right_answer=0,all_mistake_answer=0},
+                      {all_score=0,all_right_answer=0,all_mistake_answer=0},
+                      {all_score=0,all_right_answer=0,all_mistake_answer=0},
+                      {all_score=0,all_right_answer=0,all_mistake_answer=0},
+                      {all_score=0,all_right_answer=0,all_mistake_answer=0},
+                      {all_score=0,all_right_answer=0,all_mistake_answer=0},
+                      {all_score=0,all_right_answer=0,all_mistake_answer=0}},
       all_time_progres = {},
     }
   }
