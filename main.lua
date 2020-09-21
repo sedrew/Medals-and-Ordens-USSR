@@ -48,7 +48,7 @@ else
      font_size = 80,
      music = true,
      sounds = true,
-     lang = "en",
+     lang = "ru",
      recent_visit = os_date,
      animation = {
        scene = {delay = 100, time = 300, effect="crossFade"},
@@ -64,6 +64,7 @@ else
       count_game = 0,
       achieve_name = {},
       week_progres = {0,0,0,0,0,0,0},
+      all_time_progres = {},
     }
   }
   PROPS = tabl.settings
@@ -74,6 +75,11 @@ end
 i18n = require('lib.i18n.init')
 i18n.load(require('resource.languages'))
 i18n.setLocale(PROPS.lang)
+
+--local backgroundMusic = audio.loadSound("audio/One Step Closer.mp3")
+--audio.setVolume(0.5)
+--audio.play(backgroundMusic)
+
 --i18n.loadFile(system.pathForFile(system.ResourceDirectory) ..'/lib/i18n/ru.lua') -- load French language file
 -- print("sdsdsds %{age}", 3)
 -- print(i18n('good_bye'))
