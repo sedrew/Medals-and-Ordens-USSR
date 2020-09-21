@@ -9,10 +9,12 @@ function scene:create(event)
 
   display.newRect(sceneGroup, centerX , centerY, fullw, fullh):setFillColor(37/255, 39/255, 46/255, 0.7)
   local plant = display.newRoundedRect(sceneGroup, centerX, centerY, fullw-80, fullh-180, 15)
-        --plant:setFillColor(244/255,229/255,209/255)
-        plant:setFillColor(1)
+        --plant:setFillColor(0.845,	0.943, 0.999)
+        plant:setFillColor(unpack(PROPS.color.cart))
 
   local textTab = {"Время вышло\n", "Звезды закончились\n", "Очки", "Ловкость ", "Правельных ответов"}
+
+  local butt = display.newRoundedRect(sceneGroup, centerX , plant.y-plant.width+175, plant.width-100, 130, 20):setFillColor(255/255,129/255,129/255)
 
   local text = display.newText({
     parent = sceneGroup,
@@ -23,7 +25,8 @@ function scene:create(event)
     font = PROPS.font,
     fontSize = 75,
   })
-  text:setTextColor(255/255,129/255,129/255)
+  text:setTextColor(1)
+  --text:setTextColor(255/255,129/255,129/255)
 
   transition.cancel("tagPauseLineTime")
 
@@ -47,8 +50,8 @@ function scene:create(event)
     parent = sceneGroup,
     text =  table_achieve.game_achieve.all_score,
     width = 490,
-    align = "center",
-    x = display.contentCenterX, y = text.y+250,
+    align = "left",
+    x = display.contentCenterX+100, y = text.y+250,
     font = PROPS.font,
     fontSize = 200,
   })
@@ -56,10 +59,10 @@ function scene:create(event)
 
   local text_score = display.newText({
     parent = sceneGroup,
-    text =  composer.getVariable("score"),
+    text =  "+"..composer.getVariable("score"),
     width = 490,
     align = "center",
-    x = display.contentCenterX, y = text.y+150,
+    x = all_text_score.x, y = text.y+150,
     font = PROPS.font,
     fontSize = 75,
   })
@@ -78,7 +81,8 @@ function scene:create(event)
 	  font = PROPS.font,
 	  fontSize = 45,
   })
-  text_ask:setTextColor(118/255,113/255,112/255)
+  text_ask:setTextColor(1)
+  --text_ask:setTextColor(118/255,113/255,112/255)
 
   local fact = display.newText({
     parent = sceneGroup,
@@ -89,8 +93,8 @@ function scene:create(event)
     font = PROPS.font,
     fontSize = 600/string.len(facts[ar1][ar2])+35,
   })
-  fact:setTextColor(118/255,113/255,112/255)
-  --local setting = loadsave.loadTable( "settings.json" )
+  fact:setTextColor(1)
+  --fact:setTextColor(118/255,113/255,112/255)
 
   local old_scene_name = composer.getVariable("old_scene_name")
   function closer(event)
@@ -115,7 +119,7 @@ function scene:create(event)
     width = button_props.width, height = button_props.height,
     x = (plant.x-plant.width/2)+button_props.width/2,
     y = (plant.y+plant.height/2)-button_props.height/2,
-    fillColor = { default={ 0.2 }, over={ 0, 149/255, 59/255 } },
+    fillColor = { default={0.645,	0.743, 0.837}, over={unpack(PROPS.color.right)} },
     labelColor = { default={ 1 }, over={ 1 } },
     fontSize = 32,
     label = "Back",
@@ -130,7 +134,7 @@ function scene:create(event)
     x = (plant.x+plant.width/2)-button_props.width/2,
     y = (plant.y+plant.height/2)-button_props.height/2,
     --left = plant.y+button_props.width, top = (plant.x+plant.height)-(button_props.height),
-    fillColor = { default={ 0.2 }, over={ 0, 149/255, 59/255 } },
+    fillColor = { default={0.645,	0.743, 0.837}, over= {unpack(PROPS.color.right)}},
     labelColor = { default={ 1 }, over={ 1 } },
     fontSize = 32,
     label = "Restart",
