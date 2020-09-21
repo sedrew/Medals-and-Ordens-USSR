@@ -28,15 +28,11 @@ function B:upBar(score)
   local vertices = { 0,-110/del, 27/del,-35/del, 105/del,-35/del, 43/del,16/del, 65/del,90/del, 0,45/del, -65/del,90/del, -43/del,15/del, -105/del,-35/del, -27/del,-35/del, }
 --  local vertices = {}
 
-  local star_img = display.newImage(self.sceneGroup, "img/UI/2x/star.png", 0, 50)
+
 
   for i = 1, 3 do
-    star[i] = display.newPolygon(self.sceneGroup, 750-(i*70), 50, vertices )
-    star[i].fill = {unpack(PROPS.color.achieve)}
-    star[i].strokeWidth = 0
-    star[i]:setStrokeColor(unpack(PROPS.color.achieve))
-    --star[i].x = centerX
-    --star[i].y = centerY
+    star[i] = display.newImage(self.sceneGroup, "img/UI/2x/star.png",  750-(i*70), 50)
+    star[i]:setFillColor(unpack(PROPS.color.achieve))
   end
 
 
@@ -78,8 +74,7 @@ function B:upBar(score)
   self.mistake = 0
   function self.update()
     if (self.mistake > 0 and self.mistake < 4) then
-      star[self.mistake]:setStrokeColor(unpack(PROPS.color.grey))
-      star[self.mistake].fill = {unpack(PROPS.color.grey)}
+      star[self.mistake]:setFillColor(unpack(PROPS.color.grey))
     elseif (self.mistake > 3) then
 	   self.gameOver()
 	   --B.gameOV(composer) --composer.showOverlay("scene.gameOver", {time = 800, effect="crossFade", isModal = true,})
