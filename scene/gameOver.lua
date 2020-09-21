@@ -9,9 +9,12 @@ function scene:create(event)
 
   display.newRect(sceneGroup, centerX , centerY, fullw, fullh):setFillColor(37/255, 39/255, 46/255, 0.7)
   local plant = display.newRoundedRect(sceneGroup, centerX, centerY, fullw-80, fullh-180, 15)
-        plant:setFillColor(244/255,229/255,209/255)
+        --plant:setFillColor(0.845,	0.943, 0.999)
+        plant:setFillColor(unpack(PROPS.color.cart))
 
   local textTab = {"Время вышло\n", "Звезды закончились\n", "Очки", "Ловкость ", "Правельных ответов"}
+
+  local butt = display.newRoundedRect(sceneGroup, centerX , plant.y-plant.width+175, plant.width-100, 130, 20):setFillColor(255/255,129/255,129/255)
 
   local text = display.newText({
     parent = sceneGroup,
@@ -22,7 +25,8 @@ function scene:create(event)
     font = PROPS.font,
     fontSize = 75,
   })
-  text:setTextColor(255/255,129/255,129/255)
+  text:setTextColor(1)
+  --text:setTextColor(255/255,129/255,129/255)
 
   transition.cancel("tagPauseLineTime")
 
@@ -41,36 +45,29 @@ function scene:create(event)
     recent_visit = {},
   }
   settings.saveTable(table_achieve, "settings.json")
-  -- local lov = 0
-  -- for i = 1, #lovkost do
-    -- lov = math.ceil(lov + lovkost[i])
-		-- --print(lovkost[i])
-   -- end
 
-  -- display.newRoundedRect(sceneGroup, display.contentCenterX, plant.y-320, 350, 55, 15):setFillColor(118/255,113/255,112/255)
-  -- local plane = display.newRoundedRect(sceneGroup, display.contentCenterX-175, plant.y-320, (350/100)*(lov/#lovkost), 55, 15)
-    -- plane:setFillColor(0.272+(38/(lov/#lovkost+10)), (0.815/100)*(lov/#lovkost+30), 80/255) --red 0.572 .428
-    -- plane.anchorX = 0
+  local all_text_score = display.newText({
+    parent = sceneGroup,
+    text =  table_achieve.game_achieve.all_score,
+    width = 490,
+    align = "left",
+    x = display.contentCenterX+100, y = text.y+250,
+    font = PROPS.font,
+    fontSize = 200,
+  })
+  all_text_score:setFillColor(unpack(PROPS.color.achieve))
 
-  -- local text2 = display.newText({
-	-- parent = sceneGroup,
-	-- text =  textTab[4] .. math.ceil(lov/#lovkost) .. '%', --.."%\n" .. textTab[5] .." ".. math.floor((score/minus)*100) .. "%"
-	-- width = 490,
-	-- align = "center",
-	-- x = display.contentCenterX, y = plant.y-320,
-	-- font = "font/Blogger_Sans-Bold.otf",
-	-- fontSize = 45,
-  -- })
-  -- text2:setTextColor(1,1,1)
   local text_score = display.newText({
     parent = sceneGroup,
-    text =  composer.getVariable("score"),
+    text =  "+"..composer.getVariable("score"),
     width = 490,
     align = "center",
-    x = display.contentCenterX, y = text.y+150,
+    x = all_text_score.x, y = text.y+150,
     font = PROPS.font,
     fontSize = 75,
   })
+  text_score:setFillColor(unpack(PROPS.color.achieve))
+
 
   local ar1 = math.random(1, #facts)
   local ar2 = math.random(2, math.random(2, #facts[ar1]))
@@ -84,7 +81,8 @@ function scene:create(event)
 	  font = PROPS.font,
 	  fontSize = 45,
   })
-  text_ask:setTextColor(118/255,113/255,112/255)
+  text_ask:setTextColor(1)
+  --text_ask:setTextColor(118/255,113/255,112/255)
 
   local fact = display.newText({
     parent = sceneGroup,
@@ -95,8 +93,8 @@ function scene:create(event)
     font = PROPS.font,
     fontSize = 600/string.len(facts[ar1][ar2])+35,
   })
-  fact:setTextColor(118/255,113/255,112/255)
-  --local setting = loadsave.loadTable( "settings.json" )
+  fact:setTextColor(1)
+  --fact:setTextColor(118/255,113/255,112/255)
 
   local old_scene_name = composer.getVariable("old_scene_name")
   function closer(event)
@@ -121,7 +119,7 @@ function scene:create(event)
     width = button_props.width, height = button_props.height,
     x = (plant.x-plant.width/2)+button_props.width/2,
     y = (plant.y+plant.height/2)-button_props.height/2,
-    fillColor = { default={ 0.2 }, over={ 0, 149/255, 59/255 } },
+    fillColor = { default={0.645,	0.743, 0.837}, over={unpack(PROPS.color.right)} },
     labelColor = { default={ 1 }, over={ 1 } },
     fontSize = 32,
     label = "Back",
@@ -136,7 +134,7 @@ function scene:create(event)
     x = (plant.x+plant.width/2)-button_props.width/2,
     y = (plant.y+plant.height/2)-button_props.height/2,
     --left = plant.y+button_props.width, top = (plant.x+plant.height)-(button_props.height),
-    fillColor = { default={ 0.2 }, over={ 0, 149/255, 59/255 } },
+    fillColor = { default={0.645,	0.743, 0.837}, over= {unpack(PROPS.color.right)}},
     labelColor = { default={ 1 }, over={ 1 } },
     fontSize = 32,
     label = "Restart",
