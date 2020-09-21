@@ -19,7 +19,7 @@ function scene:show( event )
 
       local GroupText1 = display.newText({
         parent = sceneGroup,
-        text = "Домой",
+        text = i18('home'),
         x = display.contentCenterX, y = 80,
         font = PROPS.font,
         fontSize = 90,
@@ -50,7 +50,7 @@ function button:play(t)
   self.gotoScene = t.gotoScene or "scene.menu"
   self.options_dealy = t.options_dealy or {delay = 400, time = 1000, effect="slideDown"}
   self.sceneGroup = t.sceneGroup or sceneGroup
-  
+
   self.widget = display.newImage(sceneGroup, "img/menu/im" .. self.vr .. ".png", self.x, self.y)
   function self.widget:touch(e)
     if(e.phase == "ended" ) then

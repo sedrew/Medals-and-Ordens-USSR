@@ -8,7 +8,7 @@ function B:upBar(score)
   display.newRoundedRect(self.sceneGroup, display.contentCenterX, 50, display.actualContentWidth, 100, 10):setFillColor(unpack(PROPS.color.up_bar));
   local toMenu = display.newText({
     parent = self.sceneGroup,
-    text = "Домой",
+    text = i18('home'),
     x = display.contentCenterX, y = 40,
     font = PROPS.font,
     fontSize = 75,

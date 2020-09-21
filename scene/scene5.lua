@@ -102,7 +102,7 @@ function proverka()
   if ( slovo == "composer") then
     local er2 = display.newText({
       parent = sceneGroup,
-      text = "Правильно",
+      text = i18('correct'),
       width = display.contentWidth,
       align = "center",
       x = display.contentCenterX, y = display.contentCenterY+400,

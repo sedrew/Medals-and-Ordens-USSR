@@ -10,7 +10,7 @@ function scene:show( event )
 
       local toMenu = display.newText({
         parent = sceneGroup,
-        text = "Домой",
+        text = i18('home'),
         x = display.contentCenterX, y = 40,
         font = PROPS.font,
         fontSize = 75,
@@ -69,7 +69,7 @@ function scene:show( event )
 
       local sbros = display.newText({
         parent = sceneGroup,
-        text = "Сбросить статистику",
+        text = i18('removestat'),
         x = display.actualContentWidth-200, y = display.actualContentHeight-25,
         font = PROPS.font,
         fontSize = 40,
@@ -103,7 +103,7 @@ function scene:show( event )
 
 
 
-      local text ='Сыграно '.. PlayGame .. ' раза\nОтвечено правильно '..score..' раза'
+      local text =i18('played').. PlayGame .. i18('answer')..score..i18('Times')
       local case = display.newText({
         parent = sceneGroup,
         align = "left",
