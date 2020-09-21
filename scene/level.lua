@@ -19,7 +19,7 @@ function scene:show( event )
 
       local GroupText1 = display.newText({
         parent = sceneGroup,
-        text = i18('home'),
+        text = i18n('home'),
         x = display.contentCenterX, y = 80,
         font = PROPS.font,
         fontSize = 90,

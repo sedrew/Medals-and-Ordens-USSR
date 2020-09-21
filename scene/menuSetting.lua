@@ -58,7 +58,7 @@ function scene:show( event )
     local lang = display.newText({
       parent = sceneGroup,
       align = "left",
-      text = i18('languages'),
+      text = i18n('languages'),
       width = 800,
       x = left+left_add, y = 200,
       font = PROPS.font,
@@ -68,7 +68,7 @@ function scene:show( event )
     local theme = display.newText({
       parent = sceneGroup,
       align = "left",
-      text = i18('thema'),
+      text = i18n('thema'),
       width = 800,
       x = left+left_add, y = lang.y+100,
       font = PROPS.font,
@@ -78,7 +78,7 @@ function scene:show( event )
     local sound = display.newText({
       parent = sceneGroup,
       align = "left",
-      text = i18('sounds'),
+      text = i18n('sounds'),
       width = 800,
       x = left+left_add, y = theme.y+100,
       font = PROPS.font,
@@ -88,7 +88,7 @@ function scene:show( event )
     local music = display.newText({
       parent = sceneGroup,
       align = "left",
-      text = i18('Music'),
+      text = i18n('Music'),
       width = 800,
       x = left+left_add, y = sound.y+100,
       font = PROPS.font,
@@ -98,7 +98,7 @@ function scene:show( event )
     local fonts = display.newText({
       parent = sceneGroup,
       align = "left",
-      text = i18('font'),
+      text = i18n('font'),
       width = 800,
       x = left+left_add, y = music.y+100,
       font = PROPS.font,
@@ -108,7 +108,7 @@ function scene:show( event )
     local size_fonts = display.newText({
       parent = sceneGroup,
       align = "left",
-      text = i18('fontsizee'),
+      text = i18n('fontsizee'),
       width = 800,
       x = left+left_add, y = fonts.y+100,
       font = PROPS.font,

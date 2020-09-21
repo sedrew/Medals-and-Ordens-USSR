@@ -20,9 +20,9 @@ function scene:show( event )
 
     local GroupText1 = display.newText({
       parent = GroupText1,
-      text = i18('home'),
+      text = i18n('home'),
       x = display.contentCenterX, y = 1150,
-      font = "font/Blogger_Sans-Bold.otf",
+      font = PROPS.font,
       fontSize = 90,
     })
     --
@@ -171,7 +171,7 @@ end
       width = 200,
       text = ">>",
       x = right-40, y = 1150,
-      font = "font/Blogger_Sans-Bold.otf",
+      font = PROPS.font,
       fontSize = 100,
     })
     ---
@@ -180,7 +180,7 @@ end
       width = 200,
       text = "<<",
       x = left+120, y = 1150,
-      font = "font/Blogger_Sans-Bold.otf",
+      font = PROPS.font,
       fontSize = 100,
     })
 
@@ -197,7 +197,7 @@ end
   width = display.actualContentWidth,
   x = display.contentCenterX, y = 120,
   align = "center",
-  font = "font/Blogger_Sans-Bold.otf",
+  font = PROPS.font,
 
 })
 

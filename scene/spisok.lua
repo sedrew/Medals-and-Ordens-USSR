@@ -20,7 +20,7 @@ local box = display.newGroup()
       sceneGroup:insert(box)
 			local toMenu = display.newText({
 	      parent = sceneGroup,
-	      text = i18('home'),
+	      text = i18n('home'),
 	      x = display.contentCenterX, y = 30,
 	      font = "CoreMellowBold.ttf",
 	      fontSize = 65,

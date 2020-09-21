@@ -10,7 +10,7 @@ function scene:show( event )
 
       local toMenu = display.newText({
         parent = sceneGroup,
-        text = i18('home'),
+        text = i18n('home'),
         x = display.contentCenterX, y = 40,
         font = PROPS.font,
         fontSize = 75,
@@ -69,7 +69,7 @@ function scene:show( event )
 
       local sbros = display.newText({
         parent = sceneGroup,
-        text = i18('removestat'),
+        text = i18n('removestat'),
         x = display.actualContentWidth-200, y = display.actualContentHeight-25,
         font = PROPS.font,
         fontSize = 40,
@@ -104,7 +104,7 @@ function scene:show( event )
         fontSize = 50,
         })
 
-      local text =i18('played')..ACHIEVES.count_game..i18('answer')....ACHIEVES.all_right_answer....i18('Times')
+      local text =i18n('played').." "..ACHIEVES.count_game.." "..i18n('answer').." "..ACHIEVES.all_right_answer.." "..i18n('Times')
       local case = display.newText({
         parent = sceneGroup,
         align = "left",
