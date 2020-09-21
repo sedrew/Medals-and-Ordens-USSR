@@ -20,7 +20,7 @@ function scene:show( event )
 
     local GroupText1 = display.newText({
       parent = GroupText1,
-      text = "Домой",
+      text = i18('home'),
       x = display.contentCenterX, y = 1150,
       font = "font/Blogger_Sans-Bold.otf",
       fontSize = 90,

@@ -58,7 +58,7 @@ function scene:show( event )
 
     local toMenu = display.newText({
       parent = sceneGroup,
-      text = "Домой",
+      text = i18('home'),
       x = display.contentCenterX, y = 30,
       font = "font/Blogger_Sans-Bold.otf",
       fontSize = 65,
