@@ -14,7 +14,7 @@ local images
 local name_medal
 
 local time_start
-local all_variant = 60
+local all_variant = 12
 local all_cards = 4
 -- create()
 local kod = {1,3,4,6,7,8,9,10,12,13,14,15,16,18,19,20,21,22,23,25,26,27,28,29,31,32,33,34,35,36,38,39,40,41,42,43,44,45,46,47,49,50,52,53,54,55,56,57,58}
@@ -81,9 +81,12 @@ function scene:show( event )
     time_start = upBar_event.timeStripe(5)
 
     composer.setVariable("old_scene_name", "scene.three_games")
-	  function upBar_event.gameOver()
+	  function upBar_event.gameOver(string)
+      local string = string or "stars_out"
+      pop.tap = false
+      composer.setVariable("textGameOver", string)
       composer.setVariable("score",upBar_event.score)
-	    composer.showOverlay("scene.gameOver", {time = 800, effect="crossFade", isModal = true,})
+	    composer.showOverlay("scene.gameOver") --{time = 800, effect="fade", isModal = true,}
     end
 
 
@@ -120,7 +123,8 @@ function scene:show( event )
             count_steps = count_steps + 1
             if (count_steps >= all_variant/all_cards) then
               print("STOOOP")
-            --  return upBar_event.gameOver()
+               upBar_event.gameOver("victory")
+              return
             end
             ACHIEVES.all_right_answer = ACHIEVES.all_right_answer + 1
             pop:animationScores(e.target, 20)
