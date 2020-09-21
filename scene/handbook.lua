@@ -41,24 +41,20 @@ function scene:show( event )
 
 
 
-local card = display.newRoundedRect(300, 300, 400,150, 50)
-local pop = require("maket")
-
-
+-- local card = display.newRoundedRect(300, 300, 400,150, 50)
+-- local pop = require("maket")
+--
+--
 local tool = {}
---tool.box = {}
-
-pop:createRects({
-  countX=3,countY=1,
-  h=40,w=100,
-  x=200,y=900,
-  indentX = 9, indentY = 9,
-  color = {1,0,0.3}
-})
-
-function tool:create_reacts()
-end
-
+-- --tool.box = {}
+--
+-- pop:createRects({
+--   countX=3,countY=1,
+--   h=40,w=100,
+--   x=200,y=900,
+--   indentX = 9, indentY = 9,
+--   color = {1,0,0.3}
+-- })
 
 
 function tool:table_left(t)
@@ -78,62 +74,62 @@ function tool:table_right(t)
 end
 
 
-function tool:slider(t)
-
-    self.x1, self.y1 = t.box[1]:localToContent(0,0)
-    self.x2, self.y2 = t.box[#t.box]:localToContent(0,0)
-    self.pos_left, self.pos_right = t.one_left or 0, t.one_right or 1
-    self.pos2_left, self.pos2_right = t.two_left or 0, t.two_right or 1
-    self.pos = t.position or 0
-
-    print(self.x1,"*",self.pos_right)
-    if self.x1 < self.pos_left then
-      t.box[1]:removeSelf()
-      tool:table_left(t.box)
-      t.box[#t.box+1] = display.newRoundedRect(pop.rectGroup, t.box[#t.box].x+120, t.box[#t.box].y, 100, 40, 12)
-    elseif self.x2 > self.pos_right then
-      t.box[#t.box]:removeSelf()
-      t.box = tool:table_right(t.box)
-      --print(t.box[1], t.box[#t.box])
-      t.box[1] = display.newRoundedRect(pop.rectGroup, t.box[2].x-120, t.box[2].y, 100, 40, 12)
-    end
-    if self.x2 < self.pos2_left then
-
-      t.box[#t.box]:setFillColor(0,1,0)
-    elseif self.x2 > self.pos2_right then
-      t.box[#t.box]:setFillColor(1,0,0)
-      print("RIGHT")
-    end
-end
-
-
-function pop.rectGroup:touch( event )
-  if event.phase == "began" then
-    display.getCurrentStage():setFocus( self, event.id )
-    self.isFocus = true
-
-    self.markX = self.x
-    --self.markY = self.y
-
-  elseif self.isFocus then
-    if event.phase == "moved" then
-
-      self.x = event.x - event.xStart + self.markX
-      --self.y = event.y - event.yStart + self.markY
-      tool:slider({
-        box = pop.box,
-        one_left = 20, one_right = 500,
-        two_left = 400, two_right = 800,
-      })
-
-    elseif event.phase == "ended" or event.phase == "cancelled" then
-      display.getCurrentStage():setFocus( self, nil )
-      self.isFocus = false
-    end
-  end
- return true
-end
-pop.rectGroup:addEventListener( "touch", pop.rectGroup )
+-- function tool:slider(t)
+--
+--     self.x1, self.y1 = t.box[1]:localToContent(0,0)
+--     self.x2, self.y2 = t.box[#t.box]:localToContent(0,0)
+--     self.pos_left, self.pos_right = t.one_left or 0, t.one_right or 1
+--     self.pos2_left, self.pos2_right = t.two_left or 0, t.two_right or 1
+--     self.pos = t.position or 0
+--
+--     print(self.x1,"*",self.pos_right)
+--     if self.x1 < self.pos_left then
+--       t.box[1]:removeSelf()
+--       tool:table_left(t.box)
+--       t.box[#t.box+1] = display.newRoundedRect(pop.rectGroup, t.box[#t.box].x+120, t.box[#t.box].y, 100, 40, 12)
+--     elseif self.x2 > self.pos_right then
+--       t.box[#t.box]:removeSelf()
+--       t.box = tool:table_right(t.box)
+--       --print(t.box[1], t.box[#t.box])
+--       t.box[1] = display.newRoundedRect(pop.rectGroup, t.box[2].x-120, t.box[2].y, 100, 40, 12)
+--     end
+--     if self.x2 < self.pos2_left then
+--
+--       t.box[#t.box]:setFillColor(0,1,0)
+--     elseif self.x2 > self.pos2_right then
+--       t.box[#t.box]:setFillColor(1,0,0)
+--       print("RIGHT")
+--     end
+-- end
+--
+--
+-- function pop.rectGroup:touch( event )
+--   if event.phase == "began" then
+--     display.getCurrentStage():setFocus( self, event.id )
+--     self.isFocus = true
+--
+--     self.markX = self.x
+--     --self.markY = self.y
+--
+--   elseif self.isFocus then
+--     if event.phase == "moved" then
+--
+--       self.x = event.x - event.xStart + self.markX
+--       --self.y = event.y - event.yStart + self.markY
+--       tool:slider({
+--         box = pop.box,
+--         one_left = 20, one_right = 500,
+--         two_left = 400, two_right = 800,
+--       })
+--
+--     elseif event.phase == "ended" or event.phase == "cancelled" then
+--       display.getCurrentStage():setFocus( self, nil )
+--       self.isFocus = false
+--     end
+--   end
+--  return true
+-- end
+-- pop.rectGroup:addEventListener( "touch", pop.rectGroup )
 --------
 
 -- -- touch listener function
@@ -170,18 +166,20 @@ pop.rectGroup:addEventListener( "touch", pop.rectGroup )
     local myRoundedRect2 = display.newRoundedRect(sceneGroup, display.contentCenterX, 1000, 360, 160, 15)
           myRoundedRect2:setFillColor(190/255,215/255,239/255)
 
-    local right = display.newText({
-      parent = right,
+    local right_bt = display.newText({
+      parent = sceneGroup,
+      width = 200,
       text = ">>",
-      x = 660, y = 1150,
+      x = right-40, y = 1150,
       font = "font/Blogger_Sans-Bold.otf",
       fontSize = 100,
     })
     ---
-    local left = display.newText({
-      parent = left,
+    local left_bt = display.newText({
+      parent = sceneGroup,
+      width = 200,
       text = "<<",
-      x = 50, y = 1150,
+      x = left+120, y = 1150,
       font = "font/Blogger_Sans-Bold.otf",
       fontSize = 100,
     })
@@ -225,7 +223,7 @@ kol1[1]:scale(0.9*(350/kol1[1].width),0.9*(350/kol1[1].width))
 
 local l = 1
 
-function left:touch(event)
+function left_bt:touch(event)
   if ( event.phase == "began" ) then
     if (i > 1) then
       if (med1[i] ~= nil )  then
@@ -244,9 +242,9 @@ function left:touch(event)
   end
   return true
 end
-left:addEventListener( "touch", left )
+left_bt:addEventListener( "touch", left_bt )
 
-function right:touch(event)
+function right_bt:touch(event)
   if ( event.phase == "began" ) then
     if (i < #nazv) then
       if (med1[i] ~= nil )  then
@@ -265,12 +263,10 @@ function right:touch(event)
   end
   return true
 end
-right:addEventListener("touch", right)
+right_bt:addEventListener("touch", right_bt)
 
     sceneGroup:insert(GroupText)
     sceneGroup:insert(GroupText1)
-    sceneGroup:insert(right)
-    sceneGroup:insert(left)
     sceneGroup:insert(myRoundedRect)
     sceneGroup:insert(med)
     sceneGroup:insert(gr)
