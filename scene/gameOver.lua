@@ -9,7 +9,8 @@ function scene:create(event)
 
   display.newRect(sceneGroup, centerX , centerY, fullw, fullh):setFillColor(37/255, 39/255, 46/255, 0.7)
   local plant = display.newRoundedRect(sceneGroup, centerX, centerY, fullw-80, fullh-180, 15)
-        plant:setFillColor(244/255,229/255,209/255)
+        --plant:setFillColor(244/255,229/255,209/255)
+        plant:setFillColor(1)
 
   local textTab = {"Время вышло\n", "Звезды закончились\n", "Очки", "Ловкость ", "Правельных ответов"}
 
@@ -41,27 +42,18 @@ function scene:create(event)
     recent_visit = {},
   }
   settings.saveTable(table_achieve, "settings.json")
-  -- local lov = 0
-  -- for i = 1, #lovkost do
-    -- lov = math.ceil(lov + lovkost[i])
-		-- --print(lovkost[i])
-   -- end
 
-  -- display.newRoundedRect(sceneGroup, display.contentCenterX, plant.y-320, 350, 55, 15):setFillColor(118/255,113/255,112/255)
-  -- local plane = display.newRoundedRect(sceneGroup, display.contentCenterX-175, plant.y-320, (350/100)*(lov/#lovkost), 55, 15)
-    -- plane:setFillColor(0.272+(38/(lov/#lovkost+10)), (0.815/100)*(lov/#lovkost+30), 80/255) --red 0.572 .428
-    -- plane.anchorX = 0
+  local all_text_score = display.newText({
+    parent = sceneGroup,
+    text =  table_achieve.game_achieve.all_score,
+    width = 490,
+    align = "center",
+    x = display.contentCenterX, y = text.y+250,
+    font = PROPS.font,
+    fontSize = 200,
+  })
+  all_text_score:setFillColor(unpack(PROPS.color.achieve))
 
-  -- local text2 = display.newText({
-	-- parent = sceneGroup,
-	-- text =  textTab[4] .. math.ceil(lov/#lovkost) .. '%', --.."%\n" .. textTab[5] .." ".. math.floor((score/minus)*100) .. "%"
-	-- width = 490,
-	-- align = "center",
-	-- x = display.contentCenterX, y = plant.y-320,
-	-- font = "font/Blogger_Sans-Bold.otf",
-	-- fontSize = 45,
-  -- })
-  -- text2:setTextColor(1,1,1)
   local text_score = display.newText({
     parent = sceneGroup,
     text =  composer.getVariable("score"),
@@ -71,6 +63,8 @@ function scene:create(event)
     font = PROPS.font,
     fontSize = 75,
   })
+  text_score:setFillColor(unpack(PROPS.color.achieve))
+
 
   local ar1 = math.random(1, #facts)
   local ar2 = math.random(2, math.random(2, #facts[ar1]))
