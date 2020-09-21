@@ -62,7 +62,7 @@ function B:upBar(score)
         end,
         onComplete = function()
           timer.cancel(self.time_game)
-    	    self.gameOver()
+    	    self.gameOver("time_out")
         end
        })
       return child_class

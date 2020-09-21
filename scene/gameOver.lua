@@ -7,34 +7,42 @@ local scene = composer.newScene()
 function scene:create(event)
   local sceneGroup = self.view
 
+  local text_gameOver = composer.getVariable("textGameOver") or "time_out"
   display.newRect(sceneGroup, centerX , centerY, fullw, fullh):setFillColor(37/255, 39/255, 46/255, 0.7)
   local plant = display.newRoundedRect(sceneGroup, centerX, centerY, fullw-80, fullh-180, 15)
-        --plant:setFillColor(0.845,	0.943, 0.999)
         plant:setFillColor(unpack(PROPS.color.cart))
+
 
   local textTab = {"Время вышло\n", "Звезды закончились\n", "Очки", "Ловкость ", "Правельных ответов"}
 
-  local butt = display.newRoundedRect(sceneGroup, centerX , plant.y-plant.width+175, plant.width-100, 130, 20):setFillColor(255/255,129/255,129/255)
+  local butt = display.newRoundedRect(sceneGroup, centerX , plant.y-plant.width+175, plant.width-100, 130, 20)
+
+  if text_gameOver == "victory" then
+    butt:setFillColor(unpack(PROPS.color.right))
+  else
+    butt:setFillColor(unpack(PROPS.color.mistake))
+  end
 
   local text = display.newText({
     parent = sceneGroup,
-    text =  textTab[1],
-    width = 490,
+    text =  i18n(text_gameOver),
+    width = butt.width,
     align = "center",
     x = display.contentCenterX, y = plant.y-plant.width+175,
     font = PROPS.font,
-    fontSize = 75,
+    fontSize = (butt.width-60)/math.floor(utf8.len(i18n(text_gameOver)))+30,
   })
   text:setTextColor(1)
-  --text:setTextColor(255/255,129/255,129/255)
 
   transition.cancel("tagPauseLineTime")
 
   local settings = require("lib.loadsave")
   local table_achieve = settings.loadTable("settings.json")
 
+  ACHIEVES.all_score = table_achieve.game_achieve.all_score + composer.getVariable("score") --посмтри на main.lua
+
   table_achieve.game_achieve = {
-    all_score = ACHIEVES.all_score + composer.getVariable("score"),
+    all_score = ACHIEVES.all_score,
     all_right_answer = ACHIEVES.all_right_answer,
     all_mistake_answer = ACHIEVES.all_mistake_answer,
     all_time = ACHIEVES.all_time,
@@ -61,8 +69,8 @@ function scene:create(event)
     parent = sceneGroup,
     text =  "+"..composer.getVariable("score"),
     width = 490,
-    align = "center",
-    x = all_text_score.x, y = text.y+150,
+    align = "left",
+    x = all_text_score.x+220, y = text.y+150,
     font = PROPS.font,
     fontSize = 75,
   })
@@ -82,7 +90,6 @@ function scene:create(event)
 	  fontSize = 45,
   })
   text_ask:setTextColor(1)
-  --text_ask:setTextColor(118/255,113/255,112/255)
 
   local fact = display.newText({
     parent = sceneGroup,
@@ -94,7 +101,6 @@ function scene:create(event)
     fontSize = 600/string.len(facts[ar1][ar2])+35,
   })
   fact:setTextColor(1)
-  --fact:setTextColor(118/255,113/255,112/255)
 
   local old_scene_name = composer.getVariable("old_scene_name")
   function closer(event)
@@ -107,7 +113,6 @@ function scene:create(event)
 	    composer.hideOverlay("fade", 400) -- закрываем сцену
 	    composer.gotoScene("scene.menu",  PROPS.animation.scene)
 	    composer.removeScene(old_scene_name)
-	  --	composer.removeScene(composer.getVariable( "name" ))
     end
   end
 
@@ -122,7 +127,7 @@ function scene:create(event)
     fillColor = { default={0.645,	0.743, 0.837}, over={unpack(PROPS.color.right)} },
     labelColor = { default={ 1 }, over={ 1 } },
     fontSize = 32,
-    label = "Back",
+    label = i18n("back"),
     onRelease  = function(event) closer('close') end
    }
 	sceneGroup:insert(okButton)
@@ -137,7 +142,7 @@ function scene:create(event)
     fillColor = { default={0.645,	0.743, 0.837}, over= {unpack(PROPS.color.right)}},
     labelColor = { default={ 1 }, over={ 1 } },
     fontSize = 32,
-    label = "Restart",
+    label =  i18n("restart"),
     onRelease = function(event)	closer('restart') end
   }
 	sceneGroup:insert(restartButton)

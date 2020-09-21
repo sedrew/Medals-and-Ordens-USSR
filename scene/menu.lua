@@ -46,11 +46,11 @@ function scene:show( event )
 
   function PlayGame:touch(event)
     if ( event.phase == "began" ) then
-      transition.to(PlayGame, {time = 50, size = 75,
-        onComplete = function()
-          composer.removeScene("scene.menu")
-          composer.gotoScene("scene.level", PROPS.animation.scene)
-        end})
+      composer.removeScene("scene.menu")
+      composer.gotoScene("scene.level", PROPS.animation.scene)
+      -- transition.to(PlayGame, {time = 50, size = 75,
+      --   onComplete = function()
+      --   end})
     end
       return true
   end
@@ -102,9 +102,18 @@ function scene:show( event )
     scene = "scene.menuSetting",
   })
 
+  local score_text = display.newText({
+    parent = sceneGroup,
+    text = i18n("score")..": "..ACHIEVES.all_score,
+    x =  centerX, y = centerY+140,
+    font = PROPS.font,
+    fontSize = 70,
+    })
+
+
   butts_group:scale(0.9,0.9)
   butts_group.x = centerX
-  butts_group.y = centerY+240
+  butts_group.y = centerY+280
   --Old disigne
     -- local myGroup = display.newGroup()
   -- local ic = display.newImage(myGroup, "img/menu/ic.png")

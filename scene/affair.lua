@@ -94,27 +94,28 @@ function scene:show( event )
       toMenu:addEventListener( "touch", toMenu )
 
 
+      local score_text = display.newText({
+        parent = sceneGroup,
+        align = "left",
+        width = 400,
+        text = i18n("score")..": "..ACHIEVES.all_score,
+        x =  left+260, y = top+220,
+        font = PROPS.font,
+        fontSize = 50,
+        })
 
-      local PlayGame = 40
-      local score	= 100
-      local minus = 30
-      local lovk = 70
-      local res = 30
-
-
-
-      local text ='Сыграно '.. PlayGame .. ' раза\nОтвечено правильно '..score..' раза'
+      local text ='Сыграно '..ACHIEVES.count_game..' раза\nОтвечено правильно '..ACHIEVES.all_right_answer..' раза'
       local case = display.newText({
         parent = sceneGroup,
         align = "left",
         text = text,
-        x = display.contentCenterX, y = 200,
+        x = display.contentCenterX, y = score_text.y+100,
         font = PROPS.font,
         fontSize = 50,
       })
 
-      local halfW = display.contentWidth * 0.5
-      local halfH = display.contentHeight * 0.5
+      --local halfW = display.contentWidth * 0.5
+      --local halfH = display.contentHeight * 0.5
 
     --Radian deogram
     --   local ragdogLib = require "scene.ragdogLib"
