@@ -13,12 +13,12 @@ return {
     }
   },
   ru = {
-    name_game = "Медали и Ордена",
-    play = "Играть",
-    home = "Домой",
-    back = "Назад",
-    restart = "Заново",
-    setting = "Настройки",
+    name_game = "Medals and Orders",
+    play = "Play",
+    home = "Home",
+    back = "Back",
+    restart = "Restart",
+    setting = "Settings",
     age_msg = "выше %{age}.",
     phone_msg = {
       one = "you have one new message.",
