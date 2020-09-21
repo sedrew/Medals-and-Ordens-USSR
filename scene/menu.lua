@@ -32,13 +32,14 @@ function scene:show( event )
   logo.x = display.contentCenterX
   logo.y = 480
 
-  local button_rect = display.newRoundedRect(sceneGroup, centerX, 850, 500, 150, 30)
+  local butts_group = display.newGroup()
+  local button_rect = display.newRoundedRect(butts_group, 0, 0, 500, 150, 30)
   button_rect:setFillColor(1,0.396,0.396)
   local fSize = 90
   local PlayGame =  display.newText({
-    parent = sceneGroup,
+    parent = butts_group,
     text = i18n('play'),
-    x = display.contentCenterX, y = button_rect.y,
+    x =  button_rect.x, y = button_rect.y,
     font = PROPS.font,
     fontSize = fSize,
   })
@@ -57,17 +58,17 @@ function scene:show( event )
 
   local bt = {}
   function bt:buttons(t)
-    self.button_rect = display.newRoundedRect(sceneGroup, t.x, t.y, 150, 150, 30)
-    self.scene = t.scene
+    self.button_rect = display.newRoundedRect(butts_group, t.x, t.y, 150, 150, 30)
+    self.scene = t.scene or "scene.affair"
     self.button_rect:setFillColor(unpack(t.color))
-    self.img = display.newImage(sceneGroup, t.img_url, t.x, t.y)
-    self.img:scale( (self.button_rect.height/100)*2, (self.button_rect.height/100)*2)
+    self.img = display.newImage(butts_group, t.img_url, t.x, t.y)
+    self.img:scale( (self.button_rect.height/100)*1, (self.button_rect.height/100)*1)
+
 
     function self.button_rect:touch(event)
       if ( event.phase == "began" ) then
-
             composer.removeScene("scene.menu")
-            composer.gotoScene("scene.affair", PROPS.animation.scene)
+            composer.gotoScene(t.scene, PROPS.animation.scene)
       end
         return true
     end
@@ -78,31 +79,32 @@ function scene:show( event )
   local affair = bt:buttons({
     x = button_rect.x-button_rect.width/2+75,
     y = button_rect.y+160,
-    color = {1,0.396,0.396},
+    color = {0.561,0.82,0.318},
     img_url = "img/UI/lightbulb.png",
-    scene = "scene.menuSetting",
+    scene = "scene.affair",
   })
-  affair.img:scale(0.075,0.075)
+  affair.img:scale(0.1,0.1)
 
   local book = bt:buttons({
     x = button_rect.x,
     y = button_rect.y+160,
-    color = {1,0.396,0.396},
+    color = {0.04,0.69,0.945},
     img_url = "img/UI/android-book.png",
     scene = "scene.handbook",
   })
-  book.img:scale(0.075,0.075)
+  book.img:scale(0.1,0.1)
 
   local sett = bt:buttons({
     x = button_rect.x+button_rect.width/2-75,
     y = button_rect.y+160,
-    color = {1,0.396,0.396},
-    img_url = "img/UI/1x/gear.png",
+    color = {0.6,0.2,1},
+    img_url = "img/UI/2x/gear.png",
     scene = "scene.menuSetting",
   })
 
-
-
+  butts_group:scale(0.9,0.9)
+  butts_group.x = centerX
+  butts_group.y = centerY+240
   --Old disigne
     -- local myGroup = display.newGroup()
   -- local ic = display.newImage(myGroup, "img/menu/ic.png")
@@ -168,6 +170,7 @@ function scene:show( event )
   --
   -- sceneGroup:insert(myGroup)
   -- myGroup:insert(logo)
+  sceneGroup:insert(butts_group)
   sceneGroup:insert(logo)
   end
 end
