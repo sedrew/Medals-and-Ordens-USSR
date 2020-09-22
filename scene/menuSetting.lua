@@ -37,6 +37,7 @@ function scene:show( event )
       end
     end
 
+    display.newRoundedRect(sceneGroup, display.contentCenterX, 50, display.actualContentWidth, 100, 10):setFillColor(unpack(PROPS.color.up_bar))
     local toMenu = display.newImage( sceneGroup, "img/menu/home_white.png", centerX, top+50)
     toMenu:scale(0.3,0.3)
 
@@ -215,6 +216,7 @@ function scene:show( event )
         })
     sound_switch:scale(2,2)
     sceneGroup:insert(sound_switch)
+
 
     local currentNumber = 12
     -- local function onStepperPress( event )

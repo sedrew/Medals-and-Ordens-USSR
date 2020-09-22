@@ -8,6 +8,8 @@ function scene:show( event )
 
     if ( phase == "will" ) then
 
+      display.newRoundedRect(sceneGroup, display.contentCenterX, 50, display.actualContentWidth, 100, 10):setFillColor(unpack(PROPS.color.up_bar));
+
       local toMenu = display.newText({
         parent = sceneGroup,
         text = i18n('home'),
@@ -70,13 +72,60 @@ function scene:show( event )
       local sbros = display.newText({
         parent = sceneGroup,
         text = i18n('removestat'),
-        x = display.actualContentWidth-200, y = display.actualContentHeight-25,
+        x = display.actualContentWidth-240, y = display.actualContentHeight-25,
         font = PROPS.font,
         fontSize = 40,
       })
 
+      local loadsave  = require("lib.loadsave")
       function sbros:touch(e)
         if (e.phase == "began") then
+          print("SS")
+          local tabl = {
+            settings = {
+             color = {
+               background = {0,	0.560, 0.494},
+               up_bar = {0, 0.509, 0.454},
+               achieve = {1, 0.949,	0.419},
+               text = {0,0,0},
+               cart = {0.745,	0.843, 0.937},
+               right = {0.568, 0.819, 0.309},
+               mistake = {1, 0.396, 0.396},
+               white = {0,0,0},
+               grey = {0.5,0.5,0.5},
+             },
+             font = "font/Blogger_Sans-Medium.otf",
+             font_size = 80,
+             music = true,
+             sounds = true,
+             lang = "ru",
+             recent_visit = os_date,
+             animation = {
+               scene = {delay = 100, time = 300, effect="crossFade"},
+               object = {time = 400, delay = 700, alpha = 0},
+             }
+            },
+            game_achieve = {
+              all_score = 0,
+              all_right_answer = 0,
+              all_mistake_answer = 0,
+              all_time = 0,
+              middle_time = 0,
+              count_game = 0,
+              achieve_name = {},
+              week_progres = {{all_score=0,all_right_answer=0,all_mistake_answer=0},
+                              {all_score=0,all_right_answer=0,all_mistake_answer=0},
+                              {all_score=0,all_right_answer=0,all_mistake_answer=0},
+                              {all_score=0,all_right_answer=0,all_mistake_answer=0},
+                              {all_score=0,all_right_answer=0,all_mistake_answer=0},
+                              {all_score=0,all_right_answer=0,all_mistake_answer=0},
+                              {all_score=0,all_right_answer=0,all_mistake_answer=0}},
+              all_time_progres = {},
+            }
+          }
+          PROPS.settings = tabl.settings
+          ACHIEVES.game_achieve = tabl.settings.game_achieve
+          loadsave.saveTable(tabl, "settings.json")
         end
         return true
       end
@@ -98,8 +147,8 @@ function scene:show( event )
         parent = sceneGroup,
         align = "left",
         width = 400,
-        text = i18n("score")..": "..ACHIEVES.all_score,
-        x =  left+260, y = top+220,
+        text = i18n("score").." "..ACHIEVES.all_score,
+        x =  left+310, y = top+220,
         font = PROPS.font,
         fontSize = 50,
         })

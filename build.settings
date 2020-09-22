@@ -20,7 +20,7 @@ settings =
 	{
 		usesPermissions =
 		{
-			"android.permission.INTERNET",
+			--"android.permission.INTERNET",
 		},
 	},
 
@@ -40,11 +40,18 @@ settings =
 	--
 	-- Plugins section
 	--
-	plugins =
-    {
-        
-    },
-
+	; plugins =
+  ;   {
+	; 		["plugin.CoronaSplashControl"] =
+	; 			{
+	; 				publisherId = "com.coronalabs",
+	; 			},
+  ;   },
+	;
+	; 	splashScreen =
+  ;   {
+  ;       enable = false
+  ;   },
 
 	--
 	-- Project section
