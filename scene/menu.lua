@@ -69,6 +69,8 @@ function scene:show( event )
   end
   PlayGame:addEventListener("touch", PlayGame)
 
+print(true)
+
   local bt = {}
   function bt:buttons(t)
     self.button_rect = display.newRoundedRect(butts_group, t.x, t.y, 150, 150, 30)

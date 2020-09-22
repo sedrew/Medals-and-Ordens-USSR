@@ -17,12 +17,13 @@ function scene:show( event )
 
     if ( phase == "will" ) then
 
+      display.newRoundedRect(sceneGroup, display.contentCenterX, 50, display.actualContentWidth, 100, 10):setFillColor(unpack(PROPS.color.up_bar));
       local GroupText1 = display.newText({
         parent = sceneGroup,
         text = i18n('home'),
-        x = display.contentCenterX, y = 80,
+        x = display.contentCenterX, y = 40,
         font = PROPS.font,
-        fontSize = 90,
+        fontSize = 75,
       })
       function GroupText1:touch()
         composer.gotoScene("scene.menu", PROPS.animation.scene)
@@ -52,11 +53,35 @@ function button:play(t)
   self.sceneGroup = t.sceneGroup or sceneGroup
 
   self.widget = display.newImage(sceneGroup, "img/menu/im" .. self.vr .. ".png", self.x, self.y)
+
+  self.score_for_open = t.open or 0
+  self.all_score = t.all_score or -4
+  local bools = true
+
+  if  self.all_score < self.score_for_open then
+    bools = false
+    display.newRoundedRect(sceneGroup, self.widget.x, self.widget.y, 680, 170, 30):setFillColor(unpack(PROPS.color.grey),0.95)
+    local locked = display.newImage(sceneGroup, "img/UI/2x/locked.png", self.x-200, self.y)
+    local PlayGame =  display.newText({
+      parent = sceneGroup,
+      text = self.all_score.."/"..self.score_for_open,
+      x =  self.x+50, y = self.y,
+      font = PROPS.font,
+      fontSize = 80,
+    })
+  else
+    bools = true
+  end
+
   function self.widget:touch(e)
-    if(e.phase == "ended" ) then
-      _G.game_mode = t.game_mode
-      composer.gotoScene("scene.three_games", self.options_dealy)
-      composer.removeScene("scene.level")
+      print(bools)
+    if (bools == true) then
+      print(bools)
+      if(e.phase == "ended" ) then
+        _G.game_mode = t.game_mode
+        composer.gotoScene("scene.three_games", self.options_dealy)
+        composer.removeScene("scene.level")
+      end
     end
   end
     self.widget:addEventListener("touch",self.widget)
@@ -72,7 +97,9 @@ local one_button = button:play({
   gotoScene = "scene.three_games",
   options_delay = PROPS.animation.scene,
   vr = 0,
-  game_mode = "text_3"
+  game_mode = "text_3",
+  open = -1,
+  all_score = ACHIEVES.all_score,
 })
 one_button.widget:scale(0.7, 0.7)
 
@@ -82,7 +109,9 @@ local two_button = button:play({
   gotoScene = "scene.three_games",
   options_delay = PROPS.animation.scene,
   vr = 1,
-  game_mode = "text_3"
+  game_mode = "text_3",
+  open = 100,
+  all_score = ACHIEVES.all_score,
 })
 two_button.widget:scale(0.7, 0.7)
 
@@ -92,7 +121,9 @@ local three_button = button:play({
   gotoScene = "scene.three_games",
   options_delay = PROPS.animation.scene,
   vr = 2,
-  game_mode = "medal_4"
+  game_mode = "medal_4",
+  open = 200,
+  all_score = ACHIEVES.all_score,
 })
 three_button.widget:scale(0.7, 0.7)
 
@@ -102,7 +133,9 @@ local four_button = button:play({
   gotoScene = "scene.three_games",
   options_delay = PROPS.animation.scene,
   vr = 3,
-  game_mode = "kolodki_4"
+  game_mode = "kolodki_4",
+  open = 300,
+  all_score = ACHIEVES.all_score,
 })
 four_button.widget:scale(0.7, 0.7)
 

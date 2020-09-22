@@ -5,7 +5,7 @@ function B:upBar(score)
   self.score =  score or 0
 
 
-  display.newRoundedRect(self.sceneGroup, display.contentCenterX, 50, display.actualContentWidth, 100, 10):setFillColor(unpack(PROPS.color.up_bar));
+  display.newRoundedRect(self.sceneGroup, display.contentCenterX, 50, display.actualContentWidth, 100, 10):setFillColor(unpack(PROPS.color.up_bar))
   local toMenu = display.newText({
     parent = self.sceneGroup,
     text = i18n('home'),
