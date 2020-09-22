@@ -30,7 +30,7 @@ function scene:show( event )
       if (e.phase == "began") then
       composer.gotoScene("scene.menu", {time = 800, effect="crossFade"})
       composer.removeScene("scene.handbook")
-      display.remove( GroupText1 )
+      display.remove(GroupText1)
       GroupText1 = nil
     end
     return true
@@ -161,10 +161,24 @@ end
 
 
 --------------------------
-    local myRoundedRect = display.newRoundedRect(display.contentCenterX, 560, 650, 650, 15)
-          myRoundedRect:setFillColor(190/255,215/255,239/255)
+    local i = 1
+    local nazv = require("resource.words")[PROPS.lang]
+
+    local medalRect = display.newRoundedRect(display.contentCenterX, 560, 650, 650, 15)
+          medalRect:setFillColor(190/255,215/255,239/255)
     local myRoundedRect2 = display.newRoundedRect(sceneGroup, display.contentCenterX, 1000, 360, 160, 15)
           myRoundedRect2:setFillColor(190/255,215/255,239/255)
+
+    function medalRect:touch(event)
+      if (event.phase == "began") then
+        local tb = {i,nazv[i]}
+        composer.setVariable("table_name_med", tb)
+        composer.showOverlay("scene.description",{isModal = true})
+      end
+      return true
+    end
+    medalRect:addEventListener("touch", medalRect)
+
 
     local right_bt = display.newText({
       parent = sceneGroup,
@@ -184,10 +198,10 @@ end
       fontSize = 100,
     })
 
-   local i = 1
+
    local med = display.newGroup()
 
-   local nazv = require("resource.words")[PROPS.lang]
+
    local gr = display.newGroup()
 
 
@@ -204,8 +218,6 @@ end
 
 local med1 = {}
       med1[i] = display.newImage(med, "img/medali_ten/".. i .. ".png",display.contentCenterX, 550)
-
-
 
 local kol_not = {2,5,11,17,24,30,37,48,51,59,60}
 local kol = {}
@@ -267,7 +279,7 @@ right_bt:addEventListener("touch", right_bt)
 
     sceneGroup:insert(GroupText)
     sceneGroup:insert(GroupText1)
-    sceneGroup:insert(myRoundedRect)
+    sceneGroup:insert(medalRect)
     sceneGroup:insert(med)
     sceneGroup:insert(gr)
 

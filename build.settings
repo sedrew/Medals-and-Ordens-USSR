@@ -40,18 +40,18 @@ settings =
 	--
 	-- Plugins section
 	--
-	; plugins =
-  ;   {
-	; 		["plugin.CoronaSplashControl"] =
-	; 			{
-	; 				publisherId = "com.coronalabs",
-	; 			},
-  ;   },
-	;
-	; 	splashScreen =
-  ;   {
-  ;       enable = false
-  ;   },
+-- plugins =
+--  {
+-- 		["plugin.CoronaSplashControl"] =
+--			{
+--				publisherId = "com.coronalabs",
+--			},
+--  },
+--
+-- 	splashScreen =
+ --  {
+ --     enable = false
+ --   },
 
 	--
 	-- Project section
