@@ -6,6 +6,8 @@ local scene = composer.newScene()
 function scene:create(event)
   local sceneGroup = self.view
 
+  local descript = require("resource.descriptionHandbook")[PROPS.lang]
+  local words = require("resource.words")[PROPS.lang]
 
   local container = display.newContainer(fullw-80, fullh-180)
   display.newRect(sceneGroup, centerX , centerY, fullw, fullh):setFillColor(37/255, 39/255, 46/255, 0.7)
@@ -13,9 +15,6 @@ function scene:create(event)
         plant:setFillColor(unpack(PROPS.color.cart))
 
   local group = display.newGroup()
-
-
-
   local table_name = composer.getVariable("table_name_med")
   local kol_not = {2,5,11,17,24,30,37,48,51,59,60}
   local img_medal = display.newImage(group, "img/medali_ten/".. table_name[1] .. ".png",display.contentCenterX, 450)
@@ -37,10 +36,13 @@ function scene:create(event)
   end
 
   --local img_medal = display.newImage(group, )
-  print(table_name[2])
+
+  --print(table.find(descript,"Медаль\n«За победу над Германией в Великой Отечественной войне\n1941-1945 гг.»"))
+  local string_name = utf8.gsub(words[table_name[1]],'\n.-'," ")
+
   local all_text_score = display.newText({
     parent = group,
-    text =  "table_achieve.game_achieve.all_score",
+    text = "Медаль\n«За победу над Германией в Великой Отечественной войне\n1941-1945 гг.»",
     width = 490,
     align = "center",
     x = display.contentCenterX, y = img_medal.y+800,

@@ -13,9 +13,9 @@ bottom     = top + fullh
 ------------------------------------------
 utf8 = require("lib.utf8")
 local str = "Медаль\n «Партизану Отечественной войны»\n I степени"
-local sd = utf8.gsub(str,'\n.-')
+local sd = utf8.gsub(str,'\n.-'," ")
 local os_date = os.date( "*t" )
-print(system.getPreference("locale", "language"))
+print(sd) --system.getPreference("locale", "language")
 --utf8.gsub("Медаль «Партизану Отечественной войны» I степени", "(%w+)%s*(%w+)", "%2 %1"))
 local loadsave  = require("lib.loadsave")
 local props = loadsave.loadTable("settings.json")
