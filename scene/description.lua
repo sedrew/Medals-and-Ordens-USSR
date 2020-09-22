@@ -76,13 +76,21 @@ function scene:create(event)
 
     elseif self.isFocus then
       if event.phase == "moved" then
+        local posY = event.y - event.yStart + self.markY
+        if posY < top+200 then
+          dr.y = event.y - event.yStart + self.markY
+        end
 
         --self.x = event.x - event.xStart + self.markX
-        dr.y = event.y - event.yStart + self.markY
+        --dr.y = event.y - event.yStart + self.markY
 
       elseif event.phase == "ended" or event.phase == "cancelled" then
         display.getCurrentStage():setFocus( self, nil )
         self.isFocus = false
+        if dr.y >= top then
+          transition.to(dr,{
+            time=150, y = top})
+        end
       end
     end
    return true
@@ -100,6 +108,10 @@ function scene:create(event)
       end
   end
   button_close:addEventListener("touch", button_close)
+
+  local button_close = display.newImage(dr,"img/UI/2x/zoomIn.png",img_medal.x+img_medal.width/2-140, img_medal.y+img_medal.height/2+10)
+  button_close:setFillColor(1)
+
 
   function closer(event)
   end
