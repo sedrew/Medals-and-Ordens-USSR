@@ -27,7 +27,7 @@ function scene:show( event )
    local backgroundMusicChannel
 
    if PROPS.music == true then
-     backgroundMusicChannel = audio.play( backgroundMusic, { loops=-1 }  )
+     --backgroundMusicChannel = audio.play( backgroundMusic, { loops=-1 }  )
    else
      audio.stop(backgroundMusicChannel)
   end
