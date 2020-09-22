@@ -13,6 +13,7 @@ function B:upBar(score)
     font = PROPS.font,
     fontSize = 75,
   })
+
   local textScore = display.newText({
     parent = self.sceneGroup,
     text = "0",
@@ -28,13 +29,10 @@ function B:upBar(score)
   local vertices = { 0,-110/del, 27/del,-35/del, 105/del,-35/del, 43/del,16/del, 65/del,90/del, 0,45/del, -65/del,90/del, -43/del,15/del, -105/del,-35/del, -27/del,-35/del, }
 --  local vertices = {}
 
-
-
   for i = 1, 3 do
     star[i] = display.newImage(self.sceneGroup, "img/UI/2x/star.png",  750-(i*70), 50)
     star[i]:setFillColor(unpack(PROPS.color.achieve))
   end
-
 
   function self.timeStripe(time)
     local rt = 100
@@ -82,19 +80,14 @@ function B:upBar(score)
     textScore.text = self.score
    end
 
+   function toMenu:touch(event)
+     if (event.phase == "began") then
+      B.gameOver("pause")
+     end
+    return true
+   end
+   toMenu:addEventListener( "touch",toMenu)
 
-
-  -- function toMenu:touch(e)
-    -- if (tumb == true) then
-      -- if (e.phase == "began") then
-        -- transition.cancel("transTag")
-        -- composer.gotoScene("scene.menu", {time = 500, effect="crossFade"})
-        -- composer.removeScene("scene.game", {time = 500})
-    -- end
-    -- return true
-   -- end
-  -- end
-  -- toMenu:addEventListener( "touch", toMenu )
   return self
 end
 

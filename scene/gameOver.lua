@@ -19,6 +19,8 @@ function scene:create(event)
 
   if text_gameOver == "victory" then
     butt:setFillColor(unpack(PROPS.color.right))
+  elseif text_gameOver == "pause" then
+    butt:setFillColor(unpack(PROPS.color.achieve))
   else
     butt:setFillColor(unpack(PROPS.color.mistake))
   end
@@ -30,7 +32,7 @@ function scene:create(event)
     align = "center",
     x = display.contentCenterX, y = plant.y-plant.width+175,
     font = PROPS.font,
-    fontSize = (butt.width-60)/math.floor(utf8.len(i18n(text_gameOver)))+30,
+    fontSize = (butt.width-100)/math.floor(utf8.len(i18n(text_gameOver)))+25,
   })
   text:setTextColor(1)
 
@@ -58,8 +60,8 @@ function scene:create(event)
     parent = sceneGroup,
     text =  table_achieve.game_achieve.all_score,
     width = 490,
-    align = "left",
-    x = display.contentCenterX+100, y = text.y+250,
+    align = "center",
+    x = display.contentCenterX, y = text.y+260,
     font = PROPS.font,
     fontSize = 200,
   })
@@ -70,7 +72,7 @@ function scene:create(event)
     text =  "+"..composer.getVariable("score"),
     width = 490,
     align = "left",
-    x = all_text_score.x+220, y = text.y+150,
+    x = all_text_score.x+250, y = text.y+150,
     font = PROPS.font,
     fontSize = 75,
   })

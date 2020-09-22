@@ -51,6 +51,11 @@ function scene:show( event )
     end
     toMenu:addEventListener( "touch", toMenu )
 
+    local loadsave  = require("lib.loadsave")
+    function save_setting()
+      local table_save = {settings = PROPS,game_achieve = ACHIEVES}
+      loadsave.saveTable(table_save, "settings.json")
+    end
 
 
     local left_add = 460
@@ -65,12 +70,47 @@ function scene:show( event )
       fontSize = fontSize,
     })
 
+    local pick_lang = display.newText({
+      parent = sceneGroup,
+      align = "center",
+      text = "Русский",
+      width = 800,
+      x = right-200, y = 200,
+      font = PROPS.font,
+      fontSize = fontSize,
+    })
+
+    function pick_lang:touch(event)
+      if (event.phase == "began") then
+          if pick_lang.text == "Русский" then
+            pick_lang.text = "English"
+            PROPS.lang = "en"
+          else
+            pick_lang.text = "Русский"
+            PROPS.lang = "ru"
+          end
+          save_setting()
+      end
+        return true
+    end
+    pick_lang:addEventListener("touch", pick_lang)
+
     local theme = display.newText({
       parent = sceneGroup,
       align = "left",
       text = i18n('thema'),
       width = 800,
       x = left+left_add, y = lang.y+100,
+      font = PROPS.font,
+      fontSize = fontSize,
+    })
+
+    local pick_theme = display.newText({
+      parent = sceneGroup,
+      align = "center",
+      text = "Зеленная",
+      width = 800,
+      x = right-200, y = lang.y+100,
       font = PROPS.font,
       fontSize = fontSize,
     })
@@ -95,12 +135,23 @@ function scene:show( event )
       fontSize = fontSize,
     })
 
+
     local fonts = display.newText({
       parent = sceneGroup,
       align = "left",
       text = i18n('font'),
       width = 800,
       x = left+left_add, y = music.y+100,
+      font = PROPS.font,
+      fontSize = fontSize,
+    })
+
+    local pick_fonts = display.newText({
+      parent = sceneGroup,
+      align = "center",
+      text = "Средний",
+      width = 800,
+      x = right-200, y = music.y+100,
       font = PROPS.font,
       fontSize = fontSize,
     })
@@ -115,10 +166,23 @@ function scene:show( event )
       fontSize = fontSize,
     })
 
+    local pick_size_fonts = display.newText({
+      parent = sceneGroup,
+      align = "center",
+      text = "80",
+      width = 800,
+      x = right-100, y = fonts.y+100,
+      font = PROPS.font,
+      fontSize = fontSize,
+    })
+
     -- Handle press events for the checkbox
-    local function onSwitchPress( event )
+    local function music_switchPress( event )
         local switch = event.target
-        print( "Switch with ID '"..switch.id.."' is on: "..tostring(switch.isOn) )
+        PROPS.music = switch.isOn
+        save_setting()
+        print(switch.isOn)
+        --print( "Switch with ID '"..switch.id.."' is on: "..tostring() )
     end
     local music_switch = widget.newSwitch({
             x = right-150,
@@ -126,9 +190,9 @@ function scene:show( event )
             -- left = right-300,
             -- top = 200,
             style = "onOff",
-            id = "onOffSwitch",
-            onPress = onSwitchPress,
-            initialSwitchState = true,
+            --id = "onOffSwitch",
+            onPress = music_switchPress,
+            initialSwitchState = PROPS.music,
         })
     music_switch:scale(2,2)
     sceneGroup:insert(music_switch)
@@ -136,7 +200,8 @@ function scene:show( event )
     -- Handle press events for the checkbox
     local function onSwitchPress( event )
         local switch = event.target
-        print( "Switch with ID '"..switch.id.."' is on: "..tostring(switch.isOn) )
+        PROPS.sounds = switch.isOn
+        save_setting()
     end
     local sound_switch = widget.newSwitch({
             x = right-150,
@@ -144,31 +209,31 @@ function scene:show( event )
             -- left = right-300,
             -- top = 200,
             style = "onOff",
-            id = "onOffSwitch",
+            --id = "onOffSwitch",
             onPress = onSwitchPress,
-            initialSwitchState = true,
+            initialSwitchState = PROPS.sounds,
         })
     sound_switch:scale(2,2)
     sceneGroup:insert(sound_switch)
 
     local currentNumber = 12
-    local function onStepperPress( event )
-        if ( "increment" == event.phase ) then
-            currentNumber = currentNumber + 1
-        elseif ( "decrement" == event.phase ) then
-            currentNumber = currentNumber - 1
-        end
-        print( currentNumber )
-    end
-
-    local newStepper = widget.newStepper({
-            x = size_fonts.x+100,
-            y = size_fonts.y,
-            minimumValue = 12,
-            maximumValue = 120,
-            onPress = onStepperPress
-        })
-    sceneGroup:insert(newStepper)
+    -- local function onStepperPress( event )
+    --     if ( "increment" == event.phase ) then
+    --         currentNumber = currentNumber + 1
+    --     elseif ( "decrement" == event.phase ) then
+    --         currentNumber = currentNumber - 1
+    --     end
+    --     print( currentNumber )
+    -- end
+    --
+    -- local newStepper = widget.newStepper({
+    --         x = size_fonts.x+100,
+    --         y = size_fonts.y,
+    --         minimumValue = 12,
+    --         maximumValue = 120,
+    --         onPress = onStepperPress
+    --     })
+    -- sceneGroup:insert(newStepper)
 
 ----------
     end

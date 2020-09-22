@@ -160,7 +160,7 @@ function B:createRects(t)
         text = words[number],
         width = display.contentWidth-30,
         align = "center",
-        x = display.contentCenterX, y = self.rectGroup.y-420, --КОСТЫЛь!!!
+        x = display.contentCenterX, y = self.rectGroup.y-400, --КОСТЫЛь!!!
         font = PROPS.font,
         fontSize = 60--/((utf8.len(words[number]))/10), --КОСТЫЛь!!!
       })

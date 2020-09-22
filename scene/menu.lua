@@ -17,7 +17,20 @@ function scene:show( event )
 
  if ( phase == "will" ) then
 
+   i18n = require('lib.i18n.init')
+   i18n.load(require('resource.languages'))
+   i18n.setLocale(PROPS.lang)
 
+
+   local backgroundMusic = audio.loadSound("audio/One Step Closer.mp3")
+   audio.setVolume(0.5)
+   local backgroundMusicChannel
+
+   if PROPS.music == true then
+     backgroundMusicChannel = audio.play( backgroundMusic, { loops=-1 }  )
+   else
+     audio.stop(backgroundMusicChannel)
+  end
 
   local GroupText = display.newText({
     parent = sceneGroup,
@@ -64,7 +77,6 @@ function scene:show( event )
     self.img = display.newImage(butts_group, t.img_url, t.x, t.y)
     self.img:scale( (self.button_rect.height/100)*1, (self.button_rect.height/100)*1)
 
-
     function self.button_rect:touch(event)
       if ( event.phase == "began" ) then
             composer.removeScene("scene.menu")
@@ -83,7 +95,7 @@ function scene:show( event )
     img_url = "img/UI/lightbulb.png",
     scene = "scene.affair",
   })
-  affair.img:scale(0.1,0.1)
+  affair.img:scale(0.15,0.15)
 
   local book = bt:buttons({
     x = button_rect.x,
@@ -92,7 +104,7 @@ function scene:show( event )
     img_url = "img/UI/android-book.png",
     scene = "scene.handbook",
   })
-  book.img:scale(0.1,0.1)
+  book.img:scale(0.12,0.12)
 
   local sett = bt:buttons({
     x = button_rect.x+button_rect.width/2-75,
@@ -101,6 +113,8 @@ function scene:show( event )
     img_url = "img/UI/2x/gear.png",
     scene = "scene.menuSetting",
   })
+  sett.img.x = sett.img.x-3 --КОСТЫЛь
+  sett.img.y = sett.img.y-3 --КОСТЫЛь
 
   local score_text = display.newText({
     parent = sceneGroup,
@@ -110,75 +124,10 @@ function scene:show( event )
     fontSize = 70,
     })
 
-
   butts_group:scale(0.9,0.9)
   butts_group.x = centerX
   butts_group.y = centerY+280
-  --Old disigne
-    -- local myGroup = display.newGroup()
-  -- local ic = display.newImage(myGroup, "img/menu/ic.png")
-  --     ic.x = 140 ic.y = 970 ic:scale(0.6, 0.6)
-  -- local GroupText3 = display.newText({
-  --   parent = GroupText3,
-  --   text = "Справочник",
-  --   x = display.contentCenterX+70, y = 1015,
-  --   font = PROPS.font,
-  --   fontSize = fSize,
-  -- })
-  -- sceneGroup:insert(GroupText3)
-  --
-  -- function GroupText3:touch(event)
-  --   if ( event.phase == "began" ) then
-  --     elseif ( event.phase == "ended" ) then
-  --       composer.gotoScene("scene.handbook", {time = 800, effect="slideUp"})
-  --       composer.removeScene("scene.menu")
-  --     end
-  --   return true
-  -- end
-  -- GroupText3:addEventListener( "touch", GroupText3 )
-  --
-  -- local diary = display.newText({
-  --   parent = diary,
-  --   text = "Дневник",
-  --   x = display.contentCenterX+10, y = 910,
-  --   font = PROPS.font,
-  --   fontSize = fSize,
-  -- })
-  -- sceneGroup:insert(diary)
-  --
-  -- function diary:touch(event)
-  --   if ( event.phase == "ended" ) then
-  --     composer.gotoScene("scene.diary", {time = 800, effect="slideUp"})
-  --     composer.removeScene("scene.menu")
-  --     end
-  --   return true
-  -- end
-  -- diary:addEventListener( "touch", diary)
-  --
-  -- local case = display.newText({
-  --   parent = sceneGroup,
-  --   text = "Личное дело",
-  --   x = display.contentCenterX+80, y = 1125,
-  --   font = PROPS.font,
-  --   fontSize = fSize,
-  -- })
-  -- sceneGroup:insert(case)
-  --
-  --
-  -- function case:touch(event)
-  --   if ( event.phase == "began" ) then
-  --     transition.to(case, {time = 250, size = 75, transition=easing.continuousLoop})
-  --     composer.gotoScene("scene.affair", PROPS.animation.scene)
-  --     composer.removeScene("scene.menu")
-  --   end
-  --  return true
-  -- end
-  -- case:addEventListener( "touch", case )
-  --
 
-  --
-  -- sceneGroup:insert(myGroup)
-  -- myGroup:insert(logo)
   sceneGroup:insert(butts_group)
   sceneGroup:insert(logo)
   end

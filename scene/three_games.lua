@@ -14,12 +14,13 @@ local images
 local name_medal
 
 local time_start
-local all_variant = 12
+local all_variant = 60
 local all_cards = 4
 -- create()
 local kod = {1,3,4,6,7,8,9,10,12,13,14,15,16,18,19,20,21,22,23,25,26,27,28,29,31,32,33,34,35,36,38,39,40,41,42,43,44,45,46,47,49,50,52,53,54,55,56,57,58}
 
 local pick_mode = _G.game_mode
+local game_score_is_mode = 10
 
 function scene:create( event )
   local sceneGroup = self.view
@@ -41,6 +42,7 @@ function scene:create( event )
      pop.other_object = display.newRoundedRect(sceneGroup, centerX, top+400, 600,  600, 12)
      pop.other_object:setFillColor(unpack(PROPS.color.cart))
    elseif (pick_mode == "medal_4") then
+     game_score_is_mode = 20
      random_numbers = modules:random(all_cards,all_variant).notRepeat().step()
      pop = modules:createRects({
        countX=2,countY=2,
@@ -51,6 +53,7 @@ function scene:create( event )
      sceneGroup:insert(pop.mainScene)
 
    elseif (pick_mode == "kolodki_4") then
+     game_score_is_mode = 30
      random_numbers = modules:random(all_cards)
      random_numbers.random_numbers = kod
      random_numbers.notRepeat().step()
@@ -89,8 +92,6 @@ function scene:show( event )
 	    composer.showOverlay("scene.gameOver") --{time = 800, effect="fade", isModal = true,}
     end
 
-
-
     function game_mode_spawn_sheet()
       random_numbers = random_numbers.notRepeat().step()
       number_name = random_numbers.returnOneNumber()
@@ -122,12 +123,12 @@ function scene:show( event )
           if (random_numbers.randomList[e.target.tag] == number_name) then
             count_steps = count_steps + 1
             if (count_steps >= all_variant/all_cards) then
-              print("STOOOP")
+               print("STOOOP")
                upBar_event.gameOver("victory")
               return
             end
             ACHIEVES.all_right_answer = ACHIEVES.all_right_answer + 1
-            pop:animationScores(e.target, 20)
+            pop:animationScores(e.target, game_score_is_mode)
             pop.tap = false
             pop:remove(pop.unite_group,
               function()
@@ -140,7 +141,7 @@ function scene:show( event )
             pop.box[e.target.tag]:setFillColor(unpack(PROPS.color.right))
 
             transition.cancel("tagPauseLineTime")
-            upBar_event.score = upBar_event.score + 20
+            upBar_event.score = upBar_event.score + game_score_is_mode
           elseif (e.target.tap == true) then
             ACHIEVES.all_mistake_answer = ACHIEVES.all_mistake_answer + 1
             upBar_event.mistake = upBar_event.mistake + 1
