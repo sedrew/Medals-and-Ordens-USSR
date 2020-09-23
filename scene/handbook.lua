@@ -37,26 +37,7 @@ function scene:show( event )
   end
   GroupText1:addEventListener( "touch", GroupText1 )
 
-
-
-
-
--- local card = display.newRoundedRect(300, 300, 400,150, 50)
--- local pop = require("maket")
---
---
 local tool = {}
--- --tool.box = {}
---
--- pop:createRects({
---   countX=3,countY=1,
---   h=40,w=100,
---   x=200,y=900,
---   indentX = 9, indentY = 9,
---   color = {1,0,0.3}
--- })
-
-
 function tool:table_left(t)
   table.remove(t,1)
  return t
@@ -73,64 +54,6 @@ function tool:table_right(t)
  return t
 end
 
-
--- function tool:slider(t)
---
---     self.x1, self.y1 = t.box[1]:localToContent(0,0)
---     self.x2, self.y2 = t.box[#t.box]:localToContent(0,0)
---     self.pos_left, self.pos_right = t.one_left or 0, t.one_right or 1
---     self.pos2_left, self.pos2_right = t.two_left or 0, t.two_right or 1
---     self.pos = t.position or 0
---
---     print(self.x1,"*",self.pos_right)
---     if self.x1 < self.pos_left then
---       t.box[1]:removeSelf()
---       tool:table_left(t.box)
---       t.box[#t.box+1] = display.newRoundedRect(pop.rectGroup, t.box[#t.box].x+120, t.box[#t.box].y, 100, 40, 12)
---     elseif self.x2 > self.pos_right then
---       t.box[#t.box]:removeSelf()
---       t.box = tool:table_right(t.box)
---       --print(t.box[1], t.box[#t.box])
---       t.box[1] = display.newRoundedRect(pop.rectGroup, t.box[2].x-120, t.box[2].y, 100, 40, 12)
---     end
---     if self.x2 < self.pos2_left then
---
---       t.box[#t.box]:setFillColor(0,1,0)
---     elseif self.x2 > self.pos2_right then
---       t.box[#t.box]:setFillColor(1,0,0)
---       print("RIGHT")
---     end
--- end
---
---
--- function pop.rectGroup:touch( event )
---   if event.phase == "began" then
---     display.getCurrentStage():setFocus( self, event.id )
---     self.isFocus = true
---
---     self.markX = self.x
---     --self.markY = self.y
---
---   elseif self.isFocus then
---     if event.phase == "moved" then
---
---       self.x = event.x - event.xStart + self.markX
---       --self.y = event.y - event.yStart + self.markY
---       tool:slider({
---         box = pop.box,
---         one_left = 20, one_right = 500,
---         two_left = 400, two_right = 800,
---       })
---
---     elseif event.phase == "ended" or event.phase == "cancelled" then
---       display.getCurrentStage():setFocus( self, nil )
---       self.isFocus = false
---     end
---   end
---  return true
--- end
--- pop.rectGroup:addEventListener( "touch", pop.rectGroup )
---------
 
 -- -- touch listener function
 -- function touchIt( event )
@@ -159,7 +82,48 @@ end
 -- end
 
 
-
+-- local widget = require( "widget" )
+--
+-- -- ScrollView listener
+-- local function scrollListener( event )
+--
+--     local phase = event.phase
+--     if ( phase == "began" ) then print( "Scroll view was touched" )
+--     elseif ( phase == "moved" ) then print( "Scroll view was moved" )
+--     elseif ( phase == "ended" ) then print( "Scroll view was released" )
+--     end
+--
+--     -- In the event a scroll limit is reached...
+--     if ( event.limitReached ) then
+--         if ( event.direction == "up" ) then print( "Reached bottom limit" )
+--         elseif ( event.direction == "down" ) then print( "Reached top limit" )
+--         elseif ( event.direction == "left" ) then print( "Reached right limit" )
+--         elseif ( event.direction == "right" ) then print( "Reached left limit" )
+--         end
+--     end
+--
+--     return true
+-- end
+--
+-- -- Create the widget
+-- local scrollView = widget.newScrollView(
+--     {
+--         top = 100,
+--         left = 10,
+--         width = 300,
+--         height = 400,
+--         scrollWidth = 600,
+--         scrollHeight = 800,
+--         listener = scrollListener
+--     }
+-- )
+--
+-- -- Create a image and insert it into the scroll view
+-- --display.newImage(med, ,display.contentCenterX, 550)
+-- local background = display.newImageRect( "img/medali_ten/".. 2 .. ".png", 768, 1024 )
+-- local background2 = display.newImageRect( "img/medali_ten/".. 1 .. ".png", 768, 1024 )
+-- scrollView:insert( background )
+-- scrollView:insert( background2 )
 --------------------------
     local i = 1
     local nazv = require("resource.words")[PROPS.lang]

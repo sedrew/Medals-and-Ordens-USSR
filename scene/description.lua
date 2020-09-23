@@ -38,7 +38,7 @@ function scene:create(event)
   --local img_medal = display.newImage(group, )
 
   --print(table.find(descript,"Медаль\n«За победу над Германией в Великой Отечественной войне\n1941-1945 гг.»"))
-  local string_name = utf8.gsub(words[table_name[1]],'\n.-'," ")
+  --local string_name = utf8.gsub(words[table_name[1]],'\n.-'," ")
 
   local all_text_score = display.newText({
     parent = group,
