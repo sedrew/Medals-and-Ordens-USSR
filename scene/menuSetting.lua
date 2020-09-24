@@ -71,15 +71,27 @@ function scene:show( event )
       fontSize = fontSize,
     })
 
+    local lang_local = "Error"
+    if PROPS.lang == "ru" then
+      lang_local =  i18n('Russia')
+    elseif PROPS.lang == "en" then
+      lang_local =  i18n('English')
+    end
+
     local pick_lang = display.newText({
       parent = sceneGroup,
       align = "center",
-      text = "Русский",
+      text = lang_local,
       width = 800,
       x = right-200, y = 200,
       font = PROPS.font,
       fontSize = fontSize,
     })
+
+    -- function update()
+    --   composer.removeScene("scene.menuSetting", false)
+    --   composer.gotoScene("scene.menuSetting")
+    -- end
 
     function pick_lang:touch(event)
       if (event.phase == "began") then
@@ -91,6 +103,7 @@ function scene:show( event )
             PROPS.lang = "ru"
           end
           save_setting()
+          --update()
       end
         return true
     end
@@ -156,6 +169,16 @@ function scene:show( event )
       font = PROPS.font,
       fontSize = fontSize,
     })
+
+    function pick_fonts:touch(event)
+      if (event.phase == "began") then
+          
+          save_setting()
+          --update()
+      end
+        return true
+    end
+    pick_fonts:addEventListener("touch", pick_fonts)
 
     local size_fonts = display.newText({
       parent = sceneGroup,
