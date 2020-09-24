@@ -89,7 +89,7 @@ function scene:show( event )
       pop.tap = false
       composer.setVariable("textGameOver", string)
       composer.setVariable("score",upBar_event.score)
-	    composer.showOverlay("scene.gameOver") --{time = 800, effect="fade", isModal = true,}
+	    composer.showOverlay("scene.gameOver",{isModal = true}) --{time = 800, effect="fade", isModal = true,}
     end
 
     function game_mode_spawn_sheet()

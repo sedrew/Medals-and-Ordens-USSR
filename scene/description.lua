@@ -6,7 +6,7 @@ local scene = composer.newScene()
 function scene:create(event)
   local sceneGroup = self.view
 
-  local descript = require("resource.descriptionHandbook")[PROPS.lang]
+  --local descript = require("resource.descriptionHandbook")[PROPS.lang]
   local words = require("resource.words")[PROPS.lang]
 
   local container = display.newContainer(fullw-80, fullh-180)
@@ -103,10 +103,10 @@ function scene:create(event)
   button_close:setFillColor(unpack(PROPS.color.mistake))
 
   function button_close:touch(event)
-      if (event.phase == "began") then
+      if (event.phase == "ended") then
         --composer.gotoScene("scene.menu", {time = 800, effect="crossFade"})
-        composer.hideOverlay("scene.description")
         display.remove(dr)
+        composer.hideOverlay("scene.description")
       end
   end
   button_close:addEventListener("touch", button_close)

@@ -132,10 +132,22 @@ print(true)
 
   sceneGroup:insert(butts_group)
   sceneGroup:insert(logo)
+
+
+  -- =====================================================
+
+  -- require "ssk2.loadSSK"
+  -- _G.ssk.init( { measure = false } )
+  -- ssk.meters.create_fps(true)
+  -- ssk.meters.create_mem(true)
+
+  ----------------------
+  ----------------------
+
   end
 end
 
--- hide()
+---------------- hide()
 function scene:hide( event )
 
     local sceneGroup = self.view
