@@ -121,6 +121,7 @@ function pick_mode_menu(string)
         roundRect[k].tag = k
         roundRect[k].tap = true
 
+        print(utf8.gsub(nazv[index_sort[k]],'\n.-'," "))
         local slice
         local imgPath = "img/medali_ten/" .. index_sort[k] .. ".png"
         slice = display.newImageRect(rectGroup, imgPath, 210, 210)

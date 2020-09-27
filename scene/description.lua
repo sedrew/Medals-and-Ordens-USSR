@@ -1,6 +1,7 @@
 local composer = require("composer")
 local widget = require("widget")
 local facts	= require("resource.facts")[PROPS.lang]
+local descript_texts = require("resource.descriptionHandbook")[PROPS.lang]
 local scene = composer.newScene()
 
 function scene:create(event)
@@ -42,8 +43,8 @@ function scene:create(event)
 
   local all_text_score = display.newText({
     parent = group,
-    text = "Медаль\n«За победу над Германией в Великой Отечественной войне\n1941-1945 гг.»",
-    width = 490,
+    text = descript_texts[table_name[1]][2],
+    width = 600,
     align = "center",
     x = display.contentCenterX, y = img_medal.y+800,
     font = PROPS.font,
@@ -56,8 +57,10 @@ function scene:create(event)
   img_medal.x = 0
   img_medal.y = -200
   dr:insert(all_text_score)
+  all_text_score.anchorX = 0.5
+  all_text_score.anchorY = 0
   all_text_score.x = img_medal.x
-  all_text_score.y = img_medal.y+600
+  all_text_score.y = img_medal.y+400
   dr:insert(kol_img)
   kol_img.x = img_medal.x
   kol_img.y = img_medal.y+350
