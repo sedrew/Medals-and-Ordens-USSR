@@ -6,13 +6,27 @@ function B:upBar(score)
 
 
   display.newRoundedRect(self.sceneGroup, display.contentCenterX, 50, display.actualContentWidth, 100, 10):setFillColor(unpack(PROPS.color.up_bar))
-  local toMenu = display.newText({
-    parent = self.sceneGroup,
-    text = i18n('home'),
-    x = display.contentCenterX, y = 40,
-    font = PROPS.font,
-    fontSize = 75,
-  })
+  -- local toMenu = display.newText({
+  --   parent = self.sceneGroup,
+  --   text = i18n('home'),
+  --   x = display.contentCenterX, y = 40,
+  --   font = PROPS.font,
+  --   fontSize = 75,
+  -- })
+
+  local toMenu = display.newImage(self.sceneGroup, "img/menu/home_white.png", centerX, top+50)
+  toMenu:scale(0.3,0.3)
+
+  -- function toMenu:touch(e)
+  --   if (e.phase == "began") then
+  --     composer.gotoScene("scene.menu", {time = 500, effect="crossFade"})
+  --     composer.removeScene("scene.menuSetting", {time = 500})
+  --     display.remove( toMenu )
+  --     toMenu = nil
+  --   end
+  --   return true
+  -- end
+  -- toMenu:addEventListener( "touch", toMenu )
 
   local textScore = display.newText({
     parent = self.sceneGroup,

@@ -97,7 +97,7 @@ function scene:create(event)
     parent = sceneGroup,
     text =  facts[ar1][1] .. '\n' .. facts[ar1][ar2] ,
     width = plant.width-30,
-    align = "left",
+    align = "center",
     x = display.contentCenterX, y = text_ask.y+165,--КОСТЫЛь
     font = PROPS.font,
     fontSize = 600/string.len(facts[ar1][ar2])+35,
