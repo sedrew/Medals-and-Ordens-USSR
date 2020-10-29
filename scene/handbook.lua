@@ -19,7 +19,7 @@ function scene:show( event )
     display.newRoundedRect(sceneGroup, display.contentCenterX, 50, display.actualContentWidth, 100, 10):setFillColor(unpack(PROPS.color.up_bar))
 
     local GroupText1 = display.newText({
-      parent = GroupText1,
+      parent = sceneGroup,
       text = i18n('home'),
       x = centerX, y = top+50,
       font = PROPS.font,
@@ -57,7 +57,9 @@ switch_menu.x = left+100
 switch_menu.y = top+60
 switch_menu.id = "table_row"
 
-
+-- for j, k in pairs(nazv) do
+-- 	print(j, utf8.gsub(k,'\n.-'," "))
+-- end
 
 local sorted = {}
 for k, v in pairs(nazv) do
@@ -67,16 +69,11 @@ local index_sort = {}
 table.sort(sorted, function(a,b) return a[2] < b[2] end)
 for _, v in ipairs(sorted) do
     index_sort[#index_sort+1] = v[1]
-  --  print(v[1],v[2])
 end
-
---print(nazv[7])
 
 function pick_mode_menu(string)
 
   if (string == "table_row") then
-
-
 
     function pick_medal(e)
       local tb = {e.target.tag,nazv[e.target.tag]}
@@ -89,9 +86,7 @@ function pick_mode_menu(string)
     	local x1 = self.x + self.parent.x
     	local y0 = self.y + self.parent.y + self.contentHeight
     	local y1 = self.y + self.parent.y
-
       local onScreen = ( x0 >= left and x1 <= right ) and (y0 >= top and y1 <= bottom )
-
        if( onScreen and self.lastFill == "img/fillT.png" ) then
        	self.fill = { type = "image", filename = self.imgPath }
        	self.lastFill = self.imgPath
@@ -111,7 +106,7 @@ function pick_mode_menu(string)
     local rectGroup = display.newGroup()
     local k = 1
     local rectX = 0
-    local rectY = 0
+    local rectY = 200
     local indentY = 220
     local indentX = 220
     for i = 1, 3 do
@@ -121,9 +116,9 @@ function pick_mode_menu(string)
         roundRect[k].tag = k
         roundRect[k].tap = true
 
-        print(utf8.gsub(nazv[index_sort[k]],'\n.-'," "))
+        --print(utf8.gsub(nazv[index_sort[k]],'\n.-'," "))
         local slice
-        local imgPath = "img/medali_ten/" .. index_sort[k] .. ".png"
+        local imgPath = "img/low_medali_ten/" .. index_sort[k] .. ".png"
         slice = display.newImageRect(rectGroup, imgPath, 210, 210)
     		--slice.anchorX = 0
     		-- slice.anchorY = 0
@@ -142,7 +137,7 @@ function pick_mode_menu(string)
         rectY = rectY + indentY
         k = k + 1
       end
-    rectY = 0
+    rectY = 200
     rectX = rectX + indentX
     end
     rectGroup.x = 140
@@ -166,7 +161,7 @@ function pick_mode_menu(string)
         self.markY = rectGroup.y
       elseif self.isFocus then
         if event.phase == "moved" then
-          print(system.getTimer())
+        --  print(system.getTimer())
           listener()
           local posY = event.y - event.yStart + self.markY
           if posY < top+200 then
