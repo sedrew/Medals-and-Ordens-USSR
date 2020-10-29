@@ -25,8 +25,9 @@ function scene:show( event )
         return side
       end
 
-    local containerY = 70
+    local containerY = 100
     local container = display.newContainer(fullw, fullh-containerY)
+
 
     display.newRoundedRect(sceneGroup, display.contentCenterX, 50, display.actualContentWidth, 100, 10):setFillColor(unpack(PROPS.color.up_bar))
 
@@ -65,8 +66,8 @@ function tool:table_right(t)
 end
 
 local switch_menu = display.newImageRect(sceneGroup, "img/UI/2x/menuGrid.png",  100, 100)
-switch_menu.x = left+100
-switch_menu.y = top+60
+switch_menu.x = right-50
+switch_menu.y = top+50
 switch_menu.id = "table_row"
 
 -- for j, k in pairs(nazv) do
@@ -87,6 +88,7 @@ function pick_mode_menu(string)
   if (string == "table_row") then
 
     container = display.newContainer(fullw, fullh-containerY)
+    container.y = containerY
     scroll_group = display.newGroup()
 
     function pick_medal(e)
@@ -97,14 +99,13 @@ function pick_mode_menu(string)
       end
     end
 
+    local loc_coord = get_side(container)
     local function doOnScreenFillTest(self)
     	local x0 = self.x + self.parent.x + self.contentWidth
     	local x1 = self.x + self.parent.x
     	local y0 = self.y + self.parent.y + self.contentHeight
     	local y1 = self.y + self.parent.y
-      local cont =  get_side(container)
-      print(x0, cont.left)
-      local onScreen = ( x0 >= cont.left and x1 <= cont.right ) and (y0 >= top and y1 <= bottom )
+      local onScreen = ( x0 >= loc_coord.left and x1 <= loc_coord.right ) and (y0 >= loc_coord.top and y1 <= bottom )
        if( onScreen and self.lastFill == "img/fillT.png" ) then
        	self.fill = { type = "image", filename = self.imgPath }
        	self.lastFill = self.imgPath
@@ -123,13 +124,14 @@ function pick_mode_menu(string)
 
     --local scroll_group = display.newGroup()
     local k = 1
-    local rectX = get_side(container).left+120
-    local rectY = 200
+    local rectW, rectH = 210, 210
+    local rectX = loc_coord.left+rectW/2+30
+    local rectY = loc_coord.top
     local indentY = 220
     local indentX = 220
     for i = 1, 3 do
       for j = 1, 20 do
-        roundRect[k] = display.newRoundedRect(scroll_group, rectX, rectY, 210, 210, 30)
+        roundRect[k] = display.newRoundedRect(scroll_group, rectX, rectY, rectH, rectH, 30)
         roundRect[k]:setFillColor(unpack(PROPS.color.cart))
         roundRect[k].tag = k
         roundRect[k].tap = true
@@ -154,7 +156,7 @@ function pick_mode_menu(string)
         rectY = rectY + indentY
         k = k + 1
       end
-    rectY = 200
+    rectY = loc_coord.top
     rectX = rectX + indentX
     end
     scroll_group.x = 140
@@ -179,9 +181,20 @@ function pick_mode_menu(string)
         elseif event.phase == "ended" or event.phase == "cancelled" then
           self.isFocus = false
           if scroll_group.y >= top then
-            transition.to(scroll_group,{
-              time=150, y = top})
+            transition.to(scroll_group,
+            {
+              time = 150,
+              y = top,
+              onComplete = function()listener()end})
+          elseif scroll_group.y <= -scroll_group.height+rectH*5 then
+            transition.to(scroll_group,
+              {
+                time=150,
+                y = -scroll_group.height+rectH*5+110,
+                onComplete = function()listener()end
+              })
           end
+
         end
       end
      return true
@@ -189,9 +202,9 @@ function pick_mode_menu(string)
     scroll_group:addEventListener("touch",touch)
 
     --sceneGroup:insert(scroll_group)
-    scroll_group.x = -490
-    container.x = centerX
-    container.y = centerY+containerY
+    container.anchorX = 0
+    container.anchorY = 0
+
     container:insert(scroll_group, true)
     sceneGroup:insert(container)
   ------------------------------------
@@ -201,10 +214,20 @@ elseif (string == "one_row") then
     one_row_group = display.newGroup()
 
     local i = 1
-    local medalRect = display.newRoundedRect(one_row_group,display.contentCenterX, 560, 650, 650, 15)
+    local text_name_medal = display.newText({
+      parent = one_row_group,
+      text = nazv[i],
+      width = display.actualContentWidth,
+      x = display.contentCenterX, y = top+120,
+      align = "center",
+      font = PROPS.font,
+    })
+    text_name_medal.anchorY = 0
+
+    local medalRect = display.newRoundedRect(one_row_group, display.contentCenterX, text_name_medal.y+550, 650, 650, 15)
           medalRect:setFillColor(190/255,215/255,239/255)
-    local myRoundedRect2 = display.newRoundedRect(one_row_group, display.contentCenterX, 1000, 360, 160, 15)
-          myRoundedRect2:setFillColor(190/255,215/255,239/255)
+    local kolodkiRect = display.newRoundedRect(one_row_group, display.contentCenterX, text_name_medal.y+1000, 360, 160, 15)
+          kolodkiRect:setFillColor(190/255,215/255,239/255)
 
     function medalRect:touch(event)
       if (event.phase == "began") then
@@ -220,7 +243,7 @@ elseif (string == "one_row") then
       parent = one_row_group,
       width = 200,
       text = ">>",
-      x = right-40, y = 1150,
+      x = right-40, y = kolodkiRect.y,
       font = PROPS.font,
       fontSize = 100,
     })
@@ -229,23 +252,15 @@ elseif (string == "one_row") then
       parent = one_row_group,
       width = 200,
       text = "<<",
-      x = left+120, y = 1150,
+      x = left+120, y = kolodkiRect.y,
       font = PROPS.font,
       fontSize = 100,
     })
 
     local med = display.newGroup()
-    local GroupText = display.newText({
-      parent = one_row_group,
-      text = nazv[i],
-      width = display.actualContentWidth,
-      x = display.contentCenterX, y = 120,
-      align = "center",
-      font = PROPS.font,
-    })
 
     local med1 = {}
-          med1[i] = display.newImage(med, "img/medali_ten/".. i .. ".png",display.contentCenterX, 550)
+          med1[i] = display.newImage(med, "img/medali_ten/".. i .. ".png",display.contentCenterX, text_name_medal.y+550)
     local kol_not = {2,5,11,17,24,30,37,48,51,59,60}
     local kol = {}
     local kol1 = {}
@@ -256,7 +271,7 @@ elseif (string == "one_row") then
         rawset(kol, h, 2)
       end
     end
-    kol1[kol[i]] = display.newImage(med, "img/kolodki/".. i .. ".png",display.contentCenterX, 1000)
+    kol1[kol[i]] = display.newImage(med, "img/kolodki/".. i .. ".png",display.contentCenterX, text_name_medal.y+1000)
     kol1[1]:scale(0.9*(350/kol1[1].width),0.9*(350/kol1[1].width))
 
     local l = 1
@@ -270,11 +285,11 @@ elseif (string == "one_row") then
               kol1[1] = nil
           end
               i = i - 1
-              med1[i] = display.newImage(med, "img/medali_ten/".. i .. ".png",display.contentCenterX, 550)
-              kol1[1] = display.newImage(med, "img/kolodki/".. kol[i] .. ".png",display.contentCenterX, 1000)
+              med1[i] = display.newImage(med, "img/medali_ten/".. i .. ".png",display.contentCenterX, text_name_medal.y+550)
+              kol1[1] = display.newImage(med, "img/kolodki/".. kol[i] .. ".png",display.contentCenterX, text_name_medal.y+1000)
               kol1[1]:scale(0.9*(350/kol1[1].width),0.9*(350/kol1[1].width))
-              GroupText.text = nazv[i]
-              GroupText.size = 620/string.len(nazv[i])+32
+              text_name_medal.text = nazv[i]
+              text_name_medal.size = 620/string.len(nazv[i])+32
           end
       end
       return true
@@ -291,11 +306,11 @@ elseif (string == "one_row") then
             kol1[1] = nil
         end
             i = i + 1
-            med1[i] = display.newImage(med, "img/medali_ten/".. i .. ".png",display.contentCenterX, 550)
-            kol1[1] = display.newImage(med, "img/kolodki/".. kol[i] .. ".png",display.contentCenterX, 1000)
+            med1[i] = display.newImage(med, "img/medali_ten/".. i .. ".png",display.contentCenterX, text_name_medal.y+550)
+            kol1[1] = display.newImage(med, "img/kolodki/".. kol[i] .. ".png",display.contentCenterX, text_name_medal.y+1000)
             kol1[1]:scale(0.9*(350/kol1[1].width),0.9*(350/kol1[1].width))
-            GroupText.text = nazv[i]
-            GroupText.size = 620/string.len(nazv[i])+37
+            text_name_medal.text = nazv[i]
+            text_name_medal.size = 620/string.len(nazv[i])+37
         end
       end
       return true
@@ -308,9 +323,7 @@ elseif (string == "one_row") then
 
   end
 end
-
 sceneGroup:insert(GroupText1)
-
 
 pick_mode_menu("table_row")
 
