@@ -1,13 +1,13 @@
 
 local composer = require( "composer" )
 local nazv = require("resource.words")[PROPS.lang]
-
+local scroll_group = display.newGroup()
+local one_row_group = display.newGroup()
+local did_scene_bool = false
 
 local scene = composer.newScene()
 function scene:create( event )
-
     local sceneGroup = self.view
-
 end
 function scene:show( event )
 
@@ -15,6 +15,18 @@ function scene:show( event )
     local phase = event.phase
 
     if ( phase == "will" ) then
+
+      function get_side(obj)
+        local side = {}
+        side.top = obj.y - obj.height/2
+        side.bottom = obj.y + obj.height/2
+        side.left = obj.x - obj.width/2
+        side.right = obj.x + obj.width/2
+        return side
+      end
+
+    local containerY = 70
+    local container = display.newContainer(fullw, fullh-containerY)
 
     display.newRoundedRect(sceneGroup, display.contentCenterX, 50, display.actualContentWidth, 100, 10):setFillColor(unpack(PROPS.color.up_bar))
 
@@ -72,21 +84,27 @@ for _, v in ipairs(sorted) do
 end
 
 function pick_mode_menu(string)
-
   if (string == "table_row") then
 
+    container = display.newContainer(fullw, fullh-containerY)
+    scroll_group = display.newGroup()
+
     function pick_medal(e)
-      local tb = {e.target.tag,nazv[e.target.tag]}
-      composer.setVariable("table_name_med", tb)
-      composer.showOverlay("scene.description",{isModal = true})
+      if did_scene_bool then
+        local tb = {e.target.tag,nazv[e.target.tag]}
+        composer.setVariable("table_name_med", tb)
+        composer.showOverlay("scene.description",{isModal = true})
+      end
     end
 
-    local function doOnScreenFillTest( self )
+    local function doOnScreenFillTest(self)
     	local x0 = self.x + self.parent.x + self.contentWidth
     	local x1 = self.x + self.parent.x
     	local y0 = self.y + self.parent.y + self.contentHeight
     	local y1 = self.y + self.parent.y
-      local onScreen = ( x0 >= left and x1 <= right ) and (y0 >= top and y1 <= bottom )
+      local cont =  get_side(container)
+      print(x0, cont.left)
+      local onScreen = ( x0 >= cont.left and x1 <= cont.right ) and (y0 >= top and y1 <= bottom )
        if( onScreen and self.lastFill == "img/fillT.png" ) then
        	self.fill = { type = "image", filename = self.imgPath }
        	self.lastFill = self.imgPath
@@ -103,23 +121,22 @@ function pick_mode_menu(string)
     local roundRect = {}
     local medalImg = {}
 
-    local rectGroup = display.newGroup()
+    --local scroll_group = display.newGroup()
     local k = 1
-    local rectX = 0
+    local rectX = get_side(container).left+120
     local rectY = 200
     local indentY = 220
     local indentX = 220
     for i = 1, 3 do
       for j = 1, 20 do
-        roundRect[k] = display.newRoundedRect(rectGroup, rectX, rectY, 210, 210, 30)
+        roundRect[k] = display.newRoundedRect(scroll_group, rectX, rectY, 210, 210, 30)
         roundRect[k]:setFillColor(unpack(PROPS.color.cart))
         roundRect[k].tag = k
         roundRect[k].tap = true
-
         --print(utf8.gsub(nazv[index_sort[k]],'\n.-'," "))
         local slice
         local imgPath = "img/low_medali_ten/" .. index_sort[k] .. ".png"
-        slice = display.newImageRect(rectGroup, imgPath, 210, 210)
+        slice = display.newImageRect(scroll_group, imgPath, 210, 210)
     		--slice.anchorX = 0
     		-- slice.anchorY = 0
     		slice.x = rectX
@@ -140,7 +157,7 @@ function pick_mode_menu(string)
     rectY = 200
     rectX = rectX + indentX
     end
-    rectGroup.x = 140
+    scroll_group.x = 140
 
     local function listener(event)
        for k,v in pairs(medalImg) do
@@ -148,47 +165,45 @@ function pick_mode_menu(string)
        end
     end
 
-    --ssk.misc.addSmartDrag( rectGroup, { toFront = true, listener = listener } )
-    local back = display.newRect(rectGroup, centerX-fullw/2, centerY,fullw+fullw,fullh) --КОСТЫль
-    back:setFillColor(0,0,0,0.001)
-    --back.anchorX = 0.2-- back.anchorY = 0
-
-
   function touch(event)
       if event.phase == "began" then
-        --display.getCurrentStage():setFocus( self, event.id )
         self.isFocus = true
-        self.markY = rectGroup.y
+        self.markY = scroll_group.y
       elseif self.isFocus then
         if event.phase == "moved" then
-        --  print(system.getTimer())
           listener()
           local posY = event.y - event.yStart + self.markY
           if posY < top+200 then
-            rectGroup.y = event.y - event.yStart + self.markY
+            scroll_group.y = event.y - event.yStart + self.markY
           end
         elseif event.phase == "ended" or event.phase == "cancelled" then
-          --display.getCurrentStage():setFocus( self, nil )
           self.isFocus = false
-          if rectGroup.y >= top then
-            transition.to(rectGroup,{
+          if scroll_group.y >= top then
+            transition.to(scroll_group,{
               time=150, y = top})
           end
         end
       end
      return true
     end
-    rectGroup:addEventListener("touch",touch)
+    scroll_group:addEventListener("touch",touch)
 
-    sceneGroup:insert(rectGroup)
+    --sceneGroup:insert(scroll_group)
+    scroll_group.x = -490
+    container.x = centerX
+    container.y = centerY+containerY
+    container:insert(scroll_group, true)
+    sceneGroup:insert(container)
+  ------------------------------------
+  ------------------------------------
+elseif (string == "one_row") then
 
-  elseif (tring == "one_row") then
+    one_row_group = display.newGroup()
 
     local i = 1
-
-    local medalRect = display.newRoundedRect(display.contentCenterX, 560, 650, 650, 15)
+    local medalRect = display.newRoundedRect(one_row_group,display.contentCenterX, 560, 650, 650, 15)
           medalRect:setFillColor(190/255,215/255,239/255)
-    local myRoundedRect2 = display.newRoundedRect(sceneGroup, display.contentCenterX, 1000, 360, 160, 15)
+    local myRoundedRect2 = display.newRoundedRect(one_row_group, display.contentCenterX, 1000, 360, 160, 15)
           myRoundedRect2:setFillColor(190/255,215/255,239/255)
 
     function medalRect:touch(event)
@@ -202,7 +217,7 @@ function pick_mode_menu(string)
     medalRect:addEventListener("touch", medalRect)
 
     local right_bt = display.newText({
-      parent = sceneGroup,
+      parent = one_row_group,
       width = 200,
       text = ">>",
       x = right-40, y = 1150,
@@ -211,7 +226,7 @@ function pick_mode_menu(string)
     })
     ---
     local left_bt = display.newText({
-      parent = sceneGroup,
+      parent = one_row_group,
       width = 200,
       text = "<<",
       x = left+120, y = 1150,
@@ -220,9 +235,8 @@ function pick_mode_menu(string)
     })
 
     local med = display.newGroup()
-    local gr = display.newGroup()
     local GroupText = display.newText({
-      parent = GroupText,
+      parent = one_row_group,
       text = nazv[i],
       width = display.actualContentWidth,
       x = display.contentCenterX, y = 120,
@@ -288,14 +302,15 @@ function pick_mode_menu(string)
     end
     right_bt:addEventListener("touch", right_bt)
 
-    sceneGroup:insert(medalRect)
-    sceneGroup:insert(med)
-    sceneGroup:insert(gr)
+    one_row_group:insert(medalRect)
+    one_row_group:insert(med)
+    sceneGroup:insert(one_row_group)
 
-    sceneGroup:insert(GroupText)
-    sceneGroup:insert(GroupText1)
   end
 end
+
+sceneGroup:insert(GroupText1)
+
 
 pick_mode_menu("table_row")
 
@@ -303,9 +318,11 @@ pick_mode_menu("table_row")
 function switch_menu:touch(e)
   if (e.phase == "began") then
     if (switch_menu.id == "table_row") then
+      container:removeSelf()
       switch_menu.fill = {type = "image", filename = "img/UI/2x/pause.png"}
       switch_menu.id = "one_row"
     else
+      one_row_group:removeSelf()
       switch_menu.fill = {type = "image", filename = "img/UI/2x/menuGrid.png"}
       switch_menu.id = "table_row"
     end
@@ -314,12 +331,16 @@ function switch_menu:touch(e)
 end
 switch_menu:addEventListener("touch", switch_menu)
 
+
+    elseif ( phase == "did" ) then
+      did_scene_bool = true
+
   end
 end
 
 
 -- hide()
-function scene:hide( event )
+function scene:hide(event)
 
     local sceneGroup = self.view
     local phase = event.phase
@@ -328,27 +349,20 @@ function scene:hide( event )
         -- Code here runs when the scene is on screen (but is about to go off screen)
 
     elseif ( phase == "did" ) then
+      did_scene_bool = false
         -- Code here runs immediately after the scene goes entirely off screen
 
     end
 end
 
-
--- destroy()
 function scene:destroy( event )
-
     local sceneGroup = self.view
-    -- Code here runs prior to the removal of scene's view
-
+    display.remove(scroll_group)
 end
 
--- -----------------------------------------------------------------------------------
--- Scene event function listeners
--- -----------------------------------------------------------------------------------
 scene:addEventListener( "create", scene )
 scene:addEventListener( "show", scene )
 scene:addEventListener( "hide", scene )
 scene:addEventListener( "destroy", scene )
--- -----------------------------------------------------------------------------------
 
 return scene

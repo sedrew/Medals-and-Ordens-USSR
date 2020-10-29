@@ -10,9 +10,6 @@ local scroll_group = display.newGroup()
 function scene:create(event)
   local sceneGroup = self.view
 
-  --local descript = require("resource.descriptionHandbook")[PROPS.lang]
-
-
   function get_side(obj)
     local side = {}
     side.top = obj.y - obj.height/2
@@ -21,8 +18,6 @@ function scene:create(event)
     side.right = obj.x + obj.width/2
     return side
   end
-
-
 
   local container = display.newContainer(fullw-80, fullh-180)
   display.newRect(sceneGroup, centerX , centerY, fullw, fullh):setFillColor(37/255, 39/255, 46/255, 0.7)
@@ -140,10 +135,8 @@ function scene:create(event)
 end
 
 function scene:destroy( event )
-
     local sceneGroup = self.view
     display.remove(scroll_group)
-
 end
 
 scene:addEventListener( "destroy", scene )
