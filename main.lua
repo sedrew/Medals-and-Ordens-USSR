@@ -12,13 +12,13 @@ top        = centerY - fullh/2
 bottom     = top + fullh
 ------------------------------------------
 utf8 = require("lib.utf8")
-local str = "Медаль\n «Партизану Отечественной войны»\n I степени"
-local sd = utf8.gsub(str,'\n.-'," ")
-local os_date = os.date( "*t" )
-print(sd) --system.getPreference("locale", "language")
+-- local str = "Медаль\n «Партизану Отечественной войны»\n I степени"
+-- local sd = utf8.gsub(str,'\n.-'," ")
+--print(sd) --system.getPreference("locale", "language")
 --utf8.gsub("Медаль «Партизану Отечественной войны» I степени", "(%w+)%s*(%w+)", "%2 %1"))
 local loadsave  = require("lib.loadsave")
 local props = loadsave.loadTable("settings.json")
+local os_date = os.date( "*t" )
 
 PROPS   = {}
 ACHIEVES = {}
@@ -79,6 +79,10 @@ end
 -- print("sdsdsds %{age}", 3)
 -- print(i18n('good_bye'))
 --print(PROPS.lang)
+function _G.saveAll()
+  print("SSSADAD")
+end
+
 local function onSystemEvent( event )
     local eventType = event.type
     if (eventType == "applicationExit") then

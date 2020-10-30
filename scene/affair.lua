@@ -28,7 +28,6 @@ function scene:show( event )
       })
       sceneGroup:insert(pop.rectGroup)
 
-
       function statistic()
         local y = 0
         local score = 80
@@ -67,7 +66,6 @@ function scene:show( event )
         end
       end
       statistic()
-
 
       local sbros = display.newText({
         parent = sceneGroup,
@@ -199,8 +197,6 @@ function scene:show( event )
     -- local pie = ragdogLib.createPieChart(data)
     -- pie.x, pie.y = display.contentCenterX-200, display.contentCenterY-200
     -- sceneGroup:insert(pie)
-
-
     end
   end
 scene:addEventListener("show", scene)
