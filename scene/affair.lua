@@ -72,15 +72,15 @@ function scene:show( event )
       local sbros = display.newText({
         parent = sceneGroup,
         text = i18n('removestat'),
-        x = display.actualContentWidth-240, y = display.actualContentHeight-25,
+        x = display.actualContentWidth-10, y = display.actualContentHeight-25,
         font = PROPS.font,
         fontSize = 40,
       })
+      sbros.anchorX = 1
 
       local loadsave  = require("lib.loadsave")
       function sbros:touch(e)
         if (e.phase == "began") then
-          print("SS")
           local tabl = {
             settings = {
              color = {
@@ -142,26 +142,47 @@ function scene:show( event )
       end
       toMenu:addEventListener( "touch", toMenu )
 
+      local wiki_form = {}
+      function wiki_form:create(text)
+        local pos_indexY = 0
+        local text = text or "error"
+        if #wiki_form == 0 then
+          pos_indexY = top+180
+        else
+          pos_indexY = wiki_form[#wiki_form].y + wiki_form[#wiki_form].height
+        end
+        function text_init(text, t)
+          t.x, t.y = t.x or 0, t.y or 0
+          t.fontSize = t.fontSize or 40
+          t.color = t.color or {1}
+          wiki_form[#wiki_form+1] = display.newText({
+            parent = sceneGroup,
+            text = text,
+            width = 1200,
+            align = "left",
+            x = t.x, y = pos_indexY+t.y,
+            font = PROPS.font,
+            fontSize = 40,
+          })
+          wiki_form[#wiki_form]:setFillColor(unpack(t.color))
+          wiki_form[#wiki_form].anchorX = 0
+          wiki_form[#wiki_form].anchorY = 0
+          return wiki_form[#wiki_form]
+        end
+        function wiki_form:header(header)
+          local header = header or "HEADER"
+          text_init(header, {y = 40, fontSize = 40})
+          return wiki_form
+        end
+        function wiki_form:text()
+          text_init(text, {x=50, y = 20, fontSize = 50})
+        end
+        return wiki_form
+      end
 
-      local score_text = display.newText({
-        parent = sceneGroup,
-        align = "left",
-        width = 400,
-        text = i18n("score").." "..ACHIEVES.all_score,
-        x =  left+310, y = top+220,
-        font = PROPS.font,
-        fontSize = 50,
-        })
-
-      local text =i18n('played').." "..ACHIEVES.count_game.." "..i18n('answer').." "..ACHIEVES.all_right_answer.." "..i18n('Times')
-      local case = display.newText({
-        parent = sceneGroup,
-        align = "left",
-        text = text,
-        x = display.contentCenterX, y = score_text.y+100,
-        font = PROPS.font,
-        fontSize = 50,
-      })
+      wiki_form:create(i18n("score").." "..ACHIEVES.all_score):text()
+      wiki_form:create(i18n('played').." "..ACHIEVES.count_game.." "..i18n('Times')):text()
+      wiki_form:create(i18n('answer').." "..ACHIEVES.all_right_answer.." "..i18n('Times')):text()
 
       --local halfW = display.contentWidth * 0.5
       --local halfH = display.contentHeight * 0.5
