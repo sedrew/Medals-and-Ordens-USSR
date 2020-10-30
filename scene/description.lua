@@ -55,18 +55,69 @@ function scene:create(event)
     return {}
   end
 
-  local wiki_text_history = display.newText({
-    parent = scroll_group,
-    text = get_info_in_wiki(wiki, table_name[1])["history"],
-    width = 600,
-    align = "center",
-    x = container.x, y = img_medal.y+480,
-    font = PROPS.font,
-    fontSize = 40,
-  })
-  wiki_text_history:setFillColor(unpack(PROPS.color.grey))
-   wiki_text_history.anchorX = 0.5
-   wiki_text_history.anchorY = 0
+  local wiki_form = {}
+  function wiki_form:create(text)
+    local pos_indexY = 0
+    local text = text or "error"
+    if #wiki_form == 0 then
+      pos_indexY = img_medal.y+480
+    else
+      pos_indexY = wiki_form[#wiki_form].y + wiki_form[#wiki_form].height
+      print(wiki_form[#wiki_form].height)
+    end
+    function wiki_form:header(header)
+      local header = header or "HEADER"
+      wiki_form[#wiki_form+1] = display.newText({
+        parent = scroll_group,
+        text = header,
+        width = 600,
+        align = "left",
+        x = container.x, y = pos_indexY+40,
+        font = PROPS.font,
+        fontSize = 40,
+      })
+      wiki_form[#wiki_form]:setFillColor(0.2)
+      wiki_form[#wiki_form].anchorX = 0.5
+      wiki_form[#wiki_form].anchorY = 0
+      return wiki_form
+    end
+    function wiki_form:text()
+      wiki_form[#wiki_form+1] = display.newText({
+        parent = scroll_group,
+        text = text,
+        width = 600,
+        align = "center",
+        x = container.x, y = pos_indexY+100,
+        font = PROPS.font,
+        fontSize = 30,
+      })
+      wiki_form[#wiki_form]:setFillColor(unpack(PROPS.color.grey))
+      wiki_form[#wiki_form].anchorX = 0.5
+      wiki_form[#wiki_form].anchorY = 0
+    end
+    return wiki_form
+  end
+wiki_form:create(get_info_in_wiki(wiki, table_name[1])["history"]):header("История награды"):text()
+wiki_form:create(get_info_in_wiki(wiki, table_name[1])["statick"]):header("Статистика награждений"):text()
+wiki_form:create(get_info_in_wiki(wiki, table_name[1])["regulation"]):header("Положение о медали"):text()
+wiki_form:create(get_info_in_wiki(wiki, table_name[1])["rewarding"]):header("Основания для награждения"):text()
+wiki_form:create(get_info_in_wiki(wiki, table_name[1])["appearance"]):header("Внешний вид"):text()
+wiki_form:create(get_info_in_wiki(wiki, table_name[1])["examples"]):header("Примеры награждений"):text()
+wiki_form:create(get_info_in_wiki(wiki, table_name[1])["link"]):header("Ссылки на источник"):text()
+--   local wiki_text_history = display.newText({
+--     parent = scroll_group,
+--     text = get_info_in_wiki(wiki, table_name[1])["history"],
+--     width = 600,
+--     align = "center",
+--     x = container.x, y = img_medal.y+480,
+--     font = PROPS.font,
+--     fontSize = 40,
+--   })
+--   wiki_text_history:setFillColor(unpack(PROPS.color.grey))
+--   wiki_text_history.anchorX = 0.5
+--   wiki_text_history.anchorY = 0
+--
+
 
   -- local wiki_ = display.newText({
   --   parent = group,
