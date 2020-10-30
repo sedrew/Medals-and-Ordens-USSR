@@ -38,27 +38,12 @@ function scene:create(event)
 
   transition.cancel("tagPauseLineTime")
 
-  local settings = require("lib.loadsave")
-  local table_achieve = settings.loadTable("settings.json")
-
-  ACHIEVES.all_score = table_achieve.game_achieve.all_score + composer.getVariable("score") --посмтри на main.lua
-
-  table_achieve.game_achieve = {
-    all_score = ACHIEVES.all_score,
-    all_right_answer = ACHIEVES.all_right_answer,
-    all_mistake_answer = ACHIEVES.all_mistake_answer,
-    all_time = ACHIEVES.all_time,
-    middle_time = ACHIEVES.middle_time,
-    count_game = ACHIEVES.count_game,
-    achieve_name = {},
-    week_progres = {},
-    recent_visit = {},
-  }
-  settings.saveTable(table_achieve, "settings.json")
+  ACHIEVES.all_score = ACHIEVES.all_score + composer.getVariable("score") --посмтри на main.lua
+  _G.saveAll()
 
   local all_text_score = display.newText({
     parent = sceneGroup,
-    text =  table_achieve.game_achieve.all_score,
+    text =  ACHIEVES.all_score,
     width = 490,
     align = "center",
     x = display.contentCenterX, y = text.y+260,

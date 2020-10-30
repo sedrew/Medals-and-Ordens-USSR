@@ -26,7 +26,7 @@ ACHIEVES = {}
 if props ~= nil then
   PROPS = props.settings
   ACHIEVES  = props.game_achieve
-  PROPS.recent_visit = os_date
+  --PROPS.recent_visit = os_date
 else
   local tabl = {
     settings = {
@@ -75,19 +75,41 @@ else
   loadsave.saveTable(tabl, "settings.json")
 end
 
---i18n.loadFile(system.pathForFile(system.ResourceDirectory) ..'/lib/i18n/ru.lua') -- load French language file
--- print("sdsdsds %{age}", 3)
--- print(i18n('good_bye'))
---print(PROPS.lang)
 function _G.saveAll()
-  print("SSSADAD")
+  local table = loadsave.loadTable("settings.json")
+  os_date = os.date("*t")
+
+  if os_date.yday > PROPS.recent_visit.yday then
+    for i =1, 7 do
+      ACHIEVES.week_progres[i] = {all_score=0,all_right_answer=0,all_mistake_answer=0}
+    end
+  end
+  ACHIEVES.week_progres[os_date.wday].all_score = ACHIEVES.all_score
+  ACHIEVES.week_progres[os_date.wday].all_right_answer = ACHIEVES.all_right_answer
+  ACHIEVES.week_progres[os_date.wday].all_mistake_answer = ACHIEVES.all_mistake_answer
+
+  PROPS.recent_visit = os_date
+  table.settings = PROPS
+
+  table.game_achieve = {
+    all_score = ACHIEVES.all_score,
+    all_right_answer = ACHIEVES.all_right_answer,
+    all_mistake_answer = ACHIEVES.all_mistake_answer,
+    all_time = ACHIEVES.all_time,
+    middle_time = ACHIEVES.middle_time,
+    count_game = ACHIEVES.count_game,
+    achieve_name = ACHIEVES.achieve_name,
+    week_progres = ACHIEVES.week_progres,
+  }
+  loadsave.saveTable(table, "settings.json")
 end
 
 local function onSystemEvent( event )
     local eventType = event.type
     if (eventType == "applicationExit") then
-      local table_save = {settings = PROPS,game_achieve = ACHIEVES}
-      loadsave.saveTable(table_save, "settings.json")
+      _G.saveAll()
+      -- local table_save = {settings = PROPS,game_achieve = ACHIEVES}
+      -- loadsave.saveTable(table_save, "settings.json")
     end
 end
 Runtime:addEventListener( "system", onSystemEvent )

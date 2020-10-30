@@ -21,18 +21,18 @@ function scene:show( event )
    i18n.load(require('resource.languages'))
    i18n.setLocale(PROPS.lang)
 
-   local backgroundMusic = audio.loadStream("audio/One Step Closer.mp3")
-   audio.setVolume(0.5)
-   local backgroundMusicChannel
-   backgroundMusicChannel = audio.play(backgroundMusic, {loops=-1, channel = 1})
-   --audio.pause(0)
-print(audio.isChannelPaused(1))
-   if PROPS.music == true and not audio.isChannelPaused(1) then
-     backgroundMusicChannel = audio.play(backgroundMusic, {loops=-1, channel = 1})
-   else
-     print("STOP")
-     audio.stop(backgroundMusicChannel)
-  end
+--    local backgroundMusic = audio.loadStream("audio/One Step Closer.mp3")
+--    audio.setVolume(0.5)
+--    local backgroundMusicChannel
+--    backgroundMusicChannel = audio.play(backgroundMusic, {loops=-1, channel = 1})
+--    --audio.pause(0)
+-- print(audio.isChannelPaused(1))
+--    if PROPS.music == true and not audio.isChannelPaused(1) then
+--      backgroundMusicChannel = audio.play(backgroundMusic, {loops=-1, channel = 1})
+--    else
+--      print("STOP")
+--      audio.stop(backgroundMusicChannel)
+--   end
 
   local GroupText = display.newText({
     parent = sceneGroup,
