@@ -40,8 +40,10 @@ function scene:create(event)
   local kol_img
   if table.find(kol_not, table_name[1]) == true then
     kol_img = display.newImage(scroll_group, "img/kolodki/".. 2 .. ".png",container.x, img_medal.y+400)
+    kol_img:scale(0.9*(320/kol_img.width), 0.9*(120/kol_img.height))--КОСТЫЛь!!!
   else
     kol_img = display.newImage(scroll_group, "img/kolodki/".. table_name[1] .. ".png",container.x, img_medal.y+400)
+    kol_img:scale(0.9*(320/kol_img.width), 0.9*(120/kol_img.height))--КОСТЫЛь!!!
   end
 
   local wiki = load.loadTable("resource/wiki_medal.json", system.pathForFile(system.ResourceDirectory))
@@ -65,35 +67,38 @@ function scene:create(event)
       pos_indexY = wiki_form[#wiki_form].y + wiki_form[#wiki_form].height
       print(wiki_form[#wiki_form].height)
     end
-    function wiki_form:header(header)
-      local header = header or "HEADER"
-      wiki_form[#wiki_form+1] = display.newText({
-        parent = scroll_group,
-        text = header,
-        width = 600,
-        align = "left",
-        x = container.x, y = pos_indexY+40,
-        font = PROPS.font,
-        fontSize = 40,
-      })
-      wiki_form[#wiki_form]:setFillColor(0.2)
-      wiki_form[#wiki_form].anchorX = 0.5
-      wiki_form[#wiki_form].anchorY = 0
-      return wiki_form
-    end
-    function wiki_form:text()
+    function text_init(text, t)
+      t.y = t.y or 0
+      t.fontSize = t.fontSize or 40
+      t.color = t.color or {0.2}
       wiki_form[#wiki_form+1] = display.newText({
         parent = scroll_group,
         text = text,
         width = 600,
-        align = "center",
-        x = container.x, y = pos_indexY+100,
+        align = "left",
+        x = container.x, y = pos_indexY+t.y,
         font = PROPS.font,
-        fontSize = 30,
+        fontSize = 40,
       })
-      wiki_form[#wiki_form]:setFillColor(unpack(PROPS.color.grey))
+      wiki_form[#wiki_form]:setFillColor(unpack(t.color))
       wiki_form[#wiki_form].anchorX = 0.5
       wiki_form[#wiki_form].anchorY = 0
+      return wiki_form[#wiki_form]
+    end
+    function wiki_form:header(header)
+      local header = header or "HEADER"
+      text_init(header, {y = 40, fontSize = 40})
+      return wiki_form
+    end
+    function wiki_form:text()
+      text_init(text, {y = 100, fontSize = 30, color = PROPS.color.grey})
+    end
+    function wiki_form:url()
+      local link = text_init("Wiki", {y = 100, fontSize = 40, color = {0.1,0.5,1}})
+      function openURL()
+        system.openURL(text)
+      end
+      link:addEventListener("tap", openURL)
     end
     return wiki_form
   end
@@ -103,34 +108,8 @@ wiki_form:create(get_info_in_wiki(wiki, table_name[1])["regulation"]):header("П
 wiki_form:create(get_info_in_wiki(wiki, table_name[1])["rewarding"]):header("Основания для награждения"):text()
 wiki_form:create(get_info_in_wiki(wiki, table_name[1])["appearance"]):header("Внешний вид"):text()
 wiki_form:create(get_info_in_wiki(wiki, table_name[1])["examples"]):header("Примеры награждений"):text()
-wiki_form:create(get_info_in_wiki(wiki, table_name[1])["link"]):header("Ссылки на источник"):text()
---   local wiki_text_history = display.newText({
---     parent = scroll_group,
---     text = get_info_in_wiki(wiki, table_name[1])["history"],
---     width = 600,
---     align = "center",
---     x = container.x, y = img_medal.y+480,
---     font = PROPS.font,
---     fontSize = 40,
---   })
---   wiki_text_history:setFillColor(unpack(PROPS.color.grey))
---   wiki_text_history.anchorX = 0.5
---   wiki_text_history.anchorY = 0
---
+wiki_form:create(get_info_in_wiki(wiki, table_name[1])["link"]):header("Ссылки на источник"):url()
 
-
-  -- local wiki_ = display.newText({
-  --   parent = group,
-  --   text = get_info_in_wiki(wiki, table_name[1])["history"],
-  --   width = 600,
-  --   align = "center",
-  --   x = display.contentCenterX, y = img_medal.y+800,
-  --   font = PROPS.font,
-  --   fontSize = 40,
-  -- })
-  --all_text_score:setFillColor(unpack(PROPS.color.grey))
-
-  --print(all_text_score.contentHeight)
 
   container.x = plant.x
   container.y = plant.y
@@ -157,6 +136,12 @@ wiki_form:create(get_info_in_wiki(wiki, table_name[1])["link"]):header("Ссыл
         if scroll_group.y >= top then
           transition.to(scroll_group,{
             time=150, y = top})
+        elseif scroll_group.y <= -(wiki_form[#wiki_form].y+wiki_form[#wiki_form].height) then --КОСТЫЛь
+          transition.to(scroll_group,
+            {
+              time=150,
+              y = -(wiki_form[#wiki_form].y+wiki_form[#wiki_form].height),
+            })
         end
       end
     end
