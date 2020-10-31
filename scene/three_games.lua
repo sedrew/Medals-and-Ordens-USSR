@@ -18,6 +18,7 @@ local all_variant = 60
 local all_cards = 4
 -- create()
 local kod = {1,3,4,6,7,8,9,10,12,13,14,15,16,18,19,20,21,22,23,25,26,27,28,29,31,32,33,34,35,36,38,39,40,41,42,43,44,45,46,47,49,50,52,53,54,55,56,57,58}
+local kod_exceptions = {2,3,4,5,8,10,12,15,16,17,19,22,24,26,27,30,31,33,36,38,39,40,45,48,51,54,58,59}
 
 local pick_mode = _G.game_mode
 local game_score_is_mode = 10
@@ -108,7 +109,18 @@ function scene:show( event )
         name_medal = pop:oneText(nazv,number_name)
         pop:uniteGroup(name_medal,images)
       elseif (pick_mode == "kolodki_4") then
+        local bool = true
         name_medal = pop:oneImage(number_name)
+        for i, k in pairs(kod_exceptions) do
+          if k == number_name then
+            bool = false
+            break
+          end
+        end
+        if bool then
+          pop.qestion = display.newImage(name_medal, "img/vop.jpg",pop.other_object.x,pop.other_object.y-120)
+          pop.qestion:scale(0.65,0.65)
+        end
         images = pop:imagesKolodki(random_numbers.randomList)
         pop:uniteGroup(name_medal,images)
       end
@@ -156,7 +168,7 @@ function scene:show( event )
     for i=1, #pop.box do
       pop.box[i]:addEventListener("touch",touchIt)
     end
-    
+
     sceneGroup:insert(pop.mainScene)
     sceneGroup:insert(upBar_event.sceneGroup)
   elseif ( phase == "did" ) then
