@@ -136,17 +136,17 @@ function scene:show( event )
                 pop:resetColor(pop.box)
                 pop.tap = true
                 time_start.startTime()
-
               end)
             pop.box[e.target.tag]:setFillColor(unpack(PROPS.color.right))
-
             transition.cancel("tagPauseLineTime")
             upBar_event.score = upBar_event.score + game_score_is_mode
+            _G.musicControl():sound("right")
           elseif (e.target.tap == true) then
             ACHIEVES.all_mistake_answer = ACHIEVES.all_mistake_answer + 1
             upBar_event.mistake = upBar_event.mistake + 1
             pop.box[e.target.tag]:setFillColor(unpack(PROPS.color.mistake))
             e.target.tap = false
+            _G.musicControl():sound("mistake")
           end
           upBar_event.update()
         end
@@ -156,7 +156,7 @@ function scene:show( event )
     for i=1, #pop.box do
       pop.box[i]:addEventListener("touch",touchIt)
     end
-
+    
     sceneGroup:insert(pop.mainScene)
     sceneGroup:insert(upBar_event.sceneGroup)
   elseif ( phase == "did" ) then
@@ -164,17 +164,12 @@ function scene:show( event )
   end
 end
 
-
 -- hide()
 function scene:hide( event )
-
     local sceneGroup = self.view
     local phase = event.phase
-
     if ( phase == "will" ) then
-        -- Code here runs when the scene is on screen (but is about to go off screen)
     elseif ( phase == "did" ) then
-        -- Code here runs immediately after the scene goes entirely off screen
     end
 end
 
@@ -183,9 +178,8 @@ function scene:destroy( event )
   local ran = 1
   local pl = {}
   local bg = {}
+  local sceneGroup = self.view
 
-    local sceneGroup = self.view
-    -- Code here runs prior to the removal of scene's view
 end
 
 -- -----------------------------------------------------------------------------------

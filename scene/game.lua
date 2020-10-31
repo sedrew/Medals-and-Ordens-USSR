@@ -239,11 +239,13 @@ function touchIt(e)
       mov()
       score = score + 1
       timeGame.setScore(score)
+      _G.musicControl():sound("right")
     elseif (e.target.tap == true) then
        timeGame.starColor()
        box[e.target.tag]:setFillColor( 255,101/255,101/255 )   --lifeH()
        minus = minus + 1
        e.target.tap = false
+       _G.musicControl():sound("mistake")
     end
   end
 end

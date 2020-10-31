@@ -1,14 +1,10 @@
-
 local composer = require( "composer" )
 
 local scene = composer.newScene()
-
-
 function scene:create( event )
-
  local sceneGroup = self.view
-    -- Code here runs when the scene is first created but has not yet appeared on screen
 end
+
 -- show()
 function scene:show( event )
 
@@ -20,19 +16,6 @@ function scene:show( event )
    i18n = require('lib.i18n.init')
    i18n.load(require('resource.languages'))
    i18n.setLocale(PROPS.lang)
-
---    local backgroundMusic = audio.loadStream("audio/One Step Closer.mp3")
---    audio.setVolume(0.5)
---    local backgroundMusicChannel
---    backgroundMusicChannel = audio.play(backgroundMusic, {loops=-1, channel = 1})
---    --audio.pause(0)
--- print(audio.isChannelPaused(1))
---    if PROPS.music == true and not audio.isChannelPaused(1) then
---      backgroundMusicChannel = audio.play(backgroundMusic, {loops=-1, channel = 1})
---    else
---      print("STOP")
---      audio.stop(backgroundMusicChannel)
---   end
 
   local GroupText = display.newText({
     parent = sceneGroup,
@@ -70,8 +53,6 @@ function scene:show( event )
       return true
   end
   PlayGame:addEventListener("touch", PlayGame)
-
-print(true)
 
   local bt = {}
   function bt:buttons(t)
@@ -134,39 +115,20 @@ print(true)
 
   sceneGroup:insert(butts_group)
   sceneGroup:insert(logo)
-
-
-  -- =====================================================
-
-  -- require "ssk2.loadSSK"
-  -- _G.ssk.init( { measure = false } )
-  -- ssk.meters.create_fps(true)
-  -- ssk.meters.create_mem(true)
-
-  ----------------------
-  ----------------------
-
   end
 end
 
 ---------------- hide()
 function scene:hide( event )
-
     local sceneGroup = self.view
     local phase = event.phase
-
     if ( phase == "will" ) then
-        -- Code here runs when the scene is on screen (but is about to go off screen)
     elseif ( phase == "did" ) then
-        -- Code here runs immediately after the scene goes entirely off screen
     end
 end
 
 function scene:destroy( event )
- --display.remove( sceneGroup )
- --sceneGroup = nil
     local sceneGroup = self.view
-    -- Code here runs prior to the removal of scene's view
 end
 -- -----------------------------------------------------------------------------------
 -- Scene event function listeners

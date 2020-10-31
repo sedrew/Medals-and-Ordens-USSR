@@ -78,19 +78,13 @@ end
 function _G.saveAll()
   local table = loadsave.loadTable("settings.json")
   os_date = os.date("*t")
-
-  if os_date.yday > PROPS.recent_visit.yday then
+  if os_date.yday-PROPS.recent_visit.yday > 7 then
     for i =1, 7 do
       ACHIEVES.week_progres[i] = {all_score=0,all_right_answer=0,all_mistake_answer=0}
     end
   end
-  ACHIEVES.week_progres[os_date.wday].all_score = ACHIEVES.all_score
-  ACHIEVES.week_progres[os_date.wday].all_right_answer = ACHIEVES.all_right_answer
-  ACHIEVES.week_progres[os_date.wday].all_mistake_answer = ACHIEVES.all_mistake_answer
-
   PROPS.recent_visit = os_date
   table.settings = PROPS
-
   table.game_achieve = {
     all_score = ACHIEVES.all_score,
     all_right_answer = ACHIEVES.all_right_answer,
@@ -104,15 +98,52 @@ function _G.saveAll()
   loadsave.saveTable(table, "settings.json")
 end
 
+function _G.musicControl(t)
+  local t = t or {}
+  local music = t.music or PROPS.music
+  local sound = t.sound or PROPS.sounds
+  local volume = t.volume or 0.3
+  local B = {}
+
+  function B:init()
+    _G.music = {}
+    _G.music.backgroundMusic = audio.loadStream("audio/One Step Closer.mp3")
+    _G.music.mistake = audio.loadSound("audio/error-sound.mp3")
+    _G.music.gameOver = audio.loadSound("audio/game-over.mp3")
+    _G.music.victory = audio.loadSound("audio/jingle-achievement-00.mp3")
+    _G.music.right = audio.loadSound("audio/level-up-01.mp3")
+    return B
+  end
+  audio.setVolume(volume)
+  audio.setVolume( 1, {channel=2})
+  function B:play()
+    local backgroundMusicChannel
+    if PROPS.music == true then
+      backgroundMusicChannel = audio.play(_G.music.backgroundMusic, {loops=-1, channel = 1})
+      audio.resume(backgroundMusicChannel)
+    else
+      audio.pause(backgroundMusicChannel)
+    end
+ end
+ function B:sound(s)
+   if PROPS.sounds then
+     audio.play(_G.music[s],{channel = 2})
+   end
+ end
+  return B
+end
+_G.musicControl():init():play()
+
+
+
+
 local function onSystemEvent( event )
     local eventType = event.type
     if (eventType == "applicationExit") then
       _G.saveAll()
-      -- local table_save = {settings = PROPS,game_achieve = ACHIEVES}
-      -- loadsave.saveTable(table_save, "settings.json")
     end
 end
-Runtime:addEventListener( "system", onSystemEvent )
+Runtime:addEventListener("system", onSystemEvent)
 
 local background = display.setDefault("background", unpack(PROPS.color.background))
 composer.gotoScene("scene.menu", PROPS.animation.scene)

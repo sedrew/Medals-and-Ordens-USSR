@@ -19,10 +19,12 @@ function scene:create(event)
 
   if text_gameOver == "victory" then
     butt:setFillColor(unpack(PROPS.color.right))
+    _G.musicControl():sound("victory")
   elseif text_gameOver == "pause" then
     butt:setFillColor(unpack(PROPS.color.achieve))
   else
     butt:setFillColor(unpack(PROPS.color.mistake))
+    _G.musicControl():sound("gameOver")
   end
 
   local text = display.newText({
@@ -38,7 +40,9 @@ function scene:create(event)
 
   transition.cancel("tagPauseLineTime")
 
+  local os_date = os.date("*t")
   ACHIEVES.all_score = ACHIEVES.all_score + composer.getVariable("score") --посмтри на main.lua
+  ACHIEVES.week_progres[os_date.wday].all_score = ACHIEVES.week_progres[os_date.wday].all_score + composer.getVariable("score")
   _G.saveAll()
 
   local all_text_score = display.newText({

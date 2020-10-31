@@ -31,10 +31,23 @@ function scene:show( event )
       function statistic()
         local y = 0
         local score = 80
+        local max_value = 0
+        for k = 1, 7 do
+          max_value = math.max(ACHIEVES.week_progres[k].all_score,max_value)
+        end
+        local row_value = max_value
+        local step_val = math.ceil(max_value/4)
         for i = 1, 5 do
+          -- if string.len(tostring(max_value)) >= 2 then
+          --   local k = string.sub(tostring(max_value), 1,string.len(tostring(max_value))-1)
+          --   max_value = tonumber(k)*10
+          -- end
+          if i == 5 then
+
+          end
           local kol = display.newText({
             parent = pop.rectGroup,
-            text = score,
+            text = math.abs(math.ceil(row_value/10)*10),
             width = 100,
             align = "right",
             x = (pop.box[i].x-pop.w/2)-70, y = y,
@@ -43,14 +56,29 @@ function scene:show( event )
           })
           kol:setFillColor(unpack(PROPS.color.cart))
           y = y + pop.indentY
+          row_value = row_value-step_val
           score = score - 20
         end
 
+        local line_point_pos = {}
         local x_cr = -250
         local x_cradd = pop.w/6
-        local week_text = {"ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"}
+        local week_text = {"ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ","ВС"}
+        local wday = 1
+        local circl = {}
         for i = 1, 7 do
-          local circl = display.newCircle(pop.rectGroup, x_cr, pop.box[#pop.box].y, 10)
+          if i > 6 then
+            wday = 1
+          else
+            wday = wday + 1
+          end
+          local a = ACHIEVES.week_progres[wday].all_score
+          local y_pos = -(pop.box[5].y-pop.box[1].y)/max_value*a+pop.box[5].y
+
+          circl[i] = display.newCircle(pop.rectGroup, x_cr, y_pos, 10)
+          circl[i]:setFillColor(unpack(PROPS.color.achieve))
+          line_point_pos[#line_point_pos+1] = x_cr
+          line_point_pos[#line_point_pos+1] = y_pos
           local week = display.newText({
             parent = pop.rectGroup,
             text = week_text[i],
@@ -61,9 +89,12 @@ function scene:show( event )
             fontSize = 40,
           })
           week:setFillColor(unpack(PROPS.color.cart))
-
           x_cr = x_cr + x_cradd
         end
+        local line = display.newLine(pop.rectGroup,0,0,0,0)
+        line:append(unpack(line_point_pos))
+        line:setStrokeColor(unpack(PROPS.color.achieve))
+        line.strokeWidth = 3
       end
       statistic()
 

@@ -109,32 +109,32 @@ function scene:show( event )
     end
     pick_lang:addEventListener("touch", pick_lang)
 
-    local theme = display.newText({
-      parent = sceneGroup,
-      align = "left",
-      text = i18n('thema'),
-      width = 800,
-      x = left+left_add, y = lang.y+100,
-      font = PROPS.font,
-      fontSize = fontSize,
-    })
-
-    local pick_theme = display.newText({
-      parent = sceneGroup,
-      align = "center",
-      text = "Зеленная",
-      width = 800,
-      x = right-200, y = lang.y+100,
-      font = PROPS.font,
-      fontSize = fontSize,
-    })
+    -- local theme = display.newText({
+    --   parent = sceneGroup,
+    --   align = "left",
+    --   text = i18n('thema'),
+    --   width = 800,
+    --   x = left+left_add, y = lang.y+100,
+    --   font = PROPS.font,
+    --   fontSize = fontSize,
+    -- })
+    --
+    -- local pick_theme = display.newText({
+    --   parent = sceneGroup,
+    --   align = "center",
+    --   text = "Зеленная",
+    --   width = 800,
+    --   x = right-200, y = lang.y+100,
+    --   font = PROPS.font,
+    --   fontSize = fontSize,
+    -- })
 
     local sound = display.newText({
       parent = sceneGroup,
       align = "left",
       text = i18n('sounds'),
       width = 800,
-      x = left+left_add, y = theme.y+100,
+      x = left+left_add, y = pick_lang.y+100,
       font = PROPS.font,
       fontSize = fontSize,
     })
@@ -172,7 +172,7 @@ function scene:show( event )
 
     function pick_fonts:touch(event)
       if (event.phase == "began") then
-          
+
           save_setting()
           --update()
       end
@@ -180,41 +180,43 @@ function scene:show( event )
     end
     pick_fonts:addEventListener("touch", pick_fonts)
 
-    local size_fonts = display.newText({
-      parent = sceneGroup,
-      align = "left",
-      text = i18n('fontsizee'),
-      width = 800,
-      x = left+left_add, y = fonts.y+100,
-      font = PROPS.font,
-      fontSize = fontSize,
-    })
-
-    local pick_size_fonts = display.newText({
-      parent = sceneGroup,
-      align = "center",
-      text = "80",
-      width = 800,
-      x = right-100, y = fonts.y+100,
-      font = PROPS.font,
-      fontSize = fontSize,
-    })
+    -- local size_fonts = display.newText({
+    --   parent = sceneGroup,
+    --   align = "left",
+    --   text = i18n('fontsizee'),
+    --   width = 800,
+    --   x = left+left_add, y = fonts.y+100,
+    --   font = PROPS.font,
+    --   fontSize = fontSize,
+    -- })
+    --
+    -- local pick_size_fonts = display.newText({
+    --   parent = sceneGroup,
+    --   align = "center",
+    --   text = "80",
+    --   width = 800,
+    --   x = right-100, y = fonts.y+100,
+    --   font = PROPS.font,
+    --   fontSize = fontSize,
+    -- })
 
     -- Handle press events for the checkbox
     local function music_switchPress( event )
         local switch = event.target
-        PROPS.music = switch.isOn
+        if switch.isOn then
+          PROPS.music = false
+        else
+          PROPS.music = true
+          print(true)
+        end
         save_setting()
-        print(switch.isOn)
+        _G.musicControl({music = PROPS.music}):play()
         --print( "Switch with ID '"..switch.id.."' is on: "..tostring() )
     end
     local music_switch = widget.newSwitch({
             x = right-150,
             y = music.y,
-            -- left = right-300,
-            -- top = 200,
             style = "onOff",
-            --id = "onOffSwitch",
             onPress = music_switchPress,
             initialSwitchState = PROPS.music,
         })
@@ -224,16 +226,19 @@ function scene:show( event )
     -- Handle press events for the checkbox
     local function onSwitchPress( event )
         local switch = event.target
-        PROPS.sounds = switch.isOn
+        if switch.isOn then
+          PROPS.sounds = false
+        else
+          PROPS.sounds = true
+          print(true)
+        end
         save_setting()
+
     end
     local sound_switch = widget.newSwitch({
             x = right-150,
             y = sound.y,
-            -- left = right-300,
-            -- top = 200,
             style = "onOff",
-            --id = "onOffSwitch",
             onPress = onSwitchPress,
             initialSwitchState = PROPS.sounds,
         })
@@ -241,7 +246,7 @@ function scene:show( event )
     sceneGroup:insert(sound_switch)
 
 
-    local currentNumber = 12
+    --local currentNumber = 12
     -- local function onStepperPress( event )
     --     if ( "increment" == event.phase ) then
     --         currentNumber = currentNumber + 1
