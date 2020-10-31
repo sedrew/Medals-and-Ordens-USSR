@@ -1,6 +1,10 @@
 return {
   en = {
     name_game = "Medals and Orders",
+    marathon = "Marathon",
+    title = "Title",
+    medals = "Medals",
+    ribbon = "Ribbon",
     score = "Score",
     play = "Play",
     home = "Home",
@@ -24,6 +28,7 @@ return {
     font = "Font",
     fontsizee = "Font size",
     correct = "Correct",
+    error = "Error",
     age_msg = "выше %{age}.",
     phone_msg = {
       one = "you have one new message.",
@@ -32,6 +37,10 @@ return {
   },
   ru = {
     name_game = "Медали и Ордена",
+    marathon = "Марафон",
+    title = "Название",
+    medals = "Медали",
+    ribbon = "Колодки",
     score = "Очки",
     play = "Играть",
     home = "Домой",
@@ -55,6 +64,7 @@ return {
     font = "Шрифт",
     fontsizee = "Размер шрифта",
     correct = "Правильно",
+    error = "Ошибка",
     age_msg = "выше %{age}.",
     phone_msg = {
       one = "you have one new message.",

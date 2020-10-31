@@ -4,29 +4,10 @@ function B:upBar(score)
   self.sceneGroup = display.newGroup()
   self.score =  score or 0
 
-
   display.newRoundedRect(self.sceneGroup, display.contentCenterX, 50, display.actualContentWidth, 100, 10):setFillColor(unpack(PROPS.color.up_bar))
-  -- local toMenu = display.newText({
-  --   parent = self.sceneGroup,
-  --   text = i18n('home'),
-  --   x = display.contentCenterX, y = 40,
-  --   font = PROPS.font,
-  --   fontSize = 75,
-  -- })
 
   local toMenu = display.newImage(self.sceneGroup, "img/menu/home_white.png", centerX, top+50)
   toMenu:scale(0.3,0.3)
-
-  -- function toMenu:touch(e)
-  --   if (e.phase == "began") then
-  --     composer.gotoScene("scene.menu", {time = 500, effect="crossFade"})
-  --     composer.removeScene("scene.menuSetting", {time = 500})
-  --     display.remove( toMenu )
-  --     toMenu = nil
-  --   end
-  --   return true
-  -- end
-  -- toMenu:addEventListener( "touch", toMenu )
 
   local textScore = display.newText({
     parent = self.sceneGroup,
@@ -41,7 +22,6 @@ function B:upBar(score)
   local star = {}
   local del = 5
   local vertices = { 0,-110/del, 27/del,-35/del, 105/del,-35/del, 43/del,16/del, 65/del,90/del, 0,45/del, -65/del,90/del, -43/del,15/del, -105/del,-35/del, -27/del,-35/del, }
---  local vertices = {}
 
   for i = 1, 3 do
     star[i] = display.newImage(self.sceneGroup, "img/UI/2x/star.png",  750-(i*70), 50)
@@ -89,7 +69,6 @@ function B:upBar(score)
       star[self.mistake]:setFillColor(unpack(PROPS.color.grey))
     elseif (self.mistake > 3) then
 	   self.gameOver()
-	   --B.gameOV(composer) --composer.showOverlay("scene.gameOver", {time = 800, effect="crossFade", isModal = true,})
     end
     textScore.text = self.score
    end

@@ -51,8 +51,20 @@ function button:play(t)
   self.gotoScene = t.gotoScene or "scene.menu"
   self.options_dealy = t.options_dealy or {delay = 400, time = 1000, effect="slideDown"}
   self.sceneGroup = t.sceneGroup or sceneGroup
+  self.text = t.name or "error"
+  self.shift_textX = t.shift_textX or 0
+  self.align = t.align or "center"
 
-  self.widget = display.newImage(sceneGroup, "img/menu/im" .. self.vr .. ".png", self.x, self.y)
+  self.widget = display.newImage(sceneGroup, "img/menu/ib" .. self.vr .. ".png", self.x, self.y)
+  self.title = display.newText({
+    width = 800,
+    align = self.align,
+    parent = sceneGroup,
+    text = i18n(self.text),
+    x = self.widget.x+self.shift_textX, y = self.widget.y-10,
+    font = PROPS.font,
+    fontSize = 90,
+  })
 
   self.score_for_open = t.open or 0
   self.all_score = t.all_score or -4
@@ -100,6 +112,7 @@ local one_button = button:play({
   game_mode = "text_3",
   open = -1,
   all_score = ACHIEVES.all_score,
+  name = "marathon",
 })
 one_button.widget:scale(0.7, 0.7)
 
@@ -112,6 +125,8 @@ local two_button = button:play({
   game_mode = "text_3",
   open = 100,
   all_score = ACHIEVES.all_score,
+  name = "title",
+  shift_textX = 50,
 })
 two_button.widget:scale(0.7, 0.7)
 
@@ -124,6 +139,8 @@ local three_button = button:play({
   game_mode = "medal_4",
   open = 200,
   all_score = ACHIEVES.all_score,
+  name = "medals",
+  shift_textX = 50,
 })
 three_button.widget:scale(0.7, 0.7)
 
@@ -136,6 +153,8 @@ local four_button = button:play({
   game_mode = "kolodki_4",
   open = 300,
   all_score = ACHIEVES.all_score,
+  name = "ribbon",
+  shift_textX = 50,
 })
 four_button.widget:scale(0.7, 0.7)
 
